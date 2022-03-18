@@ -3,10 +3,19 @@
     <style name="Theme.BookkyAndroid" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/day_colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="navigation_selector">
+        <item name="itemIconTint">@drawable/menu_selector_color</item>
+        <item name="itemTextColor">@drawable/menu_selector_color</item>
+    </style>
+
 </resources>
