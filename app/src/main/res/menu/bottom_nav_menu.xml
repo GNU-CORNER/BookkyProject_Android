@@ -4,25 +4,25 @@
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_star_24"
         android:enabled="true"
-        android:title="홈" />
+        android:title="@string/home_title" />
     <item
         android:id="@+id/communityFragment"
         android:icon="@drawable/ic_baseline_star_24"
         android:enabled="true"
-        android:title="커뮤니티" />
+        android:title="@string/community_title" />
     <item
         android:id="@+id/suggestionFragment"
         android:icon="@drawable/ic_baseline_star_24"
         android:enabled="true"
-        android:title="추천받개" />
+        android:title="@string/suggestion_title" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_baseline_star_24"
         android:enabled="true"
-        android:title="검색" />
+        android:title="@string/search_title" />
     <item
         android:id="@+id/myInfoFragment"
         android:icon="@drawable/ic_baseline_star_24"
         android:enabled="true"
-        android:title="내 정보" />
+        android:title="@string/myInfo_title" />
 </menu>
