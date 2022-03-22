@@ -70,4 +70,10 @@ dependencies {
     // https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
+    // circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // viewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
 }

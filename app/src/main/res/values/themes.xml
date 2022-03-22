@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/day_colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -13,9 +13,10 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="navigation_selector">
-        <item name="itemIconTint">@drawable/menu_selector_color</item>
-        <item name="itemTextColor">@drawable/menu_selector_color</item>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/colorPrimary_night</item>
     </style>
+
 
 </resources>

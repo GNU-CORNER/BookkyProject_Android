@@ -10,7 +10,7 @@
 
     <color name="colorPrimary_night">#FFA24D</color>
     <color name="colorPrimary_day">#6C95FF</color>
-    <color name="colorPrimary">#6C95FF</color>
+    <color name="colorPrimary">#FFA24D</color>
     <color name="tabs_item">#383838</color>
     <color name="line">#DADADA</color>
     <color name="gray">#8E8E8E</color>

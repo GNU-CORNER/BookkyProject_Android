@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/myInfo_viewPager_interested_books_item_imageView"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:src="@drawable/test_book"/>
+    <TextView
+        android:id="@+id/myInfo_viewPager_interested_books_item_textView_title"
+        android:textStyle="bold"
+        android:text="Deep Learing"
+        android:textSize="12sp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
