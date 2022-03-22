@@ -7,8 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.data.model.BookResult
+import com.example.bookkyandroid.data.model.HomeTagBookDataModel
 
-class HomeTagByBooksAdapter(private val title : ArrayList<String>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
+class HomeTagByBooksAdapter(private val title : List<BookResult>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val bookTitle: TextView =
@@ -32,7 +34,7 @@ class HomeTagByBooksAdapter(private val title : ArrayList<String>) : RecyclerVie
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.bookTitle.text = title[position]
+        holder.bookTitle.text = title[position].TITLE
     }
 
     override fun getItemCount(): Int = title.size

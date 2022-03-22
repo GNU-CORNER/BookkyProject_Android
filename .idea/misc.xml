@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/drawable/textlines.xml" value="0.2945" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_community.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_my_info.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/recyclerview_item_interested_area.xml" value="0.2" />

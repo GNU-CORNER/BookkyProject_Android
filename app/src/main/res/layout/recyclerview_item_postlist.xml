@@ -28,6 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="카카오 공채 떴는데 보신 분 있으신가요?"
-            android:textAlignment="center"></TextView>
+            android:textAlignment="center"
+            android:textColor="@color/day_colorSecondary"
+            ></TextView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

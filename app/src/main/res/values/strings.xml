@@ -15,4 +15,7 @@
     <string name="recommend_Button_string">당신의 책을 🔍찾아보세요!</string>
     <string name="roadmap_Button_string">나의 🛣개발 지도는?</string>
     <string name="home_more_tag">태그 더 보기 ></string>
+    <string name="home_community_string">커뮤니티 ></string>
+    <string name="home_recommend_string">추천하개 ></string>
+    <string name="home_recommendSub_string">당신에게 적합한 책을 찾아줄게요!</string>
 </resources>
