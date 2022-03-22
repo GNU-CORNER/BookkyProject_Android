@@ -64,13 +64,13 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
-                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/myInfo_circleImage_profile"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
@@ -90,10 +90,10 @@
                         android:textStyle="bold" />
 
                     <ImageButton
-                        android:layout_marginStart="5dp"
                         android:id="@+id/myInfo_imgBtn_arrow"
                         android:layout_width="12dp"
                         android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
                         android:background="@null"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_arrow" />
@@ -143,9 +143,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myInfo_recyclerView_interested_area"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/recyclerview_item_interested_area" />
 
             <View
                 android:layout_width="match_parent"
@@ -195,11 +198,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:scrollbars="none"
                 android:id="@+id/myInfo_recyclerView_interested_books"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/recyclerview_item_interested_books" />
 
             <View
                 android:layout_width="match_parent"
@@ -248,12 +254,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myInfo_recyclerView_my_writing"
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                tools:itemCount="2"
+                tools:listitem="@layout/recyclerview_item_my_info_my_writing" />
 
             <View
                 android:layout_width="match_parent"
@@ -305,15 +313,17 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginBottom="20dp"
                 android:id="@+id/myInfo_recyclerView_my_review"
+                tools:itemCount="2"
+                tools:listitem="@layout/recyclerview_item_my_info_my_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:background="@color/line"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
 
