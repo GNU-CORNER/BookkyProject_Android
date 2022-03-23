@@ -13,7 +13,7 @@
         android:id="@+id/myInfo_viewPager_interested_books_item_textView_title"
         android:textStyle="bold"
         android:text="Deep Learing"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:ellipsize="end"
         android:maxLines="2"
         android:layout_marginHorizontal="10dp"

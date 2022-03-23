@@ -30,6 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/myInfo_title"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,6 +114,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:id="@+id/myInfo_textView_name2"
                         android:layout_width="wrap_content"
@@ -121,6 +123,7 @@
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -136,12 +139,14 @@
                     android:clickable="true"
                     android:text="@string/reset"
                     android:background="@drawable/textlines"
+                    android:textSize="8sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:padding="2dp"
                 android:id="@+id/myInfo_recyclerView_interested_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -170,6 +175,7 @@
 
                     <TextView
                         android:textStyle="bold"
+                        android:textSize="12sp"
                         android:id="@+id/myInfo_textView_name3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -178,6 +184,7 @@
 
                     <TextView
                         android:textStyle="bold"
+                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/myInfo_string3" />
@@ -190,6 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:textSize="8sp"
                     android:text="@string/view_more"
                     android:background="@drawable/textlines"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -202,9 +210,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
                 tools:listitem="@layout/recyclerview_item_interested_books" />
 
             <View
@@ -226,6 +234,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:id="@+id/myInfo_textView_name4"
                         android:layout_width="wrap_content"
@@ -234,6 +243,7 @@
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -242,6 +252,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:textSize="8sp"
                     android:textStyle="bold"
                     android:id="@+id/myInfo_textView_more2"
                     android:layout_width="wrap_content"
@@ -282,6 +293,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:id="@+id/myInfo_textView_name5"
                         android:layout_width="wrap_content"
@@ -290,6 +302,7 @@
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -298,6 +311,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:textSize="8sp"
                     android:textStyle="bold"
                     android:id="@+id/myInfo_textView_more3"
                     android:layout_width="wrap_content"
