@@ -58,7 +58,7 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
         )
 
         //Set adapter
-        suggestionAdapterSet(contents)
+       // suggestionAdapterSet(contents)
 
 
 
