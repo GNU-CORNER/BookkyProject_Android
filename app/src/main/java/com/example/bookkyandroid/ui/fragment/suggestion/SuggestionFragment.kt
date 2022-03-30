@@ -63,11 +63,13 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
 
 
     }
-
+/*
     private fun suggestionAdapterSet(contents: ArrayList<SuggestionContents>) {
         binding.suggestionRecyclerView.adapter = SuggestionAdapter(contents)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.suggestionRecyclerView.layoutManager = linearLayoutManager
     }
+*/
+
 }
