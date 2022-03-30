@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookkyAndroid">
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name=".ui.activity.main.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

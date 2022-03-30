@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.data.model.Book
+import com.example.bookkyandroid.data.model.BookResponse
 import com.example.bookkyandroid.data.model.HomeCommunityDataModel
 import com.example.bookkyandroid.databinding.FragmentHomeBinding
 import com.example.bookkyandroid.ui.adapter.HomeCommunityShortAdapter
@@ -32,12 +32,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             .build()
         val bookService = retrofit.create(HomeFragment.BookGetCaller::class.java)
         bookService.getBookList("25", "1")
-            .enqueue(object : Callback<Book> {
-                override fun onFailure(call: Call<Book>, t: Throwable) {
+            .enqueue(object : Callback<BookResponse> {
+                override fun onFailure(call: Call<BookResponse>, t: Throwable) {
                     Log.d(HomeFragment.TAG, t.toString())
                 }
 
-                override fun onResponse(call: Call<Book>, response: Response<Book>) {
+                override fun onResponse(call: Call<BookResponse>, response: Response<BookResponse>) {
                     if (response.isSuccessful.not()) {
                         return
                     }
@@ -91,7 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         fun getBookList(
             @Query("quantity") quantity: String,
             @Query("page") page: String
-        ): Call<Book>
+        ): Call<BookResponse>
     }
 
 }

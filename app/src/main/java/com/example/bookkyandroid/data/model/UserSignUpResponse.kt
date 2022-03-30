@@ -2,8 +2,9 @@ package com.example.bookkyandroid.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Book (
+
+data class UserSignUpResponse (
     @SerializedName("success") val success: Boolean,
-    @SerializedName("result") val result: List<BookResult>,
+    @SerializedName("result") val singUpResult: UserSingUpResult,
     @SerializedName("errorMessage") val errorMessage: String
-        )
+)
