@@ -54,21 +54,33 @@
                 android:textSize="6sp" />
 
 
-            <RatingBar
-                android:theme="@style/RatingBar"
-                android:id="@+id/my_info_my_review_item_ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
-                android:rating="5"
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp" />
+                android:layout_height="wrap_content">
+                <RatingBar
+                    android:id="@+id/my_info_my_review_item_ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    android:layout_marginEnd="2dp"
+                    android:maxWidth="15dp"
+                    android:minWidth="15dp"
+                    android:rating="5"
+                    android:theme="@style/RatingBar" />
 
-            <TextView
-                android:id="@+id/my_info_my_review_item_textView_ratingNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:textSize="8sp" />
+                <TextView
+                    android:layout_marginRight="14dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:id="@+id/my_info_my_review_item_textView_ratingNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="8sp" />
+
+
+            </FrameLayout>
 
 
 
@@ -77,18 +89,19 @@
 
         <TextView
             android:id="@+id/my_info_my_review_item_textView_contents"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
+            android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되.."
             android:textColor="@color/gray"
-            android:textSize="6sp"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/my_info_my_review_item_writer" />
 
         <LinearLayout
+            android:layout_marginBottom="10dp"
             android:gravity="end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
