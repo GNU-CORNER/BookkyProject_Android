@@ -14,7 +14,11 @@
         android:id="@+id/suggestionFragment"
         android:name="com.example.bookkyandroid.ui.fragment.suggestion.SuggestionFragment"
         android:label="fragment_suggestion"
-        tools:layout="@layout/fragment_suggestion" />
+        tools:layout="@layout/fragment_suggestion" >
+        <action
+            android:id="@+id/action_suggestionFragment_to_bookRecommendFragment"
+            app:destination="@id/bookRecommendFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.bookkyandroid.ui.fragment.search.SearchFragment"
@@ -30,4 +34,9 @@
         android:name="com.example.bookkyandroid.ui.fragment.community.CommunityFragment"
         android:label="fragment_community"
         tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/bookRecommendFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.suggestion.BookRecommendFragment"
+        android:label="fragment_book_recommend"
+        tools:layout="@layout/fragment_book_recommend" />
 </navigation>

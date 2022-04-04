@@ -93,6 +93,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/suggestion_linearlayout_start_bookky1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
@@ -195,6 +196,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/suggestion_linearlayout_start_bookky2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
@@ -298,6 +300,7 @@
 
 
                             <LinearLayout
+                                android:id="@+id/suggestion_linearlayout_start_bookky3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
