@@ -1,21 +1,17 @@
 package com.example.bookkyandroid.ui.fragment.suggestion
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.webkit.RenderProcessGoneDetail
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.data.model.Message
-import com.example.bookkyandroid.data.model.MyWriting
 import com.example.bookkyandroid.databinding.FragmentBookRecommendBinding
-import com.example.bookkyandroid.databinding.FragmentSuggestionBinding
 import com.example.bookkyandroid.ui.adapter.BookRecommendAdapter
-import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
 import com.example.bookkyandroid.util.Constants.RECEIVE_ID
 import com.example.bookkyandroid.util.Constants.RESULT_ID
 import com.example.bookkyandroid.util.Constants.SEND_ID
@@ -27,7 +23,6 @@ class BookRecommendFragment  : BaseFragment<FragmentBookRecommendBinding>(Fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val message = arrayListOf<Message>(
             Message("내이름은 북키 ! 탐정이죠.",RECEIVE_ID, true),
