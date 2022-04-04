@@ -132,6 +132,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/book_recommend_Button7"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="다시 추천해줘 !"
@@ -140,6 +141,7 @@
                 android:layout_height="30dp"/>
 
             <Button
+                android:id="@+id/book_recommend_Button8"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:text="그만할래"

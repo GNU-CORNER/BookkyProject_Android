@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.RenderProcessGoneDetail
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
@@ -61,6 +63,19 @@ class BookRecommendFragment  : BaseFragment<FragmentBookRecommendBinding>(Fragme
 
             adapter.insertMessage(Message("", RESULT_ID, true))
             binding.bookRecommendRecyclerview.scrollToPosition(adapter.itemCount - 1)
+            binding.bookRecommendLinearLayout1.visibility = View.GONE
+            binding.bookRecommendLinearLayout2.visibility = View.GONE
+            binding.bookRecommendLinearLayout3.visibility = View.VISIBLE
+        }
+
+        binding.bookRecommendButton7.setOnClickListener {
+            binding.bookRecommendLinearLayout1.visibility = View.VISIBLE
+            binding.bookRecommendLinearLayout2.visibility = View.VISIBLE
+            binding.bookRecommendLinearLayout3.visibility = View.GONE
+        }
+
+        binding.bookRecommendButton8.setOnClickListener {
+            findNavController().popBackStack()
         }
 
 
