@@ -15,6 +15,8 @@ import com.example.bookkyandroid.util.Constants.SEND_ID
 import de.hdodenhof.circleimageview.CircleImageView
 
 
+//리사이클러뷰 재활용 문제 해결해야함
+
 class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView.Adapter<BookRecommendAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -86,6 +88,10 @@ class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView
                 holder.emptyView.visibility =  View.GONE
             }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     fun insertMessage(message: Message) {
