@@ -15,6 +15,7 @@ import com.example.bookkyandroid.databinding.FragmentSuggestionBinding
 import com.example.bookkyandroid.ui.adapter.BookRecommendAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
 import com.example.bookkyandroid.util.Constants.RECEIVE_ID
+import com.example.bookkyandroid.util.Constants.RESULT_ID
 import com.example.bookkyandroid.util.Constants.SEND_ID
 
 
@@ -56,6 +57,9 @@ class BookRecommendFragment  : BaseFragment<FragmentBookRecommendBinding>(Fragme
         }
         binding.bookRecommendButton6.setOnClickListener {
             adapter.insertMessage(Message("결과를 보여줘 !", SEND_ID, false))
+            binding.bookRecommendRecyclerview.scrollToPosition(adapter.itemCount - 1)
+
+            adapter.insertMessage(Message("", RESULT_ID, true))
             binding.bookRecommendRecyclerview.scrollToPosition(adapter.itemCount - 1)
         }
 

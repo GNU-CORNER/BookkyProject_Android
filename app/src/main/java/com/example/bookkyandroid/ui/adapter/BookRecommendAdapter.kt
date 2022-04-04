@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.Message
@@ -17,7 +18,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView.Adapter<BookRecommendAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        val layout = itemView.findViewById<LinearLayout>(R.id.book_recommend_recyclerview_item_linearLayout_receive)
+        val childRecyclerView = itemView.findViewById<RecyclerView>(R.id.book_recommend_item_recyclerview)
         val bookkyImg =  itemView.findViewById<CircleImageView>(R.id.book_recommend_recyclerview_item_imageView_bookky)
         val sendMessage = itemView.findViewById<TextView>(R.id.book_recommend_recyclerview_item_textView_send)
         val receiveMessage = itemView.findViewById<TextView>(R.id.book_recommend_recyclerview_item_textView_receive)
@@ -41,6 +43,19 @@ class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView
 
 
     override fun onBindViewHolder(holder: BookRecommendAdapter.MessageViewHolder, position: Int) {
+        val childData = arrayListOf<String>(
+            "Deep Learing",
+            "혼자 공부하는 머신러닝 + 딥러닝",
+            "개를 다루는 기술",
+            "REACT 리액트"
+        )
+
+        holder.childRecyclerView.adapter = MyInfoInterestedBooksAdapter(childData)
+        val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        holder.childRecyclerView.layoutManager = linearLayoutManager
+
+
         val currentMessage = messagesList[position]
 
         if (currentMessage.bookkyVisible == false) holder.bookkyImg.visibility =
@@ -65,16 +80,9 @@ class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView
             RESULT_ID -> {
 
                 //아이템에 리사이클러뷰 나타내기
-
-
-                val p = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-                p.weight = 1f
-
-                holder.receiveMessage.layoutParams = p
+                holder.layout.visibility = View.VISIBLE
                 holder.sendMessage.visibility = View.GONE
+                holder.receiveMessage.visibility =  View.GONE
                 holder.emptyView.visibility =  View.GONE
             }
         }

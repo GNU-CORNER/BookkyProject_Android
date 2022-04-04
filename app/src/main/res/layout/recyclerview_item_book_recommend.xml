@@ -7,8 +7,6 @@
 
     <LinearLayout
         android:layout_margin="10dp"
-        android:gravity="center_vertical"
-        android:id="@+id/book_recommend_recyclerview_item_linearLayout_receive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -54,8 +52,39 @@
             android:textColor="@color/white"
             android:text="결과를 보여줘!"/>
 
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:backgroundTint="@color/white"
+            android:id="@+id/book_recommend_recyclerview_item_linearLayout_receive"
+            android:visibility="gone"
+            android:background="@drawable/receive_round_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="황랑귀, 너의 답변을 바탕으로 추천한 책들이야."/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_recommend_item_recyclerview"
+                tools:listitem="@layout/recyclerview_item_interested_books"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
 
     </LinearLayout>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
