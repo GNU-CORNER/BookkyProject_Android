@@ -30,4 +30,13 @@
     <string name="signup_passwordValid_string">비밀번호 확인</string>
     <string name="signup_nickname_string">닉네임</string>
     <string name="additional_title_string">추가정보 입력</string>
+    <string name="findpw_title_string">비밀번호 찾기</string>
+    <string name="findpw_button1_string">인증번호 요청</string>
+    <string name="findpw_button2_string">인증번호 확인</string>
+    <string name="findpw_button3_string">다음으로</string>
+    <string name="findpw_title2_string">인증번호</string>
+    <string name="findpw_newpw_title_string">새로운 비밀번호</string>
+    <string name="findpw_newpw_title2_string">새로운 비밀번호 확인</string>
+    <string name="findpw_newpw_button_string">비밀번호 변경하기</string>
+    <string name="backButton_string">&lt;</string>
 </resources>

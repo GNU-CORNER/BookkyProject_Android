@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,12 +19,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
+                android:id="@+id/findpw_new_textView_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="56dp"
-                android:text="@string/additional_title_string"
+                android:layout_marginTop="32dp"
+                android:text="@string/findpw_title_string"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,68 +32,89 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/linearLayout10"
-                android:layout_width="match_parent"
+                android:id="@+id/linearLayout13"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="25dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10">
+                app:layout_constraintTop_toBottomOf="@+id/findpw_new_textView_title">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/findpw_new_textView_inputPwTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/signup_nickname_string"
-                        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+                        android:text="@string/findpw_newpw_title_string"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/findpw_new_editText_inputPw"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/background_round_gray"
                         android:ems="10"
-                        android:hint="홍길동"
+                        android:hint="@string/login_passwordHint_string"
                         android:includeFontPadding="true"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:paddingLeft="12dp"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/findpw_new_textView_inputPwTitle" />
+
+                    <TextView
+                        android:id="@+id/findpw_new_textView_inputPwCheckTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/findpw_newpw_title2_string"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/findpw_new_editText_inputPw" />
+
+                    <EditText
+                        android:id="@+id/findpw_new_editText_inputPwCheck"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/background_round_gray"
+                        android:ems="10"
+                        android:includeFontPadding="true"
+                        android:inputType="textPassword"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/findpw_new_textView_inputPwCheckTitle" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:id="@+id/findpw_new_button_finishButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="416dp"
+                android:layout_marginTop="333dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="56dp"
                 android:background="@drawable/background_round_primary"
-                android:text="@string/login_signup_string"
+                android:text="@string/findpw_newpw_button_string"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout13" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

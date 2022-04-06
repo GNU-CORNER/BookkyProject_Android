@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    android:windowIsFloating="false">
 
     <LinearLayout
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="729dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,11 +21,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/signup_textView_signUpTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/login_signup_string"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -41,25 +43,25 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8">
+                app:layout_constraintTop_toBottomOf="@+id/signup_textView_signUpTitle">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/signup_textView_nicknameTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/signup_nickname_string"
-                        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+                        app:layout_constraintBottom_toTopOf="@+id/signup_editText_nicknameInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName2"
+                        android:id="@+id/signup_editText_nicknameInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/background_round_gray"
@@ -93,7 +95,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/signup_textView_emailTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
@@ -118,7 +120,7 @@
                             android:layout_height="match_parent">
 
                             <EditText
-                                android:id="@+id/editTextTextEmailAddress2"
+                                android:id="@+id/signup_editText_emailInput"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:background="@drawable/background_round_gray"
@@ -129,16 +131,17 @@
                                 android:paddingLeft="12dp"
                                 android:textColor="@color/colorPrimary"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/button4"
+                                app:layout_constraintEnd_toStartOf="@+id/signup_button_codeSendButton"
+                                app:layout_constraintHorizontal_chainStyle="packed"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <Button
-                                android:id="@+id/button4"
-                                android:layout_width="0dp"
+                                android:id="@+id/signup_button_codeSendButton"
+                                android:layout_width="wrap_content"
                                 android:layout_height="0dp"
-                                android:layout_marginStart="272dp"
                                 android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
                                 android:layout_marginBottom="5dp"
                                 android:background="@drawable/background_round_primary"
                                 android:text="보내기"
@@ -146,7 +149,7 @@
                                 android:visibility="visible"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/signup_editText_emailInput"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:ignore="TouchTargetSizeCheck" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -173,18 +176,18 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/signup_textView_codeTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/signup_emailValid_string"
-                        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress3"
+                        app:layout_constraintBottom_toTopOf="@+id/signup_editText_codeInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextEmailAddress3"
+                        android:id="@+id/signup_editText_codeInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/background_round_gray"
@@ -218,18 +221,18 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/signup_textView_passwordTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/login_password_string"
-                        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+                        app:layout_constraintBottom_toTopOf="@+id/signup_editText_passwordInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextPassword2"
+                        android:id="@+id/signup_editText_passwordInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/background_round_gray"
@@ -263,18 +266,18 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/signup_textView_passwordCheckTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/signup_passwordValid_string"
-                        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword3"
+                        app:layout_constraintBottom_toTopOf="@+id/signup_editText_passwordCheckInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextPassword3"
+                        android:id="@+id/signup_editText_passwordCheckInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/background_round_gray"
@@ -292,9 +295,9 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/signup_button_signUpButton"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="25dp"
