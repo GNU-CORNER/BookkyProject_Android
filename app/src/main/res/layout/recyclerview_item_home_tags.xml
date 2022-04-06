@@ -13,8 +13,7 @@
         android:text="DeepLearning >"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"
-        tools:ignore="TextContrastCheck" />
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_item_home_tags_recyclerView_books"

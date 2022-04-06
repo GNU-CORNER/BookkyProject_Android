@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.BookResult
 import com.example.bookkyandroid.data.model.HomeTagBookDataModel
 import com.example.bookkyandroid.data.model.HomeTagTestResponse
 
-class HomeTagByBooksAdapter(private val title : ArrayList<HomeTagTestResponse>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
+class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tag: TextView =
@@ -35,9 +36,17 @@ class HomeTagByBooksAdapter(private val title : ArrayList<HomeTagTestResponse>) 
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.tag.text = title[position].tag
+        holder.tag.text = testData[position].tag
+
+        val books = testData[position].books
+
+        holder.recyclerView.adapter = HomeBooksAdapter(books)
+        val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        holder.recyclerView.layoutManager = linearLayoutManager
+
     }
 
-    override fun getItemCount(): Int = title.size
+    override fun getItemCount(): Int = testData.size
 
 }
