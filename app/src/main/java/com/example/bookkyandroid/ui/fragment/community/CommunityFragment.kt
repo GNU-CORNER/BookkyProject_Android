@@ -2,6 +2,8 @@ package com.example.bookkyandroid.ui.fragment.community
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
@@ -16,6 +18,12 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.communityButtonWrite.setOnClickListener {
+            findNavController().navigate(R.id.action_communityFragment_to_communityWriteFragment)
+        }
+        binding.communityImageButtonSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_communityFragment_to_communitySearchPostFragment)
+        }
 
         val communityPost = arrayListOf<MyWriting>(
             MyWriting("첫번째 글", "딩동댕 초인종 소리에 얼른 문을 열었더니 그토록 기다리던 아빠가 문 앞에 서 계셨죠",1,1),
@@ -30,12 +38,12 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
             MyWriting("열번째 글", "빛처럼 밝은 마음으로 너를 닮고 싶어",10,10),
         )
 
-        postAdapterSet(communityPost)
+        postAdapterSet(communityPost, findNavController())
     }
 
-    private fun postAdapterSet(myWriting: ArrayList<MyWriting>) {
+    private fun postAdapterSet(myWriting: ArrayList<MyWriting>, NavControl : NavController) {
 
-        binding.communityRecyclerViewPost.adapter = CommunityPostAdapter(myWriting)
+        binding.communityRecyclerViewPost.adapter = CommunityPostAdapter(myWriting, NavControl)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.communityRecyclerViewPost.layoutManager = linearLayoutManager
