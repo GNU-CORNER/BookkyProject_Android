@@ -18,6 +18,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.example.bookkyandroid.data.model.BookResult
+import com.example.bookkyandroid.data.model.HomeTagTestResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -47,8 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                         it.result.forEach { bookResult ->
                             Log.d(TAG, bookResult.toString())
                         }
-                        myTagBooksAdapterSet1(it.result)
-                        myTagBooksAdapterSet2(it.result)
+                        //myTagBooksAdapterSet(it.result)
                     }
                 }
             })
@@ -64,18 +64,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         homeCommunitySet(communityDummyData)
     }
 
-    private fun myTagBooksAdapterSet1(titles: List<BookResult>) {
-        binding.recyclerViewHomeBookList1.adapter = HomeTagByBooksAdapter(titles)
+    private fun myTagBooksAdapterSet(titles: ArrayList<HomeTagTestResponse>) {
+        binding.recyclerViewHomeBookList.adapter = HomeTagByBooksAdapter(titles)
+        val linearLayoutManager = LinearLayoutManager(activity)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.recyclerViewHomeBookList.layoutManager = linearLayoutManager
+    }
+
+    /*
+    private fun myTagBooksAdapterSet(titles: List<BookResult>) {
+        binding.recyclerViewHomeBookList.adapter = HomeTagByBooksAdapter(titles)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.recyclerViewHomeBookList1.layoutManager = linearLayoutManager
-    }
-    private fun myTagBooksAdapterSet2(titles: List<BookResult>) {
-        binding.recyclerViewHomeBookList2.adapter = HomeTagByBooksAdapter(titles)
-        val linearLayoutManager = LinearLayoutManager(activity)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.recyclerViewHomeBookList2.layoutManager = linearLayoutManager
-    }
+        binding.recyclerViewHomeBookList.layoutManager = linearLayoutManager
+    }*/
     private fun homeCommunitySet(titles: ArrayList<HomeCommunityDataModel>) {
         binding.recyclerViewHomeCommunityList.adapter = HomeCommunityShortAdapter(titles)
         val linearLayoutManager = LinearLayoutManager(activity)

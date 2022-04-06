@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.BookResult
 import com.example.bookkyandroid.data.model.HomeTagBookDataModel
+import com.example.bookkyandroid.data.model.HomeTagTestResponse
 
-class HomeTagByBooksAdapter(private val title : List<BookResult>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
+class HomeTagByBooksAdapter(private val title : ArrayList<HomeTagTestResponse>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val bookTitle: TextView =
-            view.findViewById(R.id.home_viewPager_tag_books_item_textView_title)
-        val image: ImageView =
-            view.findViewById(R.id.home_viewPager_tag_books_item_imageView)
+        val tag: TextView =
+            view.findViewById(R.id.recyclerView_item_home_tags_textView_title)
+        val recyclerView : RecyclerView =
+            view.findViewById(R.id.recyclerView_item_home_tags_recyclerView_books)
 
         init {
             // Define click listener for the ViewHolder's View.
@@ -26,7 +27,7 @@ class HomeTagByBooksAdapter(private val title : List<BookResult>) : RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeTagByBooksAdapter.PagerViewHolder {
 
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recyclerview_item_tag_books,
+            R.layout.recyclerview_item_home_tags,
             parent,
             false
         )
@@ -34,7 +35,7 @@ class HomeTagByBooksAdapter(private val title : List<BookResult>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.bookTitle.text = title[position].TITLE
+        holder.tag.text = title[position].tag
     }
 
     override fun getItemCount(): Int = title.size
