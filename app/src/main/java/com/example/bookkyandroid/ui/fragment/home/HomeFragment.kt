@@ -1,8 +1,8 @@
 package com.example.bookkyandroid.ui.fragment.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
@@ -12,10 +12,6 @@ import com.example.bookkyandroid.databinding.FragmentHomeBinding
 import com.example.bookkyandroid.ui.adapter.HomeCommunityShortAdapter
 import com.example.bookkyandroid.ui.adapter.HomeTagByBooksAdapter
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -190,12 +186,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
         )
 
-        myTagBooksAdapterSet(testData)
+
+
+        var isExpanded : Boolean = false
+
+        myTagBooksAdapterSet(testData, isExpanded)
+
+        binding.textViewHomeTagMore.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                myTagBooksAdapterSet(testData, isExpanded)
+                true
+            } else {
+                myTagBooksAdapterSet(testData, isExpanded)
+                false
+            }
+        }
+
 
     }
 
-    private fun myTagBooksAdapterSet(testData: ArrayList<HomeTagTestResponse>) {
-        binding.recyclerViewHomeBookList.adapter = HomeTagByBooksAdapter(testData)
+    private fun myTagBooksAdapterSet(testData: ArrayList<HomeTagTestResponse>, isExpanded : Boolean) {
+        binding.recyclerViewHomeBookList.adapter = HomeTagByBooksAdapter(testData, isExpanded)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recyclerViewHomeBookList.layoutManager = linearLayoutManager

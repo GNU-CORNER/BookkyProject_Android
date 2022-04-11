@@ -12,7 +12,7 @@ import com.example.bookkyandroid.data.model.BookResult
 import com.example.bookkyandroid.data.model.HomeTagBookDataModel
 import com.example.bookkyandroid.data.model.HomeTagTestResponse
 
-class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse>) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
+class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse>, private var isExpanded : Boolean) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tag: TextView =
@@ -47,6 +47,13 @@ class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse
 
     }
 
-    override fun getItemCount(): Int = testData.size
+    override fun getItemCount(): Int {
+        return if(!isExpanded){
+            2
+        }else {
+            testData.size
+        }
+
+    }
 
 }
