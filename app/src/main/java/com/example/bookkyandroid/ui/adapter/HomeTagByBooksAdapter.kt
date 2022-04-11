@@ -3,16 +3,14 @@ package com.example.bookkyandroid.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.data.model.BookResult
-import com.example.bookkyandroid.data.model.HomeTagBookDataModel
-import com.example.bookkyandroid.data.model.HomeTagTestResponse
+import com.example.bookkyandroid.data.model.HomeBookListDataModel
+import com.example.bookkyandroid.data.model.HomeResponseDataModel
 
-class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse>, private var isExpanded : Boolean) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
+class HomeTagByBooksAdapter(private val testDatumDataModels : ArrayList<HomeBookListDataModel>, private var isExpanded : Boolean) : RecyclerView.Adapter<HomeTagByBooksAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tag: TextView =
@@ -36,9 +34,9 @@ class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.tag.text = testData[position].tag
+        holder.tag.text = testDatumDataModels[position].tag
 
-        val books = testData[position].books
+        val books = testDatumDataModels[position].data
 
         holder.recyclerView.adapter = HomeBooksAdapter(books)
         val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
@@ -51,7 +49,7 @@ class HomeTagByBooksAdapter(private val testData : ArrayList<HomeTagTestResponse
         return if(!isExpanded){
             2
         }else {
-            testData.size
+            testDatumDataModels.size
         }
 
     }
