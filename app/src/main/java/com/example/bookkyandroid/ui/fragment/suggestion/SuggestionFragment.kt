@@ -15,7 +15,13 @@ class SuggestionFragment : BaseFragment<FragmentSuggestionBinding>(FragmentSugge
 
         binding.suggestionLinearlayoutStartBookky1.setOnClickListener {
             val action =
-            SuggestionFragmentDirections.actionSuggestionFragmentToBookRecommendFragment()
+                SuggestionFragmentDirections.actionSuggestionFragmentToBookRecommendFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.suggestionLinearlayoutStartBookky2.setOnClickListener {
+            val action =
+                SuggestionFragmentDirections.actionSuggestionFragmentToFrontEndRoadMapFragment()
             findNavController().navigate(action)
         }
 
