@@ -21,7 +21,6 @@ import com.example.bookkyandroid.data.model.BookResult
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
