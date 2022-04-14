@@ -1,8 +1,13 @@
 package com.example.bookkyandroid.ui.fragment.signin
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.data.model.UserSignInBody
@@ -10,6 +15,8 @@ import com.example.bookkyandroid.data.model.UserSignInResponse
 import com.example.bookkyandroid.data.model.UserSignUpBody
 import com.example.bookkyandroid.data.model.UserSignUpResponse
 import com.example.bookkyandroid.databinding.FragmentSigninBinding
+import com.example.bookkyandroid.ui.activity.main.LoginActivity
+import com.example.bookkyandroid.ui.activity.main.MainActivity
 import com.example.bookkyandroid.ui.fragment.findpw.FindPwFragment
 import com.example.bookkyandroid.ui.fragment.signup.SignupFragment
 import retrofit2.Call
@@ -24,6 +31,7 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val context = this
         val retrofit = Retrofit.Builder()
             .baseUrl("http://203.255.3.144:8002")
             .addConverterFactory(GsonConverterFactory.create())
@@ -33,7 +41,8 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             signIn(
                 binding.loginEditTextEmailInput!!.text.toString(),
                 binding.loginEditTextPasswordInput!!.text.toString(),
-                retrofit
+                retrofit,
+                context!!
             )
         }
         binding.loginImageViewNaverImage!!.setOnClickListener{socialNaverSignIn()}
@@ -59,9 +68,14 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
         ): Call<UserSignInResponse>
     }
 }
+private fun successLogin(view : SignInFragment, data : UserSignInResponse){
+    val intent = Intent(view.context, MainActivity::class.java)  // 인텐트를 생성해줌,
+    intent.putExtra("access-token", data.singInResult.access_token)
+    view.startActivity(intent)  // 화면 전환을 시켜줌
+    view.activity?.finish()
+}
 
-
-private fun signIn(email: String, password: String, retrofit : Retrofit){
+private fun signIn(email: String, password: String, retrofit : Retrofit, activity: SignInFragment){
     val userService = retrofit.create(SignInFragment.LoginPostCaller::class.java)
     val bodyParameter = UserSignInBody(email, password)
     userService.signIn(bodyParameter)
@@ -77,7 +91,7 @@ private fun signIn(email: String, password: String, retrofit : Retrofit){
                 signInResponse.body()?.let {
                     Log.d("LoginAPI", it.toString())
                     Log.d("LoginAPI", it.singInResult.toString())
-
+                    successLogin(activity, it)
                 }
             }
         })

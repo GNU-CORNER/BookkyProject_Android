@@ -6,5 +6,7 @@ data class UserSignInBody (
     @SerializedName("email")
     val email: String,
     @SerializedName("pwToken")
-    val pwToken: String
+    val pwToken: String,
+    @SerializedName("loginMethod")
+    val loginMethod : Int = 0
 )

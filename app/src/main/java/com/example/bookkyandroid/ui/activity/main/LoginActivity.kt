@@ -19,7 +19,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         transaction.commit()
 
     }
-    fun onClick(v: View){
 
-    }
 }

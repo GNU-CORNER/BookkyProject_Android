@@ -1,5 +1,6 @@
 package com.example.bookkyandroid.ui.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,6 +18,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
@@ -24,11 +27,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var isExpanded : Boolean = false
+
         val retrofit = Retrofit.Builder()
             .baseUrl("http://203.255.3.144:8002")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        getHomeData(retrofit, isExpanded)
+        getHomeData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
         var textNickname: TextView = binding.textViewHomeNickName
         textNickname.text = "황랑귀"
         val bookList = arrayListOf<String>("test1", "test2", "test3","test3","test3","test3","test3")
@@ -41,10 +45,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
         binding.textViewHomeTagMore.setOnClickListener {
             isExpanded = if (!isExpanded) {
-                getHomeData(retrofit, isExpanded)
+                getHomeData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
                 true
             } else {
-                getHomeData(retrofit, isExpanded)
+                getHomeData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
                 false
             }
         }
@@ -70,13 +74,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         private const val TAG="HomeFragment"
     }
     public interface HomeGetCaller {
+
         @GET("/v1/home")
         fun getHomeData(
+            @Header("access-token") access_token: String?
         ): Call<HomeResponseDataModel>
     }
-    private fun getHomeData(retrofit: Retrofit, isExpanded: Boolean){
+    private fun getHomeData(retrofit: Retrofit, isExpanded: Boolean, access_token : String){
         val bookService = retrofit.create(HomeFragment.HomeGetCaller::class.java)
-        bookService.getHomeData()
+        bookService.getHomeData(access_token)
             .enqueue(object : Callback<HomeResponseDataModel> {
                 override fun onFailure(call: Call<HomeResponseDataModel>, t: Throwable) {
                     Log.d(HomeFragment.TAG, t.toString())
@@ -92,6 +98,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                         it.result?.bookList?.forEach { data->
                             Log.d(TAG, data.tag)
                         }
+                        binding.textViewHomeNickName.text = it.result!!.userData!!.nickname
                         homeBookListAdapterSet(it.result!!.bookList!!, isExpanded)
                     }
                 }
