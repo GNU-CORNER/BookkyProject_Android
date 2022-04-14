@@ -21,7 +21,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 
-
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
