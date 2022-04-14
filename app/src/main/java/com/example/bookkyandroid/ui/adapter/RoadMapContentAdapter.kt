@@ -20,7 +20,7 @@ class RoadMapContentAdapter (private val data : ArrayList<String>, private val n
 
         init {
             // Define click listener for the ViewHolder's View.
-            btn.setOnClickListener {
+            view.setOnClickListener {
                 navController.navigate(R.id.action_global_roadMapDetailFragment)
             }
         }

@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.databinding.FragmentBookRecommendBinding
@@ -23,31 +27,6 @@ class FrontEndRoadMapFragment: BaseFragment<FragmentFrontEndRoadMapBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val viewPager = binding.frontEndRoadMapViewPager
-        val roadMapViewPagerAdapter = RoadMapViewPagerAdapter(this)
-        viewPager.adapter = roadMapViewPagerAdapter
-
-
-        //탭 부분 수정할 예정
-        binding.frontEndRoadMapLinearLayout1.setOnClickListener {
-            var current =   viewPager.currentItem - 1
-            viewPager.setCurrentItem(current, false)
-            binding.frontEndRoadMapTextView1.text = setTitle(current-1)
-            binding.frontEndRoadMapTextView2.text = setTitle(current)
-            binding.frontEndRoadMapTextView3.text = setTitle(current+1)
-
-
-        }
-        binding.frontEndRoadMapLinearLayout2.setOnClickListener {
-            var current =   viewPager.currentItem + 1
-            viewPager.setCurrentItem(current, false)
-            binding.frontEndRoadMapTextView1.text = setTitle(current-1)
-            binding.frontEndRoadMapTextView2.text = setTitle(current)
-            binding.frontEndRoadMapTextView3.text = setTitle(current+1)
-
-        }
-
         //test data
         val interestedBooks = arrayListOf<String>(
             "Deep Learing",
@@ -57,7 +36,46 @@ class FrontEndRoadMapFragment: BaseFragment<FragmentFrontEndRoadMapBinding>(
         )
 
         myInterestedBooksAdapterSet(interestedBooks)
+
+        setChangeTitle(0)
+
+        val viewPager = binding.frontEndRoadMapViewPager
+        val roadMapViewPagerAdapter = RoadMapViewPagerAdapter(this)
+        viewPager.adapter = roadMapViewPagerAdapter
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                setChangeTitle(position)
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
+        })
+
+
+
+        binding.frontEndRoadMapLinearLayout1.setOnClickListener {
+            val current = viewPager.currentItem - 1
+            viewPager.setCurrentItem(current, true)
+        }
+
+        binding.frontEndRoadMapLinearLayout2.setOnClickListener {
+            val current = viewPager.currentItem + 1
+            viewPager.setCurrentItem(current, true)
+        }
+
     }
+
 
     private fun myInterestedBooksAdapterSet(titles: ArrayList<String>) {
         binding.frontEndRoadMapRecyclerView.adapter = RoadMapAdapter(titles)
@@ -66,12 +84,36 @@ class FrontEndRoadMapFragment: BaseFragment<FragmentFrontEndRoadMapBinding>(
         binding.frontEndRoadMapRecyclerView.layoutManager = linearLayoutManager
     }
 
-    private fun setTitle(current : Int) : String {
-        return when(current) {
-            0  -> "NULL"
+    private fun setTitle(current: Int): String {
+        return when (current) {
+            0 -> "NULL"
             1 -> "WEB"
             2 -> "Internet "
             else -> ""
+        }
+    }
+
+    private fun setChangeTitle(position: Int) {
+        when (position) {
+            0 -> {
+                binding.frontEndRoadMapImageButton1.visibility = INVISIBLE
+                binding.frontEndRoadMapTextView1.text = setTitle(3)
+                binding.frontEndRoadMapTextView2.text = setTitle(0)
+                binding.frontEndRoadMapTextView3.text = setTitle(1)
+            }
+            1 -> {
+                binding.frontEndRoadMapImageButton1.visibility = VISIBLE
+                binding.frontEndRoadMapImageButton2.visibility = VISIBLE
+                binding.frontEndRoadMapTextView1.text = setTitle(0)
+                binding.frontEndRoadMapTextView2.text = setTitle(1)
+                binding.frontEndRoadMapTextView3.text = setTitle(2)
+            }
+            2 -> {
+                binding.frontEndRoadMapImageButton2.visibility = INVISIBLE
+                binding.frontEndRoadMapTextView1.text = setTitle(1)
+                binding.frontEndRoadMapTextView2.text = setTitle(2)
+                binding.frontEndRoadMapTextView3.text = setTitle(3)
+            }
         }
     }
 }
