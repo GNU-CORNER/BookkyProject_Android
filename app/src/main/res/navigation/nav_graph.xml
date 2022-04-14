@@ -36,7 +36,44 @@
         android:id="@+id/communityFragment"
         android:name="com.example.bookkyandroid.ui.fragment.community.CommunityFragment"
         android:label="fragment_community"
-        tools:layout="@layout/fragment_community" />
+        tools:layout="@layout/fragment_community" >
+        <action
+            android:id="@+id/action_communityFragment_to_communityDetailFragment"
+            app:destination="@id/communityDetailFragment" />
+        <action
+            android:id="@+id/action_communityFragment_to_communityWriteFragment"
+            app:destination="@id/communityWriteFragment" />
+        <action
+            android:id="@+id/action_communityFragment_to_communitySearchPostFragment"
+            app:destination="@id/communitySearchPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/communityDetailFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.community.CommunityDetailFragment"
+        android:label="CommunityDetailFragment" >
+        <action
+            android:id="@+id/action_communityDetailFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/communityWriteFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.community.CommunityWriteFragment"
+        android:label="fragment_community_post_write"
+        tools:layout="@layout/fragment_community_post_write" >
+        <action
+            android:id="@+id/action_communityWriteFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/communitySearchPostFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.community.CommunitySearchPostFragment"
+        android:label="fragment_community_search_post"
+        tools:layout="@layout/fragment_community_search_post" >
+        <action
+            android:id="@+id/action_communitySearchPostFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookRecommendFragment"
         android:name="com.example.bookkyandroid.ui.fragment.suggestion.BookRecommendFragment"
@@ -54,4 +91,5 @@
         tools:layout="@layout/fragment_road_map_detail" />
 
     <action android:id="@+id/action_global_roadMapDetailFragment" app:destination="@id/roadMapDetailFragment" />
+
 </navigation>

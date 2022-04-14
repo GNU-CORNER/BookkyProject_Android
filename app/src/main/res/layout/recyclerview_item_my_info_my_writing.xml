@@ -17,7 +17,7 @@
         android:maxLines="2"
         android:text="여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되.."
         android:textColor="@color/gray"
-        android:textSize="10sp"
+        android:textSize="9sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +34,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_weight="1"
             android:id="@+id/my_info_my_writing_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
             android:text="내 글 이다 내글 내글" />
 
         <ImageButton
@@ -54,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:textSize="12sp"
             android:text="0"
             android:textColor="@color/colorPrimary_night" />
 
@@ -70,6 +72,7 @@
             android:id="@+id/my_info_my_writing_item_textView_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="0"
             android:textColor="@color/colorPrimary_day" />
     </LinearLayout>

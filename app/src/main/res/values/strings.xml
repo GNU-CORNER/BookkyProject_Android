@@ -8,11 +8,35 @@
     <string name="myInfo_string1">님, 반가워요!</string>
     <string name="myInfo_string2">님의 관심 분야 💭 에요</string>
     <string name="myInfo_string3">님의 관심 도서 📖 에요</string>
-    <string name="myInfo_string4">님이 쓴 글 ✏ ️이에요</string>
-    <string name="myInfo_string5">님이 쓴 후기 ✏ ️이에요</string>
+    <string name="myInfo_string4">님이 쓴 글 ✏️ ️이에요</string>
+    <string name="myInfo_string5">님이 쓴 후기 ✏️ ️이에요</string>
     <string name="view_more">더 보기</string>
     <string name="reset">재설정하기</string>
-    <!-- TODO: Remove or change this placeholder text -->
-
-
+    <string name="recommend_Button_string">당신의 책을 🔍찾아보세요!</string>
+    <string name="roadmap_Button_string">나의 🛣개발 지도는?</string>
+    <string name="home_more_tag">태그 더 보기 ></string>
+    <string name="home_community_string">커뮤니티 ></string>
+    <string name="home_recommend_string">추천하개 ></string>
+    <string name="home_recommendSub_string">당신에게 적합한 책을 찾아줄게요!</string>
+    <string name="login_email_string">이메일</string>
+    <string name="login_password_string">비밀번호</string>
+    <string name="login_button_string">로그인</string>
+    <string name="login_social_string">간편 로그인</string>
+    <string name="login_signup_string">회원가입</string>
+    <string name="login_pwMissing_string">로그인에 문제가 있나요?</string>
+    <string name="login_emailHint_string">email@domain.com</string>
+    <string name="login_passwordHint_string">********</string>
+    <string name="signup_emailValid_string">이메일 확인</string>
+    <string name="signup_passwordValid_string">비밀번호 확인</string>
+    <string name="signup_nickname_string">닉네임</string>
+    <string name="additional_title_string">추가정보 입력</string>
+    <string name="findpw_title_string">비밀번호 찾기</string>
+    <string name="findpw_button1_string">인증번호 요청</string>
+    <string name="findpw_button2_string">인증번호 확인</string>
+    <string name="findpw_button3_string">다음으로</string>
+    <string name="findpw_title2_string">인증번호</string>
+    <string name="findpw_newpw_title_string">새로운 비밀번호</string>
+    <string name="findpw_newpw_title2_string">새로운 비밀번호 확인</string>
+    <string name="findpw_newpw_button_string">비밀번호 변경하기</string>
+    <string name="backButton_string">&lt;</string>
 </resources>
