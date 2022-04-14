@@ -49,9 +49,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/myInfo_circleImage_profile"
@@ -65,9 +65,9 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <LinearLayout
-                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"

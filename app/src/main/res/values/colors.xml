@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#FF7A7A</color>
+    <color name="reply_background">#F9F9F9</color>
     <color name="colorPrimary_night">#FFA24D</color>
     <color name="colorPrimary_day">#6C95FF</color>
     <color name="colorPrimary">#6C95FF</color>
