@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D7E2FF"
+    tools:context=".ui.fragment.suggestion.BookRecommendFragment">
+
+
+    <TextView
+        android:id="@+id/book_recommend_textView_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="그만하기"
+        android:textSize="11sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/book_recommend_textView_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/book_recommend_textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="북키"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/book_recommend_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_recommend_textView_title" />
+
+    <LinearLayout
+        android:background="?android:windowBackground"
+        android:paddingVertical="10dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/book_recommend_linearLayout1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/book_recommend_Button1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/answer_selector"
+                android:text="맞아 !" />
+
+            <Button
+                android:id="@+id/book_recommend_Button2"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/answer_selector"
+                android:text="음.. 아니야"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"/>
+            <Button
+                android:id="@+id/book_recommend_Button3"
+                android:text="잘 모르겠어."
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/answer_selector"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/book_recommend_linearLayout2"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/book_recommend_Button4"
+                android:text="그런 편인거 같아"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/answer_selector"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"/>
+            <Button
+                android:id="@+id/book_recommend_Button5"
+                android:text="아닌 것 같은데?"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/answer_selector"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"/>
+            <Button
+                android:id="@+id/book_recommend_Button6"
+                android:text="결과를 보여줘 !"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/answer_selector"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/book_recommend_linearLayout3"
+            android:visibility="gone"
+            android:weightSum="3"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/book_recommend_Button7"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="다시 추천해줘 !"
+                android:background="@drawable/answer_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+            <Button
+                android:id="@+id/book_recommend_Button8"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="그만할래"
+                android:background="@drawable/answer_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

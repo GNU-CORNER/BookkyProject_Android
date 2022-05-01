@@ -14,7 +14,14 @@
         android:id="@+id/suggestionFragment"
         android:name="com.example.bookkyandroid.ui.fragment.suggestion.SuggestionFragment"
         android:label="fragment_suggestion"
-        tools:layout="@layout/fragment_suggestion" />
+        tools:layout="@layout/fragment_suggestion" >
+        <action
+            android:id="@+id/action_suggestionFragment_to_bookRecommendFragment"
+            app:destination="@id/bookRecommendFragment" />
+        <action
+            android:id="@+id/action_suggestionFragment_to_frontEndRoadMapFragment"
+            app:destination="@id/frontEndRoadMapFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.bookkyandroid.ui.fragment.search.SearchFragment"
@@ -67,4 +74,22 @@
             android:id="@+id/action_communitySearchPostFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bookRecommendFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.suggestion.BookRecommendFragment"
+        android:label="fragment_book_recommend"
+        tools:layout="@layout/fragment_book_recommend" />
+    <fragment
+        android:id="@+id/frontEndRoadMapFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.suggestion.FrontEndRoadMapFragment"
+        android:label="fragment_front_end_road_map"
+        tools:layout="@layout/fragment_front_end_road_map" />
+    <fragment
+        android:id="@+id/roadMapDetailFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.suggestion.RoadMapDetailFragment"
+        android:label="fragment_road_map_detail"
+        tools:layout="@layout/fragment_road_map_detail" />
+
+    <action android:id="@+id/action_global_roadMapDetailFragment" app:destination="@id/roadMapDetailFragment" />
+
 </navigation>
