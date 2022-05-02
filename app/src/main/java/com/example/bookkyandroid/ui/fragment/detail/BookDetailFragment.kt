@@ -31,7 +31,7 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
                 isExpanded1 = true
             }
         }
-        binding.bookDetailTextViewExpand1.setOnClickListener {
+        binding.bookDetailTextViewExpand2.setOnClickListener {
             if(isExpanded2){
                 binding.bookDetailTextViewIndex.maxLines = 2
                 isExpanded2 = false
