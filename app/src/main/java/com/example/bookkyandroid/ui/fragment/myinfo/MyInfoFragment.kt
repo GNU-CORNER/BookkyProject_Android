@@ -2,6 +2,8 @@ package com.example.bookkyandroid.ui.fragment.myinfo
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
@@ -48,7 +50,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
 
         //Set adapters
         myInterestedAraAdapterSet(tags)
-        myInterestedBooksAdapterSet(interestedBooks)
+        myInterestedBooksAdapterSet(interestedBooks, findNavController())
         myWritingAdapterSet(myWriting)
         myReviewAdapterSet(myReview)
 
@@ -62,8 +64,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         binding.myInfoRecyclerViewInterestedArea.layoutManager = linearLayoutManager
     }
 
-    private fun myInterestedBooksAdapterSet(titles: ArrayList<String>) {
-        binding.myInfoRecyclerViewInterestedBooks.adapter = MyInfoInterestedBooksAdapter(titles)
+    private fun myInterestedBooksAdapterSet(titles: ArrayList<String>, navController: NavController) {
+        binding.myInfoRecyclerViewInterestedBooks.adapter = MyInfoInterestedBooksAdapter(titles, navController)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.myInfoRecyclerViewInterestedBooks.layoutManager = linearLayoutManager

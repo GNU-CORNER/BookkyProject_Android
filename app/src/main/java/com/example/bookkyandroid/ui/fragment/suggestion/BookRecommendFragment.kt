@@ -5,6 +5,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
@@ -30,7 +31,7 @@ class BookRecommendFragment  : BaseFragment<FragmentBookRecommendBinding>(Fragme
             Message("자바스크립트과 관련된 책이야?",RECEIVE_ID, false)
         )
 
-        bookRecommendAraAdapterSet(message)
+        bookRecommendAraAdapterSet(message, findNavController())
 
         binding.bookRecommendButton1.setOnClickListener {
             adapter.insertMessage(Message("맞아 !", SEND_ID, false))
@@ -77,8 +78,8 @@ class BookRecommendFragment  : BaseFragment<FragmentBookRecommendBinding>(Fragme
 
     }
 
-    private fun bookRecommendAraAdapterSet(message: ArrayList<Message>) {
-        adapter = BookRecommendAdapter(message)
+    private fun bookRecommendAraAdapterSet(message: ArrayList<Message>, navController: NavController) {
+        adapter = BookRecommendAdapter(message, navController)
         binding.bookRecommendRecyclerview.adapter = adapter
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL

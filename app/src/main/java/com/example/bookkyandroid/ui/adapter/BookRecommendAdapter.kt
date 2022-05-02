@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
@@ -17,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 //리사이클러뷰 재활용 문제 해결해야함
 
-class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView.Adapter<BookRecommendAdapter.MessageViewHolder>() {
+class BookRecommendAdapter (val messagesList : ArrayList<Message>, val navController: NavController): RecyclerView.Adapter<BookRecommendAdapter.MessageViewHolder>() {
 
     class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val layout = itemView.findViewById<LinearLayout>(R.id.book_recommend_recyclerview_item_linearLayout_receive)
@@ -52,7 +54,7 @@ class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView
             "REACT 리액트"
         )
 
-        holder.childRecyclerView.adapter = MyInfoInterestedBooksAdapter(childData)
+        holder.childRecyclerView.adapter = MyInfoInterestedBooksAdapter(childData, navController)
         val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         holder.childRecyclerView.layoutManager = linearLayoutManager

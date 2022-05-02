@@ -91,5 +91,11 @@
         tools:layout="@layout/fragment_road_map_detail" />
 
     <action android:id="@+id/action_global_roadMapDetailFragment" app:destination="@id/roadMapDetailFragment" />
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.detail.BookDetailFragment"
+        android:label="fragment_book_detail"
+        tools:layout="@layout/fragment_book_detail" />
+    <action android:id="@+id/action_global_bookDetailFragment" app:destination="@id/bookDetailFragment"/>
 
 </navigation>
