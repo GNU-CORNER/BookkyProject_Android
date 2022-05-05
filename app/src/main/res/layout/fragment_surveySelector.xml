@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/suggestionFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray4"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.fragment.survey.SurveySelectorFragment">
+
+    <TextView
+        android:id="@+id/surveySelector_textView_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:includeFontPadding="true"
+        android:text="@string/survey_next_string"
+        android:textAlignment="textEnd"
+        android:textColor="@color/day_colorSecondary"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/surveySelector_textView_mainTitle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:includeFontPadding="true"
+        android:text="@string/surveySelector_mainTitle1_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/surveySelector_textView_mainTitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:includeFontPadding="true"
+        android:text="@string/surveySelector_mainTitle2_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/surveySelector_textView_mainTitle3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:includeFontPadding="true"
+        android:text="@string/surveySelector_mainTitle3_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/surveySelector_recyclerView_verticalSelector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

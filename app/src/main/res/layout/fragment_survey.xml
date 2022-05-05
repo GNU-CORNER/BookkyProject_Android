@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/suggestionFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray4"
+    android:orientation="vertical"
+    tools:context=".ui.fragment.survey.SurveyFragment">
+
+    <TextView
+        android:id="@+id/survey_textView_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:includeFontPadding="true"
+        android:paddingRight="30dp"
+        android:text="@string/survey_next_string"
+        android:textAlignment="textEnd"
+        android:textColor="@color/day_colorSecondary" />
+
+    <TextView
+        android:id="@+id/survey_textView_mainTitle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:includeFontPadding="true"
+        android:paddingLeft="20dp"
+        android:text="@string/survey_mainTitle1_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/survey_textView_mainTitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:includeFontPadding="true"
+        android:paddingLeft="20dp"
+        android:text="@string/survey_mainTitle2_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/survey_textView_mainTitle3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60sp"
+        android:includeFontPadding="true"
+        android:paddingLeft="20dp"
+        android:text="@string/survey_mainTitle3_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/survey_textView_subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:paddingLeft="20dp"
+        android:text="@string/survey_subTitle_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/survey_textView_selector1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/dark_onSurface"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/survey_selector1_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/survey_textView_selector2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/dark_onSurface"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/survey_selector2_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        tools:ignore="TextContrastCheck" />
+</LinearLayout>
