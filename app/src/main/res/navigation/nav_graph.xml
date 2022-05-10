@@ -9,7 +9,17 @@
         android:id="@+id/homeFragment"
         android:name="com.example.bookkyandroid.ui.fragment.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeMoreTagFragment"
+            app:destination="@id/homeMoreTagFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeMoreTagDetailFragment"
+            app:destination="@id/homeMoreTagDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/suggestionFragment"
         android:name="com.example.bookkyandroid.ui.fragment.suggestion.SuggestionFragment"
@@ -91,5 +101,20 @@
         tools:layout="@layout/fragment_road_map_detail" />
 
     <action android:id="@+id/action_global_roadMapDetailFragment" app:destination="@id/roadMapDetailFragment" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.bookkyandroid.ui.activity.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/homeMoreTagFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.home.HomeMoreTagFragment"
+        android:label="fragment_more_tag"
+        tools:layout="@layout/fragment_more_tag" />
+    <fragment
+        android:id="@+id/homeMoreTagDetailFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.home.HomeMoreTagDetailFragment"
+        android:label="fragment_more_tag_detail"
+        tools:layout="@layout/fragment_more_tag_detail" />
 
 </navigation>

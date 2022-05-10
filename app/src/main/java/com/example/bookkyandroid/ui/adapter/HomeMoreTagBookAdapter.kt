@@ -1,21 +1,16 @@
 package com.example.bookkyandroid.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.HomeBookDataModel
-import com.example.bookkyandroid.data.model.HomeBookListDataModel
-import com.example.bookkyandroid.ui.fragment.home.HomeFragment
 
-class HomeBooksAdapter(private val data : ArrayList<HomeBookDataModel>) : RecyclerView.Adapter<HomeBooksAdapter.PagerViewHolder>() {
+class HomeMoreTagBookAdapter(private val data : ArrayList<HomeBookDataModel?>) : RecyclerView.Adapter<HomeMoreTagBookAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val title : TextView = view.findViewById(R.id.myInfo_viewPager_interested_books_item_textView_title)
@@ -35,10 +30,10 @@ class HomeBooksAdapter(private val data : ArrayList<HomeBookDataModel>) : Recycl
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.title.text = data[position].TITLE
+        holder.title.text = data[position]!!.TITLE
         holder.apply {
             Glide.with(itemView)
-                .load(data[position].thumbnailImage) // 불러올 이미지 url
+                .load(data[position]!!.thumbnailImage) // 불러올 이미지 url
                 .placeholder(R.drawable.test_book) // 이미지 로딩 시작하기 전 표시할 이미지
                 .error(R.drawable.test_book) // 로딩 에러 발생 시 표시할 이미지
                 .fallback(R.drawable.test_book) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
@@ -51,7 +46,7 @@ class HomeBooksAdapter(private val data : ArrayList<HomeBookDataModel>) : Recycl
             } else {
                 position + 6
             }
-            data.subList(position, endPosition ).map { it.thumbnailImage }.forEach {
+            data.subList(position, endPosition ).map { it!!.thumbnailImage }.forEach {
                 preLoad(holder.itemView, it.toString())
             }
         }

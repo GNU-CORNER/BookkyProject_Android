@@ -1,7 +1,6 @@
-package com.example.bookkyandroid.ui.activity.main
+package com.example.bookkyandroid.ui.activity.login
 
 import android.os.Bundle
-import android.view.View
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseActivity
 import com.example.bookkyandroid.databinding.ActivityLoginBinding
