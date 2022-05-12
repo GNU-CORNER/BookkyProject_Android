@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
@@ -13,18 +14,12 @@ import com.example.bookkyandroid.data.model.UserSignInBody
 import com.example.bookkyandroid.data.model.UserSignInResponse
 import com.example.bookkyandroid.databinding.FragmentSigninBinding
 import com.example.bookkyandroid.ui.activity.main.MainActivity
-import com.example.bookkyandroid.ui.fragment.findpw.FindPwFragment
-import com.example.bookkyandroid.ui.fragment.signup.SignupFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding::bind, R.layout.fragment_signin) {
 
@@ -33,7 +28,6 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
 
         val context = this
         val bookkyService = RetrofitManager.getInstance().bookkyService
-        val transaction =parentFragmentManager.beginTransaction()
         binding.loginButtonSignIn!!.setOnClickListener {
             signIn(
                 binding.loginEditTextEmailInput!!.text.toString(),
@@ -48,28 +42,22 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             socialGoogleSignIn()
         }
         binding.loginTextViewSignUpTitle!!.setOnClickListener {
-            transaction.replace(R.id.login_fragmentContainerView_fragmentLayer, SignupFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            findNavController().navigate(R.id.action_signInFragment_to_signupFragment)
         }
         binding.loginTextViewForgotTitle!!.setOnClickListener {
-            transaction.replace(R.id.login_fragmentContainerView_fragmentLayer, FindPwFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            findNavController().navigate(R.id.action_signInFragment_to_findPwFragment)
         }
     }
 
 }
 private fun successLogin(view : SignInFragment, data : UserSignInResponse){
-    val intent = Intent(view.context, MainActivity::class.java)  // 인텐트를 생성해줌,
-    CoroutineScope(Dispatchers.Main).launch {
+    CoroutineScope(Dispatchers.IO).launch {
         val accessToken = data.singInResult.access_token
         val refreshToken = data.singInResult.refresh_token
         ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
         ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
     }
-    view.startActivity(intent)  // 화면 전환을 시켜줌
-    view.activity?.finish()
+    view.findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
 }
 
 private fun signIn(email: String, password: String, bookkyService: BookkyService, activity: SignInFragment){

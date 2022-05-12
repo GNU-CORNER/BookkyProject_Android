@@ -54,6 +54,7 @@ class HomeTagByBooksAdapter(private val data : HomeBookListDataModel) : Recycler
                 preLoad(holder.itemView, it.toString())
             }
         }
+
     }
 
     override fun getItemCount(): Int = data.data.size

@@ -1,9 +1,12 @@
 package com.example.bookkyandroid.ui.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
@@ -13,10 +16,8 @@ import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentHomeBinding
-import com.example.bookkyandroid.ui.activity.login.LoginActivity
 import com.example.bookkyandroid.ui.adapter.HomeCommunityShortAdapter
 import com.example.bookkyandroid.ui.adapter.HomeTagByBooksAdapter
-import com.example.bookkyandroid.ui.fragment.signup.SignupFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -24,17 +25,13 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var accessToken : String = ""
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             accessToken = ApplicationClass.getInstance().getDataStore().accessToken.first()
             Log.d(TAG, "onViewCreated: "+accessToken)
         }
@@ -48,13 +45,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             HomeCommunityDataModel("자유게시판", "카카오 공채 떴던데 보신 분 있으신가요?")
         )
         homeCommunitySet(communityDummyData)
-        getHomeData(bookkyService, accessToken)
-
+        getHomeData(bookkyService,accessToken)
+        binding.imageView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_surveyFragment)
+        }
         binding.textViewHomeTagMore.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_homeMoreTagFragment)
         }
         binding.textViewHomeRecommendText.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_loginActivity)
+            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+        }
+        binding.frameLayoutBookRecommendRoadmapButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_suggestionFragment)
+        }
+        binding.frameLayoutRecommendBookynatorButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_bookRecommendFragment)
         }
     }
 
@@ -64,6 +69,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerViewHomeBookList1.layoutManager = linearLayoutManager
+        binding.homeTextViewRecyclerviewHeadline1.setOnClickListener {
+            val bundle = bundleOf("TID" to DataModels.TID)
+            it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
+        }
     }
 
     private fun homeBookListAdapterSet2(headline : String,DataModels: HomeBookListDataModel){
@@ -72,6 +81,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerViewHomeBookList2.layoutManager = linearLayoutManager
+        binding.homeTextViewRecyclerviewHeadline1.setOnClickListener {
+            val bundle = bundleOf("TID" to DataModels.TID)
+            it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
+        }
     }
 
     private fun homeCommunitySet(titles: ArrayList<HomeCommunityDataModel>) {
@@ -85,15 +98,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         private const val TAG="HomeFragment"
     }
 
-    private fun getHomeData(bookkyService: BookkyService, access_token : String){
+    private fun getHomeData(bookkyService: BookkyService, access_token:String){
         bookkyService.getHomeData(access_token)
             .enqueue(object : Callback<HomeResponseDataModel> {
                 override fun onFailure(call: Call<HomeResponseDataModel>, t: Throwable) {
-                    Log.d(HomeFragment.TAG, t.toString())
+
                 }
 
                 override fun onResponse(call: Call<HomeResponseDataModel>, response: Response<HomeResponseDataModel>){
                     if (response.isSuccessful.not()) {
+
                         return
                     }
                     response.body()?.let {

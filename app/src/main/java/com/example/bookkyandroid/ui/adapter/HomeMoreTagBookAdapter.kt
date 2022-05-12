@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -49,6 +51,10 @@ class HomeMoreTagBookAdapter(private val data : ArrayList<HomeBookDataModel?>) :
             data.subList(position, endPosition ).map { it!!.thumbnailImage }.forEach {
                 preLoad(holder.itemView, it.toString())
             }
+        }
+        holder.itemView.setOnClickListener {
+            val bundle = bundleOf("BID" to data[position]!!.BID)
+            it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
         }
     }
 

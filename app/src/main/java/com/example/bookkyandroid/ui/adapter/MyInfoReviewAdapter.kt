@@ -7,10 +7,11 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.data.model.MyProfileReviewDataModel
 import com.example.bookkyandroid.data.model.MyReview
 import com.example.bookkyandroid.data.model.MyWriting
 
-class MyInfoReviewAdapter (private val myReview : ArrayList<MyReview>) : RecyclerView.Adapter<MyInfoReviewAdapter.PagerViewHolder>() {
+class MyInfoReviewAdapter (private val reviewData : ArrayList<MyProfileReviewDataModel>) : RecyclerView.Adapter<MyInfoReviewAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val title : TextView = view.findViewById(R.id.my_info_my_review_item_title)
@@ -36,14 +37,14 @@ class MyInfoReviewAdapter (private val myReview : ArrayList<MyReview>) : Recycle
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.title.text = myReview[position].title
-        holder.contents.text = myReview[position].contents
-        holder.like.text = myReview[position].like.toString()
-        holder.ratingNum.text = myReview[position].rating.toString()
-        holder.ratingBar.rating =  myReview[position].rating.toFloat()
-        holder.writer.text = myReview[position].writer
+        holder.title.text = reviewData[position].bookTitle!!
+        holder.contents.text = reviewData[position].contents!!
+        holder.like.text = reviewData[position].likeCnt.toString()
+        holder.ratingNum.text = reviewData[position].rating.toString()
+        holder.ratingBar.rating =  reviewData[position].rating!!.toFloat()
+        holder.writer.text = reviewData[position].nickname!!
     }
 
-    override fun getItemCount(): Int = myReview.size
+    override fun getItemCount(): Int = reviewData.size
 
 }

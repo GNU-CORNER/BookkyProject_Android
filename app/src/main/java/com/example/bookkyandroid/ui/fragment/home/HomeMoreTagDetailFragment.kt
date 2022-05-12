@@ -3,6 +3,7 @@ package com.example.bookkyandroid.ui.fragment.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
@@ -10,8 +11,9 @@ import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.data.model.HomeBookListDataModel
+import com.example.bookkyandroid.data.model.HomeMoreTagDetailResponseDataModel
 import com.example.bookkyandroid.databinding.FragmentMoreTagDetailBinding
-import com.example.bookkyandroid.ui.adapter.HomeMoreTagDetailVerticalAdapter
+import com.example.bookkyandroid.ui.adapter.HomeMoreTagDetailAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,33 +22,39 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tagID = arguments?.getInt("TID")
+        Log.d("TID get Argument", tagID.toString())
         val bookkyService = RetrofitManager.getInstance().bookkyService
         getHomeMoreTagDetailData(bookkyService, tagID!!)
     }
-    private fun moreTagDetailAdapter(headline : String, DataModels: HomeBookListDataModel){
-        binding.textViewHomeMoreTagDetailHeadLine.text = headline
-        binding.recyclerViewMoreTagDetailBookList.adapter = HomeMoreTagDetailVerticalAdapter(DataModels!!.data)
-        val linearLayoutManager = LinearLayoutManager(activity)
+    private fun moreTagDetailAdapter(DataModels: HomeBookListDataModel){
+        binding.textViewHomeMoreTagDetailHeadLine.text = DataModels.tag
+        binding.recyclerViewMoreTagDetailBookList.adapter = HomeMoreTagDetailAdapter(DataModels)
+        val linearLayoutManager = GridLayoutManager(activity,3)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recyclerViewMoreTagDetailBookList.layoutManager = linearLayoutManager
     }
 
     private fun getHomeMoreTagDetailData(bookkyService: BookkyService, TID:Int){
-        bookkyService.getHomeMoreTagDetailData(25,1,TID)
-            .enqueue(object : Callback<BaseResponse<HomeBookListDataModel>> {
-                override fun onFailure(call: Call<BaseResponse<HomeBookListDataModel>>, t: Throwable) {
-                    Log.d("getHomeMoreTagDetail", t.toString())
+        bookkyService.getHomeMoreTagDetailData(TID,25,1)
+            .enqueue(object : Callback<BaseResponse<HomeMoreTagDetailResponseDataModel>> {
+                override fun onFailure(
+                    call: Call<BaseResponse<HomeMoreTagDetailResponseDataModel>>,
+                    t: Throwable
+                ) {
+
+                }
+                override fun onResponse(
+                    call: Call<BaseResponse<HomeMoreTagDetailResponseDataModel>>,
+                    response: Response<BaseResponse<HomeMoreTagDetailResponseDataModel>>
+                ) {
+                    if(response.isSuccessful()){
+                        response.body()?.let {
+                            moreTagDetailAdapter(it.result.bookList)
+                        }
+                    }
                 }
 
-                override fun onResponse(call: Call<BaseResponse<HomeBookListDataModel>>, response: Response<BaseResponse<HomeBookListDataModel>>?){
-                    if (response!!.isSuccessful.not()) {
-                        return
-                    }
-                    response.body()?.let {
-                        moreTagDetailAdapter(it!!.result.tag, it.result)
 
-                    }
-                }
             })
     }
 }

@@ -25,7 +25,9 @@
     <color name="gray2">#898A8D</color>
     <color name="gray3">#808080</color>
     <color name="gray4">#F9F9F9</color>
+    <color name="gray5">#8C8C8C</color>
     <color name="my_info_my_item_border">#F9F9F9</color>
     <color name="day_subPrimary">#BFBFBF</color>
     <color name="secondary_backgroundColor">#E5E5E5</color>
+    <color name="naver_background">#03C76B</color>
 </resources>

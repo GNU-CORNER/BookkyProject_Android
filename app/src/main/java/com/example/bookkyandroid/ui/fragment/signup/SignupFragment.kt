@@ -1,9 +1,9 @@
 package com.example.bookkyandroid.ui.fragment.signup
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
@@ -11,20 +11,12 @@ import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentSignupBinding
-import com.example.bookkyandroid.ui.activity.main.MainActivity
-import com.example.bookkyandroid.ui.fragment.signin.SignInFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
 
 class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::bind, R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,16 +49,14 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
     }
 }
-private fun successLogin(view : SignupFragment, data : UserSignUpResponse){
-    val intent = Intent(view.context, MainActivity::class.java)  // 인텐트를 생성해줌,
-    CoroutineScope(Dispatchers.Main).launch {
+private fun successSignUp(view : SignupFragment, data : UserSignUpResponse){
+    CoroutineScope(Dispatchers.IO).launch {
         val accessToken = data.singUpResult.access_token
         val refreshToken = data.singUpResult.refresh_token
         ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
         ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
     }
-    view.startActivity(intent)  // 화면 전환을 시켜줌
-    view.activity?.finish()
+    view.findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
 }
 private fun signUp(email: String, password: String, nickname: String, bookkyService: BookkyService, activity: SignupFragment){
     val bodyParameter = UserSignUpBody(email, password, nickname)
@@ -83,7 +73,7 @@ private fun signUp(email: String, password: String, nickname: String, bookkyServ
                 signUpResponse.body()?.let {
                     Log.d("LoginAPI", it.toString())
                     Log.d("LoginAPI", it.singUpResult.toString())
-                    successLogin(activity, it)
+                    successSignUp(activity, it)
                 }
             }
         })

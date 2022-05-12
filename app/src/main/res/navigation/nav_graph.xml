@@ -11,14 +11,23 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_loginActivity"
-            app:destination="@id/loginActivity" />
-        <action
             android:id="@+id/action_homeFragment_to_homeMoreTagFragment"
             app:destination="@id/homeMoreTagFragment" />
         <action
             android:id="@+id/action_homeFragment_to_homeMoreTagDetailFragment"
             app:destination="@id/homeMoreTagDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_suggestionFragment"
+            app:destination="@id/suggestionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bookRecommendFragment"
+            app:destination="@id/bookRecommendFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
     </fragment>
     <fragment
         android:id="@+id/suggestionFragment"
@@ -41,7 +50,14 @@
         android:id="@+id/myInfoFragment"
         android:name="com.example.bookkyandroid.ui.fragment.myinfo.MyInfoFragment"
         android:label="fragment_my_info"
-        tools:layout="@layout/fragment_my_info" />
+        tools:layout="@layout/fragment_my_info" >
+        <action
+            android:id="@+id/action_myInfoFragment_to_homeMoreTagDetailFragment"
+            app:destination="@id/homeMoreTagDetailFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/communityFragment"
         android:name="com.example.bookkyandroid.ui.fragment.community.CommunityFragment"
@@ -101,11 +117,6 @@
         tools:layout="@layout/fragment_road_map_detail" />
 
     <action android:id="@+id/action_global_roadMapDetailFragment" app:destination="@id/roadMapDetailFragment" />
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.example.bookkyandroid.ui.activity.login.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
     <fragment
         android:id="@+id/homeMoreTagFragment"
         android:name="com.example.bookkyandroid.ui.fragment.home.HomeMoreTagFragment"
@@ -116,5 +127,77 @@
         android:name="com.example.bookkyandroid.ui.fragment.home.HomeMoreTagDetailFragment"
         android:label="fragment_more_tag_detail"
         tools:layout="@layout/fragment_more_tag_detail" />
+    <fragment
+        android:id="@+id/surveySelectorFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.survey.SurveySelectorFragment"
+        android:label="fragment_surveyselector"
+        tools:layout="@layout/fragment_surveyselector" >
+        <action
+            android:id="@+id/action_surveySelectorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/surveyFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.survey.SurveyFragment"
+        android:label="fragment_survey"
+        tools:layout="@layout/fragment_survey" >
+        <action
+            android:id="@+id/action_surveyFragment_to_surveySelectorFragment"
+            app:destination="@id/surveySelectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.signin.SignInFragment"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin" >
+        <action
+            android:id="@+id/action_signInFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_additionalFragment"
+            app:destination="@id/additionalFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_findPwFragment"
+            app:destination="@id/findPwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.signup.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/additionalFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.signup.AdditionalFragment"
+        android:label="fragment_additional_info"
+        tools:layout="@layout/fragment_additional_info" />
+    <fragment
+        android:id="@+id/findPwFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.signin.FindPwFragment"
+        android:label="fragment_findpw"
+        tools:layout="@layout/fragment_findpw" >
+        <action
+            android:id="@+id/action_findPwFragment_to_findPwNewPwFragment"
+            app:destination="@id/findPwNewPwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findPwNewPwFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.signin.FindPwNewPwFragment"
+        android:label="fragment_findpw_newpw"
+        tools:layout="@layout/fragment_findpw_newpw" />
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.book.BookDetailFragment"
+        android:label="fragment_book_detail"
+        tools:layout="@layout/fragment_book_detail" />
+    <action
+        android:id="@+id/action_global_bookDetailFragment"
+        app:destination="@id/bookDetailFragment" />
 
 </navigation>

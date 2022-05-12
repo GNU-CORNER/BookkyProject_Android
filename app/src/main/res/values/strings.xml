@@ -41,7 +41,7 @@
     <string name="backButton_string">&lt;</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="survey_next_string">다음으로 ></string>
+    <string name="survey_next_string">다음으로</string>
     <string name="survey_mainTitle1_string">개발을</string>
     <string name="survey_mainTitle2_string">해본적이</string>
     <string name="survey_mainTitle3_string">있었나요?</string>
@@ -51,4 +51,19 @@
     <string name="surveySelector_mainTitle1_string">관심</string>
     <string name="surveySelector_mainTitle2_string">분야를</string>
     <string name="surveySelector_mainTitle3_string">선택하세요</string>
+    <string name="book_detail_bookInfo_string">도서정보</string>
+    <string name="book_detail_bookPublisher_string">출판사 :</string>
+    <string name="book_detail_bookAuthor_string">저자 :</string>
+    <string name="book_detail_bookPrice_string">정가 :</string>
+    <string name="book_detail_bookPageCnt_string">페이지 :</string>
+    <string name="book_detail_bookISBN_string">ISBN :</string>
+    <string name="book_detail_bookIntroduction_string">책 소개</string>
+    <string name="book_detail_bookMoreText_string">펼쳐보기 ></string>
+    <string name="book_detail_bookIndex_string">목차</string>
+    <string name="book_detail_bookReviewText_string">리뷰</string>
+    <string name="book_detail_bookReviewWrite_string">리뷰 쓰기</string>
+    <string name="book_detail_bookLikeText_string">공감</string>
+
+
+
 </resources>

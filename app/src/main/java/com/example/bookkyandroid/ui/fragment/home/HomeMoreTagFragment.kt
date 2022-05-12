@@ -1,6 +1,7 @@
 package com.example.bookkyandroid.ui.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
@@ -26,7 +27,7 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var accessToken : String = ""
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             accessToken = ApplicationClass.getInstance().getDataStore().accessToken.first()
         }
         val bookkyService = RetrofitManager.getInstance().bookkyService

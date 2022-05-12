@@ -38,8 +38,31 @@ interface BookkyService {
 
     @GET("/v1/books/tag/{TID}")
     fun getHomeMoreTagDetailData(
-        @Path("TID")TID:Int?,
-        @Query("quantity")qunatity :Int?,
-        @Query("page")page:Int?
-    ): Call<BaseResponse<HomeBookListDataModel>>
+        @Path("TID") TID:Int,
+        @Query("quantity") qunatity :Int,
+        @Query("page") page:Int
+    ): Call<BaseResponse<HomeMoreTagDetailResponseDataModel>>
+
+    @GET("/v1/tags")
+    fun getTagItem(): Call<BaseResponse<SurveySelectorResponseDataModel>>
+
+    @POST("/v1/auth/refresh")
+    fun refreshToken(
+        @Header("access-token")
+        access_token : String,
+        @Header("refresh-token")
+        refresh_token : String
+    ) : Call<BaseResponse<AuthRefreshResponseDataModel>>
+
+    @GET("/v1/myprofile")
+    fun getMyprofile(
+        @Header("access-token")
+        access_token: String
+    ) : Call<BaseResponse<MyProfileResponseDataModel>>
+
+    @GET("/v1/books/detail/{pk}")
+    fun getBookDetail(
+        @Path("pk") pk:Int,
+        @Header("access-token") access_token : String
+    ) : Call<BaseResponse<BookDetailResponseDataModel>>
 }

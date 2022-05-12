@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/suggestionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray4"
@@ -10,21 +9,10 @@
     tools:context=".ui.fragment.survey.SurveyFragment">
 
     <TextView
-        android:id="@+id/survey_textView_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp"
-        android:includeFontPadding="true"
-        android:paddingRight="30dp"
-        android:text="@string/survey_next_string"
-        android:textAlignment="textEnd"
-        android:textColor="@color/day_colorSecondary" />
-
-    <TextView
         android:id="@+id/survey_textView_mainTitle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="5dp"
         android:includeFontPadding="true"
         android:paddingLeft="20dp"
@@ -74,7 +62,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="15dp"
-        android:background="@color/dark_onSurface"
+        android:background="@drawable/background_round_gray"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -89,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@color/dark_onSurface"
+        android:background="@drawable/background_round_gray"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -97,4 +85,16 @@
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/button_survey_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/background_round_gray"
+        android:text="@string/survey_next_string"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
 </LinearLayout>

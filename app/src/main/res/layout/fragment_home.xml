@@ -294,6 +294,7 @@
                             android:layout_height="match_parent">
 
                             <FrameLayout
+                                android:id="@+id/frameLayout_recommend_bookynator_button"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
@@ -302,7 +303,7 @@
                                 android:layout_marginBottom="30dp"
                                 android:background="@drawable/recommenditem_background"
                                 android:padding="20dp"
-                                app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+                                app:layout_constraintBottom_toTopOf="@+id/frameLayout_book_recommend_roadmap_button"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
@@ -346,7 +347,7 @@
                             </FrameLayout>
 
                             <FrameLayout
-                                android:id="@+id/frameLayout"
+                                android:id="@+id/frameLayout_book_recommend_roadmap_button"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
