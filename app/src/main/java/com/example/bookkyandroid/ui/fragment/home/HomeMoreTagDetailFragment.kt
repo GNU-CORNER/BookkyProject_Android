@@ -29,7 +29,7 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
     private fun moreTagDetailAdapter(DataModels: HomeBookListDataModel){
         binding.textViewHomeMoreTagDetailHeadLine.text = DataModels.tag
         binding.recyclerViewMoreTagDetailBookList.adapter = HomeMoreTagDetailAdapter(DataModels)
-        val linearLayoutManager = GridLayoutManager(activity,3)
+        val linearLayoutManager = GridLayoutManager(activity,4)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recyclerViewMoreTagDetailBookList.layoutManager = linearLayoutManager
     }

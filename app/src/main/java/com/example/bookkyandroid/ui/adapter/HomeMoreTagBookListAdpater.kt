@@ -49,6 +49,7 @@ class HomeMoreTagBookListAdpater (private val testDatumDataModels : ArrayList<Ho
             val bundle = bundleOf("TID" to testDatumDataModels[position]!!.TID)
             it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
         }
+
     }
 
     override fun getItemCount(): Int {

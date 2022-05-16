@@ -2,6 +2,7 @@ package com.example.bookkyandroid.ui.fragment.findpw
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.databinding.FragmentFindpwBinding
@@ -11,9 +12,7 @@ class FindPwFragment : BaseFragment<FragmentFindpwBinding>(FragmentFindpwBinding
         super.onViewCreated(view, savedInstanceState)
     val transaction = parentFragmentManager.beginTransaction()
         binding.findpwButtonNext!!.setOnClickListener{
-            transaction.replace(R.id.login_fragmentContainerView_fragmentLayer, FindPwNewPwFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            findNavController().navigate(R.id.action_findPwFragment_to_findPwNewPwFragment)
         }
         binding.findpwButtonCallCode!!.setOnClickListener{
 

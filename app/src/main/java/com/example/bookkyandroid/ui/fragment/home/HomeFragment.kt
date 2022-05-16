@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             findNavController().navigate(R.id.action_homeFragment_to_homeMoreTagFragment)
         }
         binding.textViewHomeRecommendText.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+            findNavController().navigate(R.id.action_global_signInFragment)
         }
         binding.frameLayoutBookRecommendRoadmapButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_suggestionFragment)

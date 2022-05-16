@@ -26,13 +26,18 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         super.onViewCreated(view, savedInstanceState)
         val bookkyService = RetrofitManager.getInstance().bookkyService
 //        val accessToken = ApplicationClass.getInstance().getDataStore().accessToken
-        val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyMzQ3NDIzLCJVSUQiOjYxfQ.6Sozfk2GNBY1ybhB0wZ9SX9ixkOaRiajoUQAoYpkB4U"
+        val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyNTk3NTAwLCJVSUQiOjYxfQ.rhyonmlGNQAyjLvRcyFU8UT-DU90jNtED5AtLe39Thc"
         // Set test data
         getMyProfileData(bookkyService,accessToken)
         binding.myInfoTextViewReset.setOnClickListener {
             findNavController().navigate(R.id.action_myInfoFragment_to_surveyFragment)
         }
-
+        binding.myInfoTextViewMore1.setOnClickListener {
+            findNavController().navigate(R.id.action_myInfoFragment_to_myFavoriteBookFragment)
+        }
+        binding.myInfoTextViewMore3.setOnClickListener {
+            findNavController().navigate(R.id.action_myInfoFragment_to_myReviewFragment)
+        }
     }
 
     private fun myInterestedAraAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {

@@ -31,6 +31,4 @@ data class MyProfileReviewDataModel(
     val thumbnail : String?,
     @SerializedName("bookTitle")
     val bookTitle : String?
-
-
 )

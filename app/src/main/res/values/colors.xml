@@ -30,4 +30,5 @@
     <color name="day_subPrimary">#BFBFBF</color>
     <color name="secondary_backgroundColor">#E5E5E5</color>
     <color name="naver_background">#03C76B</color>
+    <color name="gray6">#8A8585</color>
 </resources>

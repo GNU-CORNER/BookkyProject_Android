@@ -65,4 +65,20 @@ interface BookkyService {
         @Path("pk") pk:Int,
         @Header("access-token") access_token : String
     ) : Call<BaseResponse<BookDetailResponseDataModel>>
+
+    @GET("/v1/user/favoritebook/0")
+    fun getFavoriteBook(
+        @Header("access-token")access_token: String
+    ) : Call<BaseResponse<FavoriteBookListResponseDataModel>>
+
+    @GET("/v1/user/myreview")
+    fun getMyReview(
+        @Header("access-token")access_token: String
+    ) : Call<BaseResponse<MyReviewResponseDataModel>>
+
+    @GET("/v1/books/search")
+    fun searchBook(
+        @Query("keyword") keyword : String
+    ) : Call<BaseResponse<SearchResultResponseDataModel>>
+
 }
