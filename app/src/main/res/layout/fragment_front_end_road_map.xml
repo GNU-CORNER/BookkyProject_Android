@@ -21,7 +21,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/frontEndRoadMap_imageButton_back"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -39,17 +39,6 @@
 
 
         </LinearLayout>
-
-        <ImageButton
-            android:layout_marginTop="7dp"
-            android:id="@+id/frontEndRoadMap_imageButton_back"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@null"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_arrow2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -98,7 +87,8 @@
                     android:layout_height="32dp"
                     android:background="@null"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_road_map_arrow2" />
+                    android:src="@drawable/ic_road_map_arrow2"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>
 
@@ -135,7 +125,8 @@
                     android:layout_height="32dp"
                     android:background="@null"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_road_map_arrow1" />
+                    android:src="@drawable/ic_road_map_arrow1"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:id="@+id/frontEndRoadMap_textView3"

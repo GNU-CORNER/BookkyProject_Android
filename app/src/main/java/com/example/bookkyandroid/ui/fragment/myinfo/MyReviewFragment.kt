@@ -1,0 +1,51 @@
+package com.example.bookkyandroid.ui.fragment.myinfo
+
+import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.BaseFragment
+import com.example.bookkyandroid.config.BookkyService
+import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.data.model.BaseResponse
+import com.example.bookkyandroid.data.model.MyProfileReviewDataModel
+import com.example.bookkyandroid.data.model.MyReviewResponseDataModel
+import com.example.bookkyandroid.databinding.FragmentMyReviewBinding
+import com.example.bookkyandroid.ui.adapter.MyInfoReviewAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class MyReviewFragment: BaseFragment<FragmentMyReviewBinding>(
+    FragmentMyReviewBinding::bind, R.layout.fragment_my_review) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val bookkyService = RetrofitManager.getInstance().bookkyService
+        getReviewData(bookkyService)
+    }
+    private fun myReviewAdapterSet(reviewData: ArrayList<MyProfileReviewDataModel>) {
+        binding.recyclerViewMyReview.adapter = MyInfoReviewAdapter(reviewData)
+        val linearLayoutManager = LinearLayoutManager(activity)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.recyclerViewMyReview.layoutManager = linearLayoutManager
+    }
+    private fun getReviewData(bookkyService: BookkyService){
+        val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyNTk3NTAwLCJVSUQiOjYxfQ.rhyonmlGNQAyjLvRcyFU8UT-DU90jNtED5AtLe39Thc"
+        bookkyService.getMyReview(accessToken)
+            .enqueue(object : Callback<BaseResponse<MyReviewResponseDataModel>> {
+                override fun onFailure(call: Call<BaseResponse<MyReviewResponseDataModel>>, t: Throwable) {
+
+                }
+
+                override fun onResponse(call: Call<BaseResponse<MyReviewResponseDataModel>>, response: Response<BaseResponse<MyReviewResponseDataModel>>){
+                    if (response.isSuccessful.not()) {
+
+                        return
+                    }
+                    response.body()?.let {
+                        myReviewAdapterSet(it.result.reviewList)
+                    }
+                }
+            })
+    }
+}

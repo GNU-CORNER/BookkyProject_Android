@@ -6,5 +6,7 @@ data class UserSingUpResult (
     @SerializedName("email") val email: String,
     @SerializedName("nickname") val nickname : String,
     @SerializedName("pushToken") val pushToken : String,
-    @SerializedName("pushNoti") val pushNoti: String
+    @SerializedName("pushNoti") val pushNoti: String,
+    @SerializedName("access_token") val access_token: String,
+    @SerializedName("refresh_token") val refresh_token: String,
 )

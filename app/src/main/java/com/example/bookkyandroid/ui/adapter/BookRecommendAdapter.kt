@@ -52,7 +52,7 @@ class BookRecommendAdapter (val messagesList : ArrayList<Message>): RecyclerView
             "REACT 리액트"
         )
 
-        holder.childRecyclerView.adapter = MyInfoInterestedBooksAdapter(childData)
+        holder.childRecyclerView.adapter = SuggestionInterestedBooksAdapter(childData)
         val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         holder.childRecyclerView.layoutManager = linearLayoutManager

@@ -1,47 +1,38 @@
 package com.example.bookkyandroid.ui.fragment.signin
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
+import com.example.bookkyandroid.config.BookkyService
+import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.UserSignInBody
 import com.example.bookkyandroid.data.model.UserSignInResponse
-import com.example.bookkyandroid.data.model.UserSignUpBody
-import com.example.bookkyandroid.data.model.UserSignUpResponse
 import com.example.bookkyandroid.databinding.FragmentSigninBinding
-import com.example.bookkyandroid.ui.activity.main.LoginActivity
 import com.example.bookkyandroid.ui.activity.main.MainActivity
-import com.example.bookkyandroid.ui.fragment.findpw.FindPwFragment
-import com.example.bookkyandroid.ui.fragment.signup.SignupFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding::bind, R.layout.fragment_signin) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val context = this
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://203.255.3.144:8002")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val transaction =parentFragmentManager.beginTransaction()
+        val bookkyService = RetrofitManager.getInstance().bookkyService
         binding.loginButtonSignIn!!.setOnClickListener {
             signIn(
                 binding.loginEditTextEmailInput!!.text.toString(),
                 binding.loginEditTextPasswordInput!!.text.toString(),
-                retrofit,
+                bookkyService,
                 context!!
             )
         }
@@ -51,34 +42,27 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             socialGoogleSignIn()
         }
         binding.loginTextViewSignUpTitle!!.setOnClickListener {
-            transaction.replace(R.id.login_fragmentContainerView_fragmentLayer, SignupFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            findNavController().navigate(R.id.action_signInFragment_to_signupFragment)
         }
         binding.loginTextViewForgotTitle!!.setOnClickListener {
-            transaction.replace(R.id.login_fragmentContainerView_fragmentLayer, FindPwFragment())
-            transaction.addToBackStack(null)
-            transaction.commit()
+            findNavController().navigate(R.id.action_signInFragment_to_findPwFragment)
         }
     }
-    interface LoginPostCaller {
-        @POST("/v1/user/signin")
-        fun signIn(
-            @Body userSignInbody : UserSignInBody
-        ): Call<UserSignInResponse>
-    }
+
 }
 private fun successLogin(view : SignInFragment, data : UserSignInResponse){
-    val intent = Intent(view.context, MainActivity::class.java)  // 인텐트를 생성해줌,
-    intent.putExtra("access-token", data.singInResult.access_token)
-    view.startActivity(intent)  // 화면 전환을 시켜줌
-    view.activity?.finish()
+    CoroutineScope(Dispatchers.IO).launch {
+        val accessToken = data.singInResult.access_token
+        val refreshToken = data.singInResult.refresh_token
+        ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
+        ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+    }
+    view.findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
 }
 
-private fun signIn(email: String, password: String, retrofit : Retrofit, activity: SignInFragment){
-    val userService = retrofit.create(SignInFragment.LoginPostCaller::class.java)
+private fun signIn(email: String, password: String, bookkyService: BookkyService, activity: SignInFragment){
     val bodyParameter = UserSignInBody(email, password)
-    userService.signIn(bodyParameter)
+    bookkyService.signIn(bodyParameter)
         .enqueue(object : Callback<UserSignInResponse> {
             override fun onFailure(call: Call<UserSignInResponse>, t: Throwable) {
                 Log.d("LoginAPI", t.toString())

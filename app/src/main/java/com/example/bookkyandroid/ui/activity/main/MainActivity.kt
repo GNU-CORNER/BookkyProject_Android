@@ -3,6 +3,7 @@ package com.example.bookkyandroid.ui.activity.main
 
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bookkyandroid.R
@@ -21,6 +22,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val navController = navHostFragment.navController
 
         binding.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.homeFragment || destination.id == R.id.searchFragment || destination.id == R.id.myInfoFragment || destination.id == R.id.suggestionFragment  || destination.id == R.id.communityFragment) {
+                binding.bottomNav.visibility = View.VISIBLE
+
+            } else {
+                binding.bottomNav.visibility = View.GONE
+            }
+        }
 
 
     }

@@ -18,13 +18,17 @@
     <color name="error">#FF7A7A</color>
     <color name="dark_colorPrimary">#FFA24D</color>
     <color name="dark_backgroundPrimary">#292929</color>
-    <color name="dark_onSurface">#F3F3F3</color>
+    <color name="dark_onSurface">#F5F5F5</color>
     <color name="tabs_item">#383838</color>
     <color name="line">#DADADA</color>
     <color name="gray">#8E8E8E</color>
     <color name="gray2">#898A8D</color>
     <color name="gray3">#808080</color>
     <color name="gray4">#F9F9F9</color>
+    <color name="gray5">#8C8C8C</color>
     <color name="my_info_my_item_border">#F9F9F9</color>
     <color name="day_subPrimary">#BFBFBF</color>
+    <color name="secondary_backgroundColor">#E5E5E5</color>
+    <color name="naver_background">#03C76B</color>
+    <color name="gray6">#8A8585</color>
 </resources>

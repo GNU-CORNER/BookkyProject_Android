@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.data.model.MyProfilePostDataModel
 import com.example.bookkyandroid.data.model.MyWriting
 
-class MyInfoWritingAdapter (private val myWriting : ArrayList<MyWriting>) : RecyclerView.Adapter<MyInfoWritingAdapter.PagerViewHolder>() {
+class MyInfoWritingAdapter (private val postData : ArrayList<MyProfilePostDataModel>) : RecyclerView.Adapter<MyInfoWritingAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val title : TextView = view.findViewById(R.id.my_info_my_writing_item_title)
@@ -32,12 +33,12 @@ class MyInfoWritingAdapter (private val myWriting : ArrayList<MyWriting>) : Recy
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.title.text = myWriting[position].title
-        holder.contents.text = myWriting[position].contents
-        holder.like.text = myWriting[position].like.toString()
-        holder.comment.text = myWriting[position].comment.toString()
+        holder.title.text = postData[position].title!!
+        holder.contents.text = postData[position].contents!!
+        holder.like.text = postData[position].likeCnt.toString()
+        holder.comment.text = postData[position].commentCnt.toString()
     }
 
-    override fun getItemCount(): Int = myWriting.size
+    override fun getItemCount(): Int = postData.size
 
 }

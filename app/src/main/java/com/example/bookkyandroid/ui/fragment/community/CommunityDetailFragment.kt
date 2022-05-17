@@ -24,6 +24,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         Log.d("TEss",args.pid.toString())
 
         var isExpanded : Boolean = false
