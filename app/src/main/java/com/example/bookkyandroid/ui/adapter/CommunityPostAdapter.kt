@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.MyWriting
 import com.example.bookkyandroid.ui.fragment.community.CommunityDetailFragment
+import com.example.bookkyandroid.ui.fragment.community.CommunityFragmentDirections
 
 class CommunityPostAdapter(private val myWriting: ArrayList<MyWriting>, val NavControl: NavController) : RecyclerView.Adapter<CommunityPostAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -47,8 +48,9 @@ class CommunityPostAdapter(private val myWriting: ArrayList<MyWriting>, val NavC
         holder.comment.text = myWriting[position].comment.toString()
         holder.layout.setOnClickListener{
             Log.d("CommunityPostAdapter","${holder.adapterPosition}")
-            NavControl.navigate(R.id.action_communityFragment_to_communityDetailFragment)
 
+            //NavControl.navigate(R.id.action_communityFragment_to_communityDetailFragment)
+            NavControl.navigate(CommunityFragmentDirections.actionCommunityFragmentToCommunityDetailFragment(myWriting[position].PID.toString().toInt()))
         }
     }
 

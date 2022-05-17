@@ -1,16 +1,24 @@
 package com.example.bookkyandroid.ui.fragment.community
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.data.model.MyWriting
+import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentCommunityBinding
 import com.example.bookkyandroid.ui.adapter.CommunityPostAdapter
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
     FragmentCommunityBinding::bind, R.layout.fragment_community) {
@@ -18,35 +26,97 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("TEss","Check1")
+        var isExpanded : Boolean = false
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://203.255.3.144:8002")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        Log.d("TEss","Check2")
+        getCommunitiyData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
+        Log.d("TEss","Check3")
         binding.communityButtonWrite.setOnClickListener {
             findNavController().navigate(R.id.action_communityFragment_to_communityWriteFragment)
         }
+        Log.d("TEss","Check4")
         binding.communityImageButtonSearch.setOnClickListener {
             findNavController().navigate(R.id.action_communityFragment_to_communitySearchPostFragment)
         }
+        Log.d("TEss","Check5")
 
-        val communityPost = arrayListOf<MyWriting>(
-            MyWriting("첫번째 글", "딩동댕 초인종 소리에 얼른 문을 열었더니 그토록 기다리던 아빠가 문 앞에 서 계셨죠",1,1),
-            MyWriting("두번째 글", "너무나 반가워 웃으며 아빠하고 불렀는데 어쩐지 오늘 아빠의 얼굴이 우울해 보이네요",2,2),
-            MyWriting("세번째 글", "무슨 일이 생겼나요 무슨 걱정 있나요 마음대로 안 되는 일, 오늘 있었나요?",3,3),
-            MyWriting("네번째 글", "아빠 힘내세요 우리가 있잖아요 아빠 힘내세요 우리가 있어요 힘내세요 아빠",4,4),
-            MyWriting("다섯번째 글", "깊고 작은 산골짜기 사이로 맑은 물 흐르는 작은 샘터에",5,5),
-            MyWriting("여섯번째 글", "예쁜 꽃들 사이에 살짝 숨겨진 이슬 먹고 피어난",6,6),
-            MyWriting("일곱번째 글", "네잎 클로버 랄랄라 한잎 랄랄라 두잎 랄랄라 세잎 랄랄라 네잎",7,7),
-            MyWriting("여덟번째 글", "행운을 가져다 준다는 수줍은 얼굴의 미소",8,8),
-            MyWriting("아홉번째 글", "한줄기의 따스한 햇살 받으며 희망으로 가득한 나의 친구야",9,9),
-            MyWriting("열번째 글", "빛처럼 밝은 마음으로 너를 닮고 싶어",10,10),
-        )
-
-        postAdapterSet(communityPost, findNavController())
     }
 
     private fun postAdapterSet(myWriting: ArrayList<MyWriting>, NavControl : NavController) {
-
         binding.communityRecyclerViewPost.adapter = CommunityPostAdapter(myWriting, NavControl)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.communityRecyclerViewPost.layoutManager = linearLayoutManager
     }
+
+    public interface CommunityGetCaller {
+        @GET("/v1/community/postlist/0")
+        fun getCommunitiyData(
+            @Header("access-token") access_token: String?
+        ): Call<CommunityResponseDataModel>
+    }
+
+    private fun getCommunitiyData(retrofit: Retrofit, isExpanded: Boolean, access_token : String){
+        Log.d("TEss","Check2-1")
+        val communityService = retrofit.create(CommunityFragment.CommunityGetCaller::class.java)
+        Log.d("TEss","Check2-2")
+        communityService.getCommunitiyData(access_token)
+            .enqueue(object : Callback<CommunityResponseDataModel> {
+                override fun onFailure(call: Call<CommunityResponseDataModel>, t: Throwable) {
+                    Log.d("TEss", t.toString())
+                }
+
+                override fun onResponse(call: Call<CommunityResponseDataModel>, response: Response<CommunityResponseDataModel>){
+                    Log.d("TEss","Check2-3")
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+                    Log.d("TEss","Check2-4")
+                    response.body()?.let {
+                        Log.d("TEss","Check2-5")
+                        var Temptitle=""
+                        var Tempcontents=""
+                        var Tempcomment = 0
+                        var Templike = 0
+                        var TempPID = 0
+                        var i = 0
+                        val length = it.result?.postList?.size.toString().toInt() - 1
+                        Log.d("TEss","Check2-6")
+                        var TempData = ArrayList<MyWriting>()
+                        Log.d("TEss","Check2-7")
+                        Log.d("TEss",length.toString())
+                        for( i in 0..length)
+                        {
+                            Log.d("TEss","Check2-8")
+                            Temptitle=it.result?.postList?.get(i)?.title.toString()
+                            Log.d("TEss",Temptitle)
+                            Tempcontents=it.result?.postList?.get(i)?.contents.toString()
+                            Log.d("TEss",Tempcontents)
+                            Tempcomment=it.result?.subData?.get(i)?.commentCnt.toString().toInt()
+                            Log.d("TEss",Tempcomment.toString())
+                            Templike=it.result?.subData?.get(i)?.likeCnt.toString().toInt()
+                            Log.d("TEss",Templike.toString())
+                            TempPID=it.result?.postList?.get(i)?.APID.toString().toInt()
+                            Log.d("TEss",TempPID.toString())
+                            TempData.add(MyWriting(Temptitle,Tempcontents,Tempcomment,Templike,TempPID))
+                        }
+
+                        Log.d("TEss",TempData.toString())
+                        postAdapterSet(TempData,findNavController())
+
+                        // postList => Arraylist <CommunityPostDataModel> PID, title, contents
+                        // userData => Arraylist <CommunityUserDataModel>
+                        // subData =>  Arraylist <CommunitySubDataModel>
+                    }
+
+                }
+            })
+    }
+
 
 }
