@@ -37,8 +37,8 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         )
 
         val myWriting = arrayListOf<MyWriting>(
-            MyWriting("내 글 이다 내글 내글", "여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되..",2,2),
-            MyWriting("내 글 이다 내글 내글", "여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되..",2,2)
+            MyWriting("내 글 이다 내글 내글", "여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되..",2,2, 0),
+            MyWriting("내 글 이다 내글 내글", "여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되..",2,2, 0)
         )
 
         val myReview  = arrayListOf<MyReview>(

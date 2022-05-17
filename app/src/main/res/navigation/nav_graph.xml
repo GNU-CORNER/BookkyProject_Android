@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_communityDetailFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
+        <argument
+            android:name="PID"
+            app:argType="integer" />
 
     </fragment>
     <fragment
