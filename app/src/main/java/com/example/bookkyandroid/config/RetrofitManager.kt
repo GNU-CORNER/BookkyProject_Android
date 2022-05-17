@@ -5,6 +5,7 @@ import com.example.bookkyandroid.data.model.AuthRefreshResponseDataModel
 import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.data.model.HomeResponseDataModel
 import com.example.bookkyandroid.ui.fragment.home.HomeFragment
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,9 +26,10 @@ class RetrofitManager {
                     instance = it
                 }
             }
-        val access_token = ApplicationClass.getInstance().getDataStore().accessToken
-        val refresh_token = ApplicationClass.getInstance().getDataStore().refreshToken
+
     }
+    var accessToken : String = ""
+    var refreshToken : String = ""
     private fun initRetrofitInstance(): Retrofit {
         val client: OkHttpClient = OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
@@ -44,31 +46,13 @@ class RetrofitManager {
             .build()
         return retrofit
     }
-
+    suspend fun getToken(){
+        val dataStoreInstance = ApplicationClass.getInstance().getDataStore()
+        this.accessToken = dataStoreInstance.accessToken.first()
+        this.refreshToken = dataStoreInstance.refreshToken.first()
+        Log.d("isit work?", this.accessToken +"    " +this.refreshToken)
+    }
 
     val bookkyService : BookkyService = initRetrofitInstance().create(BookkyService::class.java)
 
-    fun refresh_token(){
-        val dataStoreInstance =ApplicationClass.getInstance().getDataStore()
-
-        bookkyService.refreshToken(access_token.toString(), refresh_token.toString())
-            .enqueue(object : Callback<BaseResponse<AuthRefreshResponseDataModel>> {
-                override fun onFailure(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, response: Response<BaseResponse<AuthRefreshResponseDataModel>>){
-                    if (response.isSuccessful.not()) {
-                        return
-                    }
-                    response.body()?.let {
-                        var accessToken = it.result.access_token
-
-                        runBlocking { dataStoreInstance.setAccessToken(accessToken) }
-
-                    }
-                }
-            })
-
-    }
 }

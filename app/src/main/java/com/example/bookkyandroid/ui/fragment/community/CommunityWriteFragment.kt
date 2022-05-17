@@ -15,9 +15,6 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.communityTextViewBack.setOnClickListener {
-            findNavController().navigate(R.id.action_communityWriteFragment_to_communityFragment)
-        }
 
     }
 

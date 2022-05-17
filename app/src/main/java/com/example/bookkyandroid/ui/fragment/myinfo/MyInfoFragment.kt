@@ -8,12 +8,16 @@ import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.TokenManager
 import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentMyInfoBinding
 import com.example.bookkyandroid.ui.adapter.MyInfoWritingAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedBooksAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoReviewAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,11 +28,12 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkyService = RetrofitManager.getInstance().bookkyService
-//        val accessToken = ApplicationClass.getInstance().getDataStore().accessToken
-        val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyNTk3NTAwLCJVSUQiOjYxfQ.rhyonmlGNQAyjLvRcyFU8UT-DU90jNtED5AtLe39Thc"
-        // Set test data
-        getMyProfileData(bookkyService,accessToken)
+        CoroutineScope(Dispatchers.IO).launch{
+            val bookkyService = RetrofitManager.getInstance().bookkyService
+            RetrofitManager.getInstance().getToken()
+            getMyProfileData(bookkyService)
+        }
+
         binding.myInfoTextViewReset.setOnClickListener {
             findNavController().navigate(R.id.action_myInfoFragment_to_surveyFragment)
         }
@@ -68,8 +73,9 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         binding.myInfoRecyclerViewMyReview.layoutManager = linearLayoutManager
     }
 
-    private fun getMyProfileData(bookkyService:BookkyService, accessToken:String){
-        bookkyService.getMyprofile(accessToken)
+    private fun getMyProfileData(bookkyService:BookkyService){
+        val retrofitManagerInstance = RetrofitManager.getInstance()
+        bookkyService.getMyprofile(retrofitManagerInstance.accessToken)
             .enqueue(object : Callback<BaseResponse<MyProfileResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<MyProfileResponseDataModel>>, t: Throwable) {
 
@@ -77,7 +83,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
 
                 override fun onResponse(call: Call<BaseResponse<MyProfileResponseDataModel>>, response: Response<BaseResponse<MyProfileResponseDataModel>>){
                     if (response.isSuccessful.not()) {
-                        RetrofitManager.getInstance().refresh_token()
+                        TokenManager().refresh_token(bookkyService,retrofitManagerInstance.accessToken, retrofitManagerInstance.refreshToken)
                         return
                     }
                     response.body()?.let {

@@ -2,30 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/suggestionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/suggestionFragment"
-    android:paddingHorizontal="5dp"
     tools:context=".ui.fragment.suggestion.SuggestionFragment">
+
     <TextView
-        android:layout_marginStart="10dp"
-        android:textSize="25sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/suggestion_title"
-        android:layout_marginVertical="20dp"/>
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <LinearLayout
-            android:weightSum="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="4">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -33,10 +35,10 @@
                 android:layout_weight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +55,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_marginVertical="10dp"
                             android:layout_width="200dp"
                             android:layout_height="100dp"
                             android:layout_gravity="right"
+                            android:layout_marginVertical="10dp"
                             android:src="@drawable/suggestion_item_background_img" />
 
 
@@ -89,7 +91,7 @@
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
 
                             <LinearLayout
@@ -124,26 +126,26 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
-                    android:visibility="gone"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:src="@drawable/suggestion_new"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -160,10 +162,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_marginVertical="10dp"
                             android:layout_width="200dp"
                             android:layout_height="100dp"
                             android:layout_gravity="right"
+                            android:layout_marginVertical="10dp"
                             android:src="@drawable/suggestion_item_background_img2" />
 
 
@@ -226,27 +228,27 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
-                    android:visibility="gone"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:src="@drawable/suggestion_new"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -263,10 +265,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_marginVertical="10dp"
                             android:layout_width="200dp"
                             android:layout_height="100dp"
                             android:layout_gravity="right"
+                            android:layout_marginVertical="10dp"
                             android:src="@drawable/suggestion_item_background_img2" />
 
 
@@ -296,7 +298,6 @@
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="10sp"
                                 android:textStyle="bold" />
-
 
 
                             <LinearLayout
@@ -338,18 +339,18 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -423,21 +424,20 @@
 
 
                         <ImageView
-                            android:layout_marginVertical="10dp"
                             android:layout_width="150dp"
                             android:layout_height="100dp"
                             android:layout_gravity="right"
+                            android:layout_marginVertical="10dp"
                             android:src="@drawable/suggestion_item_background_img3" />
 
                         <ImageView
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_gravity="right|top"
                             android:id="@+id/suggestion_item_imageView_light"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:layout_gravity="right|top"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/light_bulb" />
-
 
 
                     </FrameLayout>
@@ -445,20 +445,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
-
-
-
-
-
-
 
 
 </LinearLayout>

@@ -22,15 +22,18 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_margin="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/myInfo_title"
-                    android:textSize="14sp"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -40,12 +43,13 @@
                     android:id="@+id/myInfo_imageBtn_setting"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
-                    android:src="@drawable/ic_setting"
                     android:background="@null"
                     android:scaleType="centerInside"
+                    android:src="@drawable/ic_setting"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,11 +150,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:padding="2dp"
                 android:id="@+id/myInfo_recyclerView_interested_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="2dp" />
 
 
             <View
@@ -207,6 +212,7 @@
                 android:id="@+id/myInfo_recyclerView_interested_books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 android:scrollbars="none"
@@ -268,6 +274,7 @@
                 android:id="@+id/myInfo_recyclerView_my_writing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
                 tools:itemCount="2"
                 tools:listitem="@layout/recyclerview_item_my_info_my_writing" />
@@ -323,12 +330,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginBottom="20dp"
                 android:id="@+id/myInfo_recyclerView_my_review"
-                tools:itemCount="2"
-                tools:listitem="@layout/recyclerview_item_my_info_my_review"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="20dp"
+                tools:itemCount="2"
+                tools:listitem="@layout/recyclerview_item_my_info_my_review" />
 
 
             <View

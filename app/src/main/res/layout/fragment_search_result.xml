@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchFragment"
     android:layout_width="match_parent"
@@ -8,24 +9,51 @@
     tools:context=".ui.fragment.search.SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="search" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/background_border_primary">
 
-    <SearchView
-        android:id="@+id/SearchView_search_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/background_round" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
 
-    </SearchView>
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:src="@drawable/ic_baseline_search_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_round"
+                android:ems="10"
+                android:hint="제목 또는 태그"
+                android:includeFontPadding="true"
+                android:inputType="text"
+                android:paddingLeft="20dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -64,7 +92,7 @@
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginHorizontal="10dp"
         android:background="?android:attr/listDivider" />
 

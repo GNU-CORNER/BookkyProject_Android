@@ -9,35 +9,52 @@
     tools:context=".ui.fragment.search.SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="search" />
 
-    <SearchView
-        android:id="@+id/SearchView_search"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/background_round" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/background_border_primary">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_search_tag_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="30dp"
-        android:isScrollContainer="false"
-        android:nestedScrollingEnabled="false"
-        android:overScrollMode="never"
-        app:fastScrollEnabled="false" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:src="@drawable/ic_baseline_search_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_round"
+                android:ems="10"
+                android:hint="제목 또는 태그"
+                android:includeFontPadding="true"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView_recent_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
         android:text="최근 검색"
         android:textSize="15sp"

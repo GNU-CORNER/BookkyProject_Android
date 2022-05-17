@@ -26,12 +26,17 @@
                 android:orientation="vertical"
                 android:paddingBottom="50dp">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar2"
+                <TextView
+                    android:id="@+id/textView18"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="?attr/actionBarTheme" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="책 더 보기"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragment.suggestion.RoadMapDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/linearLayout7"
@@ -20,7 +21,7 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/roadMapDetail_imageButton_back"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -39,51 +40,41 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/roadMapDetail_imageButton_back"
-            android:layout_marginTop="7dp"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@null"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_arrow2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:layout_marginVertical="10dp"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Internet"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/road_map_tab_background"
-        android:paddingHorizontal="30dp"/>
+        android:paddingHorizontal="30dp"
+        android:text="Internet" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="20dp"
         android:text="What is HTTP?"
         android:textColor="@color/colorPrimary"
-        android:textSize="24sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="20dp"/>
+        android:textSize="24sp" />
 
     <TextView
-        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
         android:text="HTTP란?"
         android:textColor="@color/colorPrimary"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
     <TextView
-        android:layout_marginVertical="10dp"
-        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="클라이언트와 서버가 서로 통신하는 방법을 표준화하는 TCP/IP 기반 응용 프로그램 계층 통신 프로토콜이에요"/>
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="클라이언트와 서버가 서로 통신하는 방법을 표준화하는 TCP/IP 기반 응용 프로그램 계층 통신 프로토콜이에요"
+        android:textSize="18sp" />
 </LinearLayout>

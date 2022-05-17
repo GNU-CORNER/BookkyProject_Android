@@ -10,10 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentHomeBinding
 import com.example.bookkyandroid.ui.adapter.HomeCommunityShortAdapter
@@ -30,12 +27,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var accessToken : String = ""
-        CoroutineScope(Dispatchers.IO).launch {
-            accessToken = ApplicationClass.getInstance().getDataStore().accessToken.first()
-            Log.d(TAG, "onViewCreated: "+accessToken)
+        CoroutineScope(Dispatchers.Default).launch {
+            val bookkyService = RetrofitManager.getInstance().bookkyService
+            RetrofitManager.getInstance().getToken()
+            getHomeData(bookkyService)
         }
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+
         var textNickname: TextView = binding.textViewHomeNickName
         textNickname.text = "황랑귀"
 
@@ -45,7 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             HomeCommunityDataModel("자유게시판", "카카오 공채 떴던데 보신 분 있으신가요?")
         )
         homeCommunitySet(communityDummyData)
-        getHomeData(bookkyService,accessToken)
+
         binding.imageView.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_surveyFragment)
         }
@@ -98,20 +95,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         private const val TAG="HomeFragment"
     }
 
-    private fun getHomeData(bookkyService: BookkyService, access_token:String){
-        bookkyService.getHomeData(access_token)
+    private fun getHomeData(bookkyService: BookkyService){
+        val accessToken = RetrofitManager.getInstance().accessToken
+        val refreshToken = RetrofitManager.getInstance().refreshToken
+        bookkyService.getHomeData(accessToken)
             .enqueue(object : Callback<HomeResponseDataModel> {
                 override fun onFailure(call: Call<HomeResponseDataModel>, t: Throwable) {
-
+                    TokenManager().refresh_token(bookkyService,accessToken, refreshToken)
                 }
 
                 override fun onResponse(call: Call<HomeResponseDataModel>, response: Response<HomeResponseDataModel>){
                     if (response.isSuccessful.not()) {
-
+                        TokenManager().refresh_token(bookkyService,accessToken, refreshToken)
+                        getHomeData(bookkyService)
                         return
                     }
                     response.body()?.let {
-
+                         binding.textViewHomeNickName.text= it.result!!.userData!!.nickname
                         homeBookListAdapterSet1(it.result!!.bookList!![0].tag,
                             it.result!!.bookList!![0]
                         )

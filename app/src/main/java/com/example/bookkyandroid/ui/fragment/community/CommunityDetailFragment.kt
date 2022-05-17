@@ -15,9 +15,6 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.communityTextViewBack.setOnClickListener {
-            findNavController().navigate(R.id.action_communityDetailFragment_to_communityFragment)
-        }
 
 
     }

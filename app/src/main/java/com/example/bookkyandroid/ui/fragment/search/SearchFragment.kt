@@ -28,17 +28,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         val bookkyService = RetrofitManager.getInstance().bookkyService
         val testTagList = arrayListOf<TagDataResponseDataModel>(TagDataResponseDataModel("#REACT",1),TagDataResponseDataModel("#JavaScript",1),TagDataResponseDataModel("#FrontEnd",1),TagDataResponseDataModel("#파이썬asdasdasdasdasd",1),TagDataResponseDataModel("#파이썬",1),TagDataResponseDataModel("#Cloud",1),TagDataResponseDataModel("#DevOps",1),TagDataResponseDataModel("#BackEnd",1))
         val keywords = arrayListOf<String>("마법소녀", "모두다 거짓말이야", "개발하기 싫다", "그만...개발..", "체전 하고싶었는데.")
-        searchTagsAdapter(testTagList)
+
         recentKeywordAdapter(keywords)
     }
-    private fun searchTagsAdapter(tags: ArrayList<TagDataResponseDataModel>) {
-        binding.recyclerViewSearchTagList.adapter = MyInfoInterestedAreaAdapter(tags)
-        val linearLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.HORIZONTAL)
-        
-        binding.recyclerViewSearchTagList.layoutManager = linearLayoutManager
 
-
-    }
     private fun recentKeywordAdapter(keyword : ArrayList<String>){
         binding.recyclerViewRecentKeywordList.adapter = RecentKeywordListAdapter(keyword)
         val linearLayoutManager = LinearLayoutManager(activity)

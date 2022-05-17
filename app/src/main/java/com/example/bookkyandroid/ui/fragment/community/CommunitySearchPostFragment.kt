@@ -15,9 +15,6 @@ class CommunitySearchPostFragment : BaseFragment<FragmentCommunitySearchPostBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.communityTextViewBack.setOnClickListener {
-            findNavController().navigate(R.id.action_communitySearchPostFragment_to_communityFragment)
-        }
 
     }
 
