@@ -85,7 +85,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
                         var Templike = 0
                         var TempPID = 0
                         var i = 0
-                        val length = it.result?.postList?.size.toString().toInt() - 1
+                        val length = it.result?.size.toString().toInt() - 1
                         Log.d("TEss","Check2-6")
                         var TempData = ArrayList<MyWriting>()
                         Log.d("TEss","Check2-7")
@@ -93,15 +93,15 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
                         for( i in 0..length)
                         {
                             Log.d("TEss","Check2-8")
-                            Temptitle=it.result?.postList?.get(i)?.title.toString()
+                            Temptitle=it.result?.get(i)?.title.toString()
                             Log.d("TEss",Temptitle)
-                            Tempcontents=it.result?.postList?.get(i)?.contents.toString()
+                            Tempcontents=it.result?.get(i)?.contents.toString()
                             Log.d("TEss",Tempcontents)
-                            Tempcomment=it.result?.subData?.get(i)?.commentCnt.toString().toInt()
+                            Tempcomment=it.result?.get(i)?.commentCnt.toString().toInt()
                             Log.d("TEss",Tempcomment.toString())
-                            Templike=it.result?.subData?.get(i)?.likeCnt.toString().toInt()
+                            Templike=it.result?.get(i)?.likeCnt.toString().toInt()
                             Log.d("TEss",Templike.toString())
-                            TempPID=it.result?.postList?.get(i)?.APID.toString().toInt()
+                            TempPID=it.result?.get(i)?.PID.toString().toInt()
                             Log.d("TEss",TempPID.toString())
                             TempData.add(MyWriting(Temptitle,Tempcontents,Tempcomment,Templike,TempPID))
                         }

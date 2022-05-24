@@ -81,7 +81,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
                         binding.communityTextViewNickname.text = it.result?.postuserdata?.get(0)?.nickname.toString()
                         binding.communityTextViewViews.text = it.result?.postdata?.get(0)?.views.toString()
                         binding.communityTextViewContents.text = it.result?.postdata?.get(0)?.contents.toString()
-                        binding.communityButtonRecommend.text = it.result?.postdata?.get(0)?.like?.size.toString()
+
 
 //                        var Temptitle=""
 //                        var Tempcontents=""

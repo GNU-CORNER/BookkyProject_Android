@@ -63,6 +63,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_menu3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -153,53 +162,34 @@
             android:layout_width="match_parent"
             android:layout_height="48dp">
 
-            <Button
-                android:id="@+id/community_button_recommend"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/community_blue_button"
-                android:text="👍34"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/community_button_fix"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/community_blue_button"
-                android:text="수정"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/community_button_del"
-                app:layout_constraintTop_toTopOf="parent"
-
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/community_button_del"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/community_red_button"
-                android:text="삭제"
-                android:textSize="11sp"
+                android:text="좋아요(8)"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="댓글(7)"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                tools:layout_editor_absoluteX="191dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/community_recyclerView_comments"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="258dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -210,37 +200,38 @@
             android:layout_marginTop="10dp"
             android:background="@color/line" />
 
-        <LinearLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="46dp">
+
 
             <EditText
                 android:id="@+id/community_comments_edittext"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:autofillHints="comments"
                 android:inputType="textShortMessage"
                 android:text="댓글을 입력해 주세요."
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText,LabelFor" />
 
             <Button
                 android:id="@+id/community_comments_submit"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
                 android:background="@drawable/community_blue_button"
                 android:text="댓글 달기"
                 android:textColor="@color/white"
                 android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
 
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

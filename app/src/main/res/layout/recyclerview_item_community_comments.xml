@@ -9,9 +9,9 @@
     android:padding="20dp">
 
     <LinearLayout
-        android:id = "@+id/community_LinearLayout_comments"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:id="@+id/community_LinearLayout_comments"
+        android:layout_width="366dp"
+        android:layout_height="103dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,58 +32,17 @@
 
                 />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="200dp"
-                android:layout_height="45dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/community_circleImage_profile"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="10dp"
-                        android:src="@mipmap/ic_launcher"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/community_textView_nickname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="16dp"
-                        android:text="이다혜"
-                        android:layout_marginStart="5dp"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-
-                        app:layout_constraintStart_toEndOf="@+id/community_circleImage_profile"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
 
             <TextView
                 android:id="@+id/community_comments_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="오 잘쓰셨네 \n두줄"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
+                android:text="오 잘쓰셨네 \n두줄"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/community_textView_nickname"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
@@ -112,55 +71,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="👍34"
+                    android:text="공감(34)"
                     tools:ignore="HardcodedText" />
 
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="60dp"
-                android:layout_height="18dp"
-                android:orientation="horizontal"
-                android:layout_marginEnd="15dp"
-                android:gravity="center"
-                android:background="@drawable/community_my_comment"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/community_comments_contents"
-
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_menu2" />
 
-                <TextView
-                    android:id="@+id/community_comments_button_reply"
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:text="💬"
-                    android:gravity="center"
-                    android:textSize="11sp"
-                    tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/community_textView_nickname"
+                android:layout_width="67dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
 
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
-
-                <TextView
-                    android:id="@+id/community_comments_button_recommend"
-                    android:layout_width="27dp"
-                    android:layout_height="wrap_content"
-                    android:text="👍"
-                    android:gravity="center"
-                    android:textSize="11sp"
-                    tools:ignore="HardcodedText" />
-
-
-            </LinearLayout>
+                android:text="이다혜"
+                android:textStyle="bold"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                tools:ignore="HardcodedText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

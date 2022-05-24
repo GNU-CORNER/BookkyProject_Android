@@ -6,7 +6,7 @@ data class CommunityResponseDataModel(
     @SerializedName("success")
     val success : Boolean?,
     @SerializedName("result")
-    val result : CommunityResultResponseDataModel?,
+    val result : ArrayList<CommunityPostDataModel>?,
     @SerializedName("errorMessage")
     val errorMessage : String?
 )
