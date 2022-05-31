@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class ReviewDataModel(
     @SerializedName("RID")
     val RID : Int,
-    @SerializedName("BID")
-    val BID : Int,
+    @SerializedName("TBID")
+    val TBID : Int,
     @SerializedName("UID")
     val UID : Int,
     @SerializedName("contents")

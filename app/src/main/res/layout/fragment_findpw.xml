@@ -52,13 +52,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:text="@string/login_email_string"
-                        app:layout_constraintBottom_toTopOf="@+id/findpw_editText_nicknameInput"
+                        app:layout_constraintBottom_toTopOf="@+id/findpw_editText_emailInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/findpw_editText_nicknameInput"
+                        android:id="@+id/findpw_editText_emailInput"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/background_round_gray"
@@ -82,8 +82,9 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                android:background="@drawable/findpw_button_background"
+                android:background="@drawable/background_round_primary"
                 android:text="@string/findpw_button1_string"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/findpw_linearlayout_emailbox" />
@@ -114,7 +115,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName2"
+                        android:id="@+id/findpw_editText_code"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_marginTop="10dp"
@@ -140,8 +141,9 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="25dp"
-                android:background="@drawable/findpw_button_background"
+                android:background="@drawable/background_round_dark"
                 android:text="@string/findpw_button2_string"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -155,8 +157,9 @@
                 android:layout_marginTop="141dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="56dp"
-                android:background="@drawable/findpw_button_background"
+                android:background="@drawable/background_round_dark"
                 android:text="@string/findpw_button3_string"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

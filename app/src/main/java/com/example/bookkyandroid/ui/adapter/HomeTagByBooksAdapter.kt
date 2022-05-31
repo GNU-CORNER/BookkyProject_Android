@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -20,7 +22,6 @@ class HomeTagByBooksAdapter(private val data : HomeBookListDataModel) : Recycler
         init {
             // Define click listener for the ViewHolder's View.
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeTagByBooksAdapter.PagerViewHolder {
@@ -54,7 +55,10 @@ class HomeTagByBooksAdapter(private val data : HomeBookListDataModel) : Recycler
                 preLoad(holder.itemView, it.toString())
             }
         }
-
+        holder.itemView.setOnClickListener {
+            val bundle = bundleOf("BID" to data.data[position]!!.TBID)
+            it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
+        }
     }
 
     override fun getItemCount(): Int = data.data.size

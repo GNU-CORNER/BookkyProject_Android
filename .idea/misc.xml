@@ -42,7 +42,6 @@
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/drawable/answer_selector.xml" value="0.187" />
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/drawable/answer_selector_btn.xml" value="0.187" />
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/drawable/answer_selector_btn_unchecked.xml" value="0.187" />
-
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/drawable/bell.xml" value="0.1" />
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/pck49/Desktop/corner/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -57,8 +56,9 @@
         <entry key="app/src/main/res/drawable/answer_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/background_border_gray.xml" value="0.3765" />
         <entry key="app/src/main/res/drawable/background_border_primary.xml" value="0.308" />
-        <entry key="app/src/main/res/drawable/background_corner_radius.xml" value="0.356" />
+        <entry key="app/src/main/res/drawable/background_corner_radius.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/background_round.xml" value="0.283" />
+        <entry key="app/src/main/res/drawable/background_round_dark.xml" value="0.2875" />
         <entry key="app/src/main/res/drawable/background_round_gray.xml" value="0.3445" />
         <entry key="app/src/main/res/drawable/background_round_primary.xml" value="0.3445" />
         <entry key="app/src/main/res/drawable/background_stroke_gray.xml" value="0.308" />
@@ -105,14 +105,14 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3269927536231884" />
         <entry key="app/src/main/res/layout/fragment_modify_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_more_tag.xml" value="0.33559782608695654" />
-        <entry key="app/src/main/res/layout/fragment_more_tag_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_more_tag_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_my_favorite_book.xml" value="0.2875905797101449" />
-        <entry key="app/src/main/res/layout/fragment_my_info.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_my_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_review.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_review_write.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_road_map_content.xml" value="0.3134057971014493" />
         <entry key="app/src/main/res/layout/fragment_road_map_detail.xml" value="0.3134057971014493" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_search_result.xml" value="0.3179347826086957" />
         <entry key="app/src/main/res/layout/fragment_signin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.33" />
@@ -137,6 +137,8 @@
         <entry key="app/src/main/res/layout/recyclerview_item_recent_keyword.xml" value="0.7239958805355304" />
         <entry key="app/src/main/res/layout/recyclerview_item_road_map.xml" value="0.15555555555555556" />
         <entry key="app/src/main/res/layout/recyclerview_item_road_map_content.xml" value="0.15555555555555556" />
+        <entry key="app/src/main/res/layout/recyclerview_item_search_result.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/recyclerview_item_searchresult_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/recyclerview_item_survey_horizonalselector.xml" value="0.3134057971014493" />
         <entry key="app/src/main/res/layout/recyclerview_item_survey_selector.xml" value="0.67" />
         <entry key="app/src/main/res/layout/recyclerview_item_survey_verticalselector.xml" value="0.32019927536231885" />

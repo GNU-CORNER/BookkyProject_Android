@@ -51,7 +51,7 @@ class MyFavoriteBookAdapter(private val bookData: ArrayList<FavoriteBookDataMode
             }
         }
         holder.itemView.setOnClickListener {
-            val bundle = bundleOf("BID" to bookData[position]!!.BID)
+            val bundle = bundleOf("BID" to bookData[position]!!.TBID)
             it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
         }
 

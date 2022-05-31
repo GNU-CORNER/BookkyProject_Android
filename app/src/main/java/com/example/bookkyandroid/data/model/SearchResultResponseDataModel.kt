@@ -3,8 +3,8 @@ package com.example.bookkyandroid.data.model
 import com.google.gson.annotations.SerializedName
 
 data class SearchResultResponseDataModel(
-    @SerializedName("BID")
-    val BID : Int,
+    @SerializedName("TBID")
+    val TBID : Int,
     @SerializedName("AUTHOR")
     val AUTHOR : String,
     @SerializedName("TITLE")
@@ -13,6 +13,12 @@ data class SearchResultResponseDataModel(
     val thumbnailImage : String,
     @SerializedName("RATING")
     val RATING : Float,
+    @SerializedName("PUBLISHER")
+    val PUBLISHER : String,
+    @SerializedName("PUBLISH_DATE")
+    val PUBLISH_DATE : String,
+    @SerializedName("BOOK_INTRODUCTION")
+    val BOOK_INTRODUCTION : String,
     @SerializedName("tagData")
     val tagData : ArrayList<TagDataResponseDataModel>
 )

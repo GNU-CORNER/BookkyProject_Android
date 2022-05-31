@@ -1,6 +1,5 @@
 package com.example.bookkyandroid.ui.fragment.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -27,29 +26,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.IO).launch {
+            //API 호출 BACK THREAD에서 호출 Coroutine
             val bookkyService = RetrofitManager.getInstance().bookkyService
-            RetrofitManager.getInstance().getToken()
-            getHomeData(bookkyService)
+            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            getHomeData(bookkyService, access_token)
         }
-
-        var textNickname: TextView = binding.textViewHomeNickName
-        textNickname.text = "황랑귀"
-
-        val communityDummyData = arrayListOf<HomeCommunityDataModel>(
-            HomeCommunityDataModel("핫게시판", "한 번 읽어보고 마스터한 책 사실 분~!!!"),
-            HomeCommunityDataModel("QnA게시판", "함수를 썼는데 이상해요..."),
-            HomeCommunityDataModel("자유게시판", "카카오 공채 떴던데 보신 분 있으신가요?")
-        )
-        homeCommunitySet(communityDummyData)
-
+        binding.textViewHomeCommunityHeadLineText.setOnClickListener {
+            var flag = false
+            CoroutineScope(Dispatchers.IO).launch {
+                if (ApplicationClass.getInstance().getDataStore().accessToken.first() == null){
+                    flag = true
+                }
+            }
+            if (!flag){
+//                findNavController().navigate(R.id.c)
+            }
+            else{
+                findNavController().navigate(R.id.action_global_signInFragment)
+            }
+        }
         binding.imageView.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_surveyFragment)
         }
         binding.textViewHomeTagMore.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_homeMoreTagFragment)
         }
-        binding.textViewHomeRecommendText.setOnClickListener {
+        binding.imageView.setOnClickListener {
             findNavController().navigate(R.id.action_global_signInFragment)
         }
         binding.frameLayoutBookRecommendRoadmapButton.setOnClickListener {
@@ -59,7 +62,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
             findNavController().navigate(R.id.action_homeFragment_to_bookRecommendFragment)
         }
     }
-
+    private fun successToGetHome(nickname : String){
+        binding.textViewHomeNickName.setText(nickname)
+    }
     private fun homeBookListAdapterSet1(headline : String, DataModels: HomeBookListDataModel){
         binding.homeTextViewRecyclerviewHeadline1.text = headline
         binding.recyclerViewHomeBookList1.adapter = HomeTagByBooksAdapter(DataModels)
@@ -67,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerViewHomeBookList1.layoutManager = linearLayoutManager
         binding.homeTextViewRecyclerviewHeadline1.setOnClickListener {
-            val bundle = bundleOf("TID" to DataModels.TID)
+            val bundle = bundleOf("TID" to DataModels.TMID)
             it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
         }
     }
@@ -79,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.recyclerViewHomeBookList2.layoutManager = linearLayoutManager
         binding.homeTextViewRecyclerviewHeadline1.setOnClickListener {
-            val bundle = bundleOf("TID" to DataModels.TID)
+            val bundle = bundleOf("TID" to DataModels.TMID)
             it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
         }
     }
@@ -95,28 +100,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         private const val TAG="HomeFragment"
     }
 
-    private fun getHomeData(bookkyService: BookkyService){
-        val accessToken = RetrofitManager.getInstance().accessToken
-        val refreshToken = RetrofitManager.getInstance().refreshToken
-        bookkyService.getHomeData(accessToken)
+    private fun getHomeData(bookkyService: BookkyService, access_token : String){
+        bookkyService.getHomeData(access_token)
             .enqueue(object : Callback<HomeResponseDataModel> {
                 override fun onFailure(call: Call<HomeResponseDataModel>, t: Throwable) {
-                    TokenManager().refresh_token(bookkyService,accessToken, refreshToken)
                 }
 
                 override fun onResponse(call: Call<HomeResponseDataModel>, response: Response<HomeResponseDataModel>){
                     if (response.isSuccessful.not()) {
-                        TokenManager().refresh_token(bookkyService,accessToken, refreshToken)
-                        getHomeData(bookkyService)
                         return
                     }
                     response.body()?.let {
-                         binding.textViewHomeNickName.text= it.result!!.userData!!.nickname
-                        homeBookListAdapterSet1(it.result!!.bookList!![0].tag,
-                            it.result!!.bookList!![0]
+                        successToGetHome(it.result.userData!!.nickname)
+                        homeCommunitySet(it.result.communityList!!)
+                        homeBookListAdapterSet1(it.result.bookList!![0].tag,
+                            it.result.bookList!![0]
                         )
-                        homeBookListAdapterSet2(it.result!!.bookList!![1].tag,
-                            it.result!!.bookList!![1]
+                        homeBookListAdapterSet2(it.result.bookList!![1].tag,
+                            it.result.bookList!![1]
                         )
                     }
                 }

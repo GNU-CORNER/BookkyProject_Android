@@ -6,7 +6,7 @@ data class HomeResultResponseDataModel(
     @SerializedName("bookList")
     val bookList : ArrayList<HomeBookListDataModel>?,
     @SerializedName("communityList")
-    val communityList : ArrayList<HomeCommunityListDataModel>?,
+    val communityList : ArrayList<HomeCommunityDataModel>?,
     @SerializedName("userData")
     val userData : HomeUserDataModel?
     )

@@ -35,9 +35,6 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
             .build()
         getCommunityDetailData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
 
-        binding.communityTextViewBack.setOnClickListener {
-            findNavController().navigate(R.id.action_communityDetailFragment_to_communityFragment)
-        }
 
     }
 

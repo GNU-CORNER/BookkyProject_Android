@@ -16,6 +16,9 @@ import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.databinding.FragmentBookDetailBinding
 import com.example.bookkyandroid.ui.adapter.BookDetailReviewAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,9 +26,12 @@ import retrofit2.Response
 class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDetailBinding::bind, R.layout.fragment_book_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkyService = RetrofitManager.getInstance().bookkyService
         val bookID = arguments?.getInt("BID")
-        getBookDetail(bookkyService,bookID!!)
+        CoroutineScope(Dispatchers.IO).launch {
+            val bookkyService = RetrofitManager.getInstance().bookkyService
+            getBookDetail(bookkyService,bookID!!)
+        }
+
     }
     private fun tagAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {
         binding.bookDetailRecyclerViewTags.adapter = MyInfoInterestedAreaAdapter(tags)
@@ -43,8 +49,8 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
     }
 
     private fun getBookDetail(bookkyService: BookkyService, pk:Int){
-        val access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyMzQ5MTg0LCJVSUQiOjYxfQ.kGbKUtn3SLcwisEGAV5yphfDlMkz05F7ZoU1Dn7GzPo"
-        bookkyService.getBookDetail(pk, access_token)
+        val accessToken = ""
+        bookkyService.getBookDetail(pk, accessToken)
             .enqueue(object : Callback<BaseResponse<BookDetailResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<BookDetailResponseDataModel>>, t: Throwable) {
                     Log.d("asasdsad", t.toString())

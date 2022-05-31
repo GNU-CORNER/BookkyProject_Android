@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.MyProfileReviewDataModel
-import com.example.bookkyandroid.data.model.MyReview
-import com.example.bookkyandroid.data.model.MyWriting
 
 class MyInfoReviewAdapter (private val reviewData : ArrayList<MyProfileReviewDataModel>) : RecyclerView.Adapter<MyInfoReviewAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -22,7 +20,7 @@ class MyInfoReviewAdapter (private val reviewData : ArrayList<MyProfileReviewDat
         val writer: TextView = view.findViewById(R.id.my_info_my_review_item_textView_writer)
         val ratingBar : RatingBar = view.findViewById(R.id.my_info_my_review_item_ratingBar)
         val ratingNum : TextView = view.findViewById(R.id.my_info_my_review_item_textView_ratingNum)
-        val image : ImageView = view.findViewById(R.id.my_info_my_review_item_imageView)
+        val image : ImageView = view.findViewById(R.id.searchResult_item_imageView)
 
         init {
             // Define click listener for the ViewHolder's View.

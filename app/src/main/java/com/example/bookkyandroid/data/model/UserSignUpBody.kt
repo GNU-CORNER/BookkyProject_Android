@@ -8,5 +8,7 @@ data class UserSignUpBody (
     @SerializedName("pwToken")
     val pwToken: String,
     @SerializedName("nickname")
-    val nickname: String
+    val nickname: String,
+    @SerializedName("loginMethod")
+    val loginMethod :Int
 )

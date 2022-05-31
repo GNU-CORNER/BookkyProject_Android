@@ -4,6 +4,7 @@ import com.example.bookkyandroid.data.model.*
 import com.example.bookkyandroid.data.model.BaseResponse
 import retrofit2.Call
 import retrofit2.http.*
+import java.util.*
 
 interface BookkyService {
 
@@ -78,7 +79,29 @@ interface BookkyService {
 
     @GET("/v1/books/search")
     fun searchBook(
-        @Query("keyword") keyword : String
-    ) : Call<BaseResponse<SearchResultResponseDataModel>>
+        @Query("keyword") keyword : String,
+        @Query("quantity") quantity : Int,
+        @Query("page") page : Int
+    ) : Call<BaseResponse<ArrayList<SearchResultResponseDataModel>>>
 
+    @POST("/v1/user/check")
+    fun checkAuthenticationCode(
+        @Body userAuthenticationCode :UserAuthenticationCode
+    ) : Call<BaseResponse<String?>>
+
+    @PUT("/v1/auth/password/init")
+    fun initPassword(
+        @Body initPasswordBodyDataModel: InitPasswordBodyDataModel
+    ) : Call<BaseResponse<String?>>
+
+    @GET("/v1/auth/email")
+    fun emailAuth(
+        @Query("email") email: String
+    ): Call<UserEmailResponseDataModel>
+
+    @PUT("/v1/user/tag")
+    fun updateTag(
+        @Header("access-token")access_token: String,
+        @Body tag : UpdateTagBodyDataModel
+    ): Call<BaseResponse<UpdateTagResponseDataModel>>
 }

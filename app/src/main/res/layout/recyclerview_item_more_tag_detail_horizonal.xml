@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="120dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp">
 
         <ImageView
             android:id="@+id/more_tag_detail_books_tag_books_item_imageView"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="120dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/test_book" />
 
         <TextView
             android:id="@+id/more_tag_detail_books_item_textView_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:gravity="center_horizontal"

@@ -46,7 +46,7 @@ class HomeMoreTagBookListAdpater (private val testDatumDataModels : ArrayList<Ho
         holder.recyclerView.layoutManager = linearLayoutManager
 
         holder.tag.setOnClickListener {
-            val bundle = bundleOf("TID" to testDatumDataModels[position]!!.TID)
+            val bundle = bundleOf("TID" to testDatumDataModels[position]!!.TMID)
             it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
         }
 

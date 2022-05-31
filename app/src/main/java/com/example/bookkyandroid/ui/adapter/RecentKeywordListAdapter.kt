@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.MyProfilePostDataModel
 import com.example.bookkyandroid.data.model.MyWriting
+import com.example.bookkyandroid.databinding.FragmentSearchBinding
+import com.example.bookkyandroid.ui.fragment.search.SearchFragment
 
-class RecentKeywordListAdapter (private val keywordList : ArrayList<String>) : RecyclerView.Adapter<RecentKeywordListAdapter.PagerViewHolder>() {
+class RecentKeywordListAdapter (private val keywordList : ArrayList<String>, private val binding: FragmentSearchBinding) : RecyclerView.Adapter<RecentKeywordListAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val keyword : TextView = view.findViewById(R.id.textView_item_keyword)
@@ -29,7 +31,9 @@ class RecentKeywordListAdapter (private val keywordList : ArrayList<String>) : R
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.keyword.text = keywordList[position]
-
+        holder.keyword.setOnClickListener {
+            binding.searchEditTextSearchInput.setText(keywordList[position])
+        }
     }
 
     override fun getItemCount(): Int = keywordList.size

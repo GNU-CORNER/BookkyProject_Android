@@ -26,7 +26,7 @@
     <string name="login_pwMissing_string">로그인에 문제가 있나요?</string>
     <string name="login_emailHint_string">email@domain.com</string>
     <string name="login_passwordHint_string">********</string>
-    <string name="signup_emailValid_string">이메일 확인</string>
+    <string name="signup_emailValid_string">인증번호 확인</string>
     <string name="signup_passwordValid_string">비밀번호 확인</string>
     <string name="signup_nickname_string">닉네임</string>
     <string name="additional_title_string">추가정보 입력</string>

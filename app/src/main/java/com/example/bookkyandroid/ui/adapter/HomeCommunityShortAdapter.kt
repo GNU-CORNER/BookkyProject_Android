@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.HomeCommunityDataModel
 
-class HomeCommunityShortAdapter(private val title : ArrayList<HomeCommunityDataModel>) : RecyclerView.Adapter<HomeCommunityShortAdapter.PagerViewHolder>() {
+class HomeCommunityShortAdapter(private val communityData : ArrayList<HomeCommunityDataModel>) : RecyclerView.Adapter<HomeCommunityShortAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val communityName: TextView =
@@ -33,10 +33,21 @@ class HomeCommunityShortAdapter(private val title : ArrayList<HomeCommunityDataM
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.communityName.text = title[position].communityName
-        holder.communityPostTitle.text = title[position].postTitle
+        if (communityData[position].communityType == 0){
+            holder.communityName.text = "자유게시판"
+        }
+        else if (communityData[position].communityType == 1){
+            holder.communityName.text = "QnA게시판"
+        }
+        else if (communityData[position].communityType == 2){
+            holder.communityName.text = "장터게시판"
+        }
+        else{
+            holder.communityName.text = "핫게시판"
+        }
+        holder.communityPostTitle.text = communityData[position].title
     }
 
-    override fun getItemCount(): Int = title.size
+    override fun getItemCount(): Int = communityData.size
 
 }

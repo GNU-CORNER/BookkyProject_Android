@@ -22,12 +22,12 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tagID = arguments?.getInt("TID")
-        Log.d("TID get Argument", tagID.toString())
+        Log.d("home", tagID.toString())
         val bookkyService = RetrofitManager.getInstance().bookkyService
         getHomeMoreTagDetailData(bookkyService, tagID!!)
     }
     private fun moreTagDetailAdapter(DataModels: HomeBookListDataModel){
-        binding.textViewHomeMoreTagDetailHeadLine.text = DataModels.tag
+        binding.textViewHomeMoreTagDetailHeadLine.setText(DataModels.tag)
         binding.recyclerViewMoreTagDetailBookList.adapter = HomeMoreTagDetailAdapter(DataModels)
         val linearLayoutManager = GridLayoutManager(activity,4)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL

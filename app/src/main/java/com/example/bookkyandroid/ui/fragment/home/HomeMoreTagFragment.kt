@@ -26,13 +26,14 @@ import retrofit2.Response
 class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTagBinding::bind, R.layout.fragment_more_tag) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var accessToken : String = ""
         CoroutineScope(Dispatchers.IO).launch {
-            accessToken = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            val bookkyService = RetrofitManager.getInstance().bookkyService
+            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            getHomeData(bookkyService, access_token)
         }
-        val bookkyService = RetrofitManager.getInstance().bookkyService
-        getHomeData(bookkyService ,accessToken)
-
+    }
+    private fun successToGetTagData(nickname: String){
+        binding.moreTagTextViewNickname.setText(nickname)
     }
     private fun homeMoreTagBookListAdapterSet(DataModels: ArrayList<HomeBookListDataModel?>){
         binding.recyclerViewMoreTagBookList.adapter = HomeMoreTagBookListAdpater(DataModels)
@@ -51,7 +52,8 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
                         return
                     }
                     response.body()?.let {
-                        homeMoreTagBookListAdapterSet(it.result!!.bookList!!)
+                        homeMoreTagBookListAdapterSet(it.result.bookList!!)
+                        successToGetTagData(it.result.nickname!!)
                     }
                 }
             })

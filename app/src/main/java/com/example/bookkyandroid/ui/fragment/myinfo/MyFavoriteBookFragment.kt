@@ -13,6 +13,9 @@ import com.example.bookkyandroid.data.model.FavoriteBookDataModel
 import com.example.bookkyandroid.data.model.FavoriteBookListResponseDataModel
 import com.example.bookkyandroid.databinding.FragmentMyFavoriteBookBinding
 import com.example.bookkyandroid.ui.adapter.MyFavoriteBookAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,8 +24,11 @@ class MyFavoriteBookFragment: BaseFragment<FragmentMyFavoriteBookBinding>(
     FragmentMyFavoriteBookBinding::bind, R.layout.fragment_my_favorite_book) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkySerivce = RetrofitManager.getInstance().bookkyService
-        getFavoriteData(bookkySerivce)
+        CoroutineScope(Dispatchers.IO).launch {
+            val bookkySerivce = RetrofitManager.getInstance().bookkyService
+            getFavoriteData(bookkySerivce)
+        }
+
     }
     private fun favoriteBookListAdapter(DataModels: ArrayList<FavoriteBookDataModel>){
         binding.recyclerViewMyFavoriteBook.adapter = MyFavoriteBookAdapter(DataModels)
@@ -31,7 +37,7 @@ class MyFavoriteBookFragment: BaseFragment<FragmentMyFavoriteBookBinding>(
         binding.recyclerViewMyFavoriteBook.layoutManager = linearLayoutManager
     }
     private fun getFavoriteData(bookkyService: BookkyService){
-        val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjUyNTk3NTAwLCJVSUQiOjYxfQ.rhyonmlGNQAyjLvRcyFU8UT-DU90jNtED5AtLe39Thc"
+        val accessToken = ""
         bookkyService.getFavoriteBook(accessToken)
             .enqueue(object : Callback<BaseResponse<FavoriteBookListResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<FavoriteBookListResponseDataModel>>, t: Throwable) {

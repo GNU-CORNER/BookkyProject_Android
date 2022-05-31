@@ -45,7 +45,7 @@ class MyInfoInterestedBooksAdapter(private val bookData : ArrayList<HomeBookData
             //이미지 뷰 처리는 Glide 라이브러리 사용 예정
         }
         holder.itemView.setOnClickListener {
-            val bundle = bundleOf("BID" to bookData[position]!!.BID)
+            val bundle = bundleOf("BID" to bookData[position]!!.TBID)
             it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
         }
     }

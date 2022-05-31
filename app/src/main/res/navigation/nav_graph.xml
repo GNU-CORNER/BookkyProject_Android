@@ -39,7 +39,13 @@
         android:id="@+id/searchFragment"
         android:name="com.example.bookkyandroid.ui.fragment.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment2"
+            app:destination="@id/searchResultFragment2"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/myInfoFragment"
         android:name="com.example.bookkyandroid.ui.fragment.myinfo.MyInfoFragment"
@@ -170,7 +176,9 @@
         tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signupFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/additionalFragment"
@@ -209,5 +217,10 @@
         android:name="com.example.bookkyandroid.ui.fragment.myinfo.MyReviewFragment"
         android:label="fragment_my_review"
         tools:layout="@layout/fragment_my_review" />
+    <fragment
+        android:id="@+id/searchResultFragment2"
+        android:name="com.example.bookkyandroid.ui.fragment.search.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
 
 </navigation>

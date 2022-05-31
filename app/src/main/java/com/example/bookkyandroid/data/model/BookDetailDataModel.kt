@@ -3,7 +3,7 @@ package com.example.bookkyandroid.data.model
 import com.google.gson.annotations.SerializedName
 
 data class BookDetailDataModel(
-    @SerializedName("BID") val BID : Int,
+    @SerializedName("TBID") val TBID : Int,
     @SerializedName("TITLE") val TITLE : String,
     @SerializedName("SUBTITLE") val SUBTITLE : String,
     @SerializedName("AUTHOR") val AUTHOR : String,

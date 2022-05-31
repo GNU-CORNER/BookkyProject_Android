@@ -33,7 +33,7 @@ class MyInfoInterestedAreaAdapter(private val tags : ArrayList<TagDataResponseDa
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.tagName.text = tags[position].tag
         holder.itemFrame.setOnClickListener{
-            val bundle = bundleOf("TID" to tags[position]!!.TID)
+            val bundle = bundleOf("TID" to tags[position]!!.TMID)
             it.findNavController().navigate(R.id.homeMoreTagDetailFragment, bundle)
         }
     }

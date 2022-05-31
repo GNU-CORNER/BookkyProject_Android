@@ -34,7 +34,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         Log.d("TEss","Check2")
-        getCommunitiyData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
+        getCommunitiyData(retrofit, isExpanded)
         Log.d("TEss","Check3")
         binding.communityButtonWrite.setOnClickListener {
             findNavController().navigate(R.id.action_communityFragment_to_communityWriteFragment)
@@ -61,11 +61,10 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         ): Call<CommunityResponseDataModel>
     }
 
-    private fun getCommunitiyData(retrofit: Retrofit, isExpanded: Boolean, access_token : String){
-        Log.d("TEss","Check2-1")
+    private fun getCommunitiyData(retrofit: Retrofit, isExpanded: Boolean){
         val communityService = retrofit.create(CommunityFragment.CommunityGetCaller::class.java)
-        Log.d("TEss","Check2-2")
-        communityService.getCommunitiyData(access_token)
+        val accessToken = ""
+        communityService.getCommunitiyData(accessToken)
             .enqueue(object : Callback<CommunityResponseDataModel> {
                 override fun onFailure(call: Call<CommunityResponseDataModel>, t: Throwable) {
                     Log.d("TEss", t.toString())

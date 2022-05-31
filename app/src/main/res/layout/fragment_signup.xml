@@ -154,6 +154,7 @@
                                 app:layout_constraintStart_toEndOf="@+id/signup_editText_emailInput"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:ignore="TouchTargetSizeCheck" />
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
@@ -180,28 +181,71 @@
                     <TextView
                         android:id="@+id/signup_textView_codeTitle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="0dp"
                         android:text="@string/signup_emailValid_string"
-                        app:layout_constraintBottom_toTopOf="@+id/signup_editText_codeInput"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/signup_editText_codeInput"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/background_round_gray"
-                        android:ems="10"
-                        android:includeFontPadding="true"
-                        android:inputType="textEmailAddress"
-                        android:paddingLeft="12dp"
-                        android:textColor="@color/colorPrimary"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="11dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        app:layout_constraintTop_toBottomOf="@+id/signup_textView_codeTitle">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background_round_gray"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/signup_button_codeCheckButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="0dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@drawable/background_round_primary"
+                                    android:text="확인"
+                                    android:textColor="@color/white"
+                                    android:visibility="visible"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="TouchTargetSizeCheck" />
+
+                                <EditText
+                                    android:id="@+id/signup_editText_codeInput"
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:background="@drawable/background_round_gray"
+                                    android:ems="10"
+                                    android:includeFontPadding="true"
+                                    android:inputType="textEmailAddress"
+                                    android:paddingLeft="12dp"
+                                    android:textColor="@color/colorPrimary"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/signup_button_codeCheckButton"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="SpeakableTextPresentCheck" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

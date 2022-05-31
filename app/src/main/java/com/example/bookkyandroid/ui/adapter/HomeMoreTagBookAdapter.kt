@@ -53,7 +53,7 @@ class HomeMoreTagBookAdapter(private val data : ArrayList<HomeBookDataModel?>) :
             }
         }
         holder.itemView.setOnClickListener {
-            val bundle = bundleOf("BID" to data[position]!!.BID)
+            val bundle = bundleOf("BID" to data[position]!!.TBID)
             it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
         }
     }

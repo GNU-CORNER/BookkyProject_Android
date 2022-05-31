@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -42,6 +44,10 @@ class HomeMoreTagDetailAdapter(private val bookData: HomeBookListDataModel) : Re
                     .fallback(R.drawable.test_book) // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
                     .into(holder.image) // 이미지를 넣을 뷰
                 //이미지 뷰 처리는 Glide 라이브러리 사용 예정
+            }
+            holder.itemView.setOnClickListener {
+                val bundle = bundleOf("BID" to bookData.data[position]!!.TBID)
+                it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
             }
         }
     }
