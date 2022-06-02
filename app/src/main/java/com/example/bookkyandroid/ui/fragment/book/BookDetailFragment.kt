@@ -1,10 +1,11 @@
 package com.example.bookkyandroid.ui.fragment.book
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -18,20 +19,51 @@ import com.example.bookkyandroid.ui.adapter.BookDetailReviewAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDetailBinding::bind, R.layout.fragment_book_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bookID = arguments?.getInt("BID")
+        var expand1 = false
+        var expand2 = false
         CoroutineScope(Dispatchers.IO).launch {
             val bookkyService = RetrofitManager.getInstance().bookkyService
-            getBookDetail(bookkyService,bookID!!)
+            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            getBookDetail(bookkyService,bookID!!, access_token)
         }
-
+        binding.bookDetailImageBtnLike.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val bookkyService = RetrofitManager.getInstance().bookkyService
+                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+                postFavorite(bookkyService, bookID!!,access_token)
+            }
+        }
+        binding.bookDetailTextViewExpand1.setOnClickListener {
+            if(!expand1){
+                binding.bookDetailTextViewIntro.maxLines = 9999
+                expand1 = true
+            }
+            else{
+                binding.bookDetailTextViewIntro.maxLines = 4
+                expand1 = false
+            }
+        }
+        binding.bookDetailTextViewExpand2.setOnClickListener {
+            if(!expand2){
+                binding.bookDetailTextViewIndex.maxLines = 9999
+                expand2 = true
+            }
+            else{
+                binding.bookDetailTextViewIndex.maxLines = 4
+                expand2 = false
+            }
+        }
     }
     private fun tagAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {
         binding.bookDetailRecyclerViewTags.adapter = MyInfoInterestedAreaAdapter(tags)
@@ -42,15 +74,52 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
 
 
     private fun reviewAdapterSet(review: ArrayList<ReviewDataModel>) {
-        binding.bookDetailRecyclerViewReviews.adapter = BookDetailReviewAdapter(review)
+        var reviewData = arrayListOf<ReviewDataModel>()
+        if(review.size == 0){
+            reviewData.add(ReviewDataModel(0,0,0,"",0,"",0.0F,false,0,false,"","","",""))
+        }
+        else{
+            reviewData = review
+        }
+        binding.bookDetailRecyclerViewReviews.adapter = BookDetailReviewAdapter(reviewData)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.bookDetailRecyclerViewReviews.layoutManager = linearLayoutManager
     }
+    private fun successToCallFavorite(isFavorite : Boolean){
+        if (isFavorite) {
+            binding.bookDetailImageBtnLike.background.setTint(Color.RED)
+        }
+        else{
+            binding.bookDetailImageBtnLike.background.setTint(Color.DKGRAY)
+        }
+    }
+    private fun postFavorite(bookkyService: BookkyService, pk:Int, access_token: String){
+        bookkyService.favoriteBook(access_token,pk)
+            .enqueue(object : Callback<BaseResponse<PostFavoriteBookDataModel>> {
+                override fun onFailure(call: Call<BaseResponse<PostFavoriteBookDataModel>>, t: Throwable) {
+                }
 
-    private fun getBookDetail(bookkyService: BookkyService, pk:Int){
-        val accessToken = ""
-        bookkyService.getBookDetail(pk, accessToken)
+                override fun onResponse(call: Call<BaseResponse<PostFavoriteBookDataModel>>, response: Response<BaseResponse<PostFavoriteBookDataModel>>){
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+                    response.body()?.let {
+                        successToCallFavorite(it.result.isFavorite)
+                    }
+
+                }
+            })
+    }
+    private fun splitter(longText : String) : String{
+        var text : String = ""
+        text = longText.replace("^^", "\n")
+
+        return text
+    }
+    private fun getBookDetail(bookkyService: BookkyService, pk:Int, access_token :String){
+
+        bookkyService.getBookDetail(pk, access_token)
             .enqueue(object : Callback<BaseResponse<BookDetailResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<BookDetailResponseDataModel>>, t: Throwable) {
                     Log.d("asasdsad", t.toString())
@@ -73,10 +142,20 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                         binding.bookDetailTextViewInfo3.text = it.result.bookList!!.PRICE
                         binding.bookDetailTextViewInfo4.text = it.result.bookList!!.PAGE
                         binding.bookDetailTextviewinfo5.text = it.result.bookList!!.ISBN
-                        binding.bookDetailTextViewIntro.text =
-                            it.result.bookList!!.BOOK_INTRODUCTION
-                        binding.bookDetailTextViewIndex.text =
-                            it.result.bookList!!.BOOK_INDEX
+                        if (it.result.bookList!!.BOOK_INTRODUCTION == null){
+                            binding.bookDetailTextViewIntro.text = "책 소개가 없습니다."
+                        }else{
+                            binding.bookDetailTextViewIntro.text =
+                                it.result.bookList!!.BOOK_INTRODUCTION
+                        }
+                        if (it.result.bookList!!.BOOK_INDEX == null){
+                            binding.bookDetailTextViewIndex.text = "책 목차가 없습니다."
+                        }
+                        else{
+                            binding.bookDetailTextViewIndex.text =
+                                splitter(it.result.bookList!!.BOOK_INDEX)
+
+                        }
                         tagAdapterSet(it.result.bookList.tagData)
                         binding.bookDetailImageViewBook.apply {
                             Glide.with(this)
@@ -87,7 +166,10 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                                 .into(binding.bookDetailImageViewBook) // 이미지를 넣을 뷰
                             //이미지 뷰 처리는 Glide 라이브러리 사용 예정
                         }
+
                         reviewAdapterSet(it.result.reviewList!!)
+                        Log.d("favorite?",it.result.isFavorite.toString())
+                        successToCallFavorite(it.result.isFavorite!!)
                     }
 
                 }

@@ -52,11 +52,10 @@
 
                     <ImageButton
                         android:id="@+id/book_detail_imageBtn_like"
-                        android:layout_width="47dp"
-                        android:layout_height="47dp"
-                        android:background="@null"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/ic_baseline_favorite_24"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_hart"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -77,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="20dp"
                 android:text="REACT 리액트"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -86,6 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="10dp"
                 android:text="사이토 고키 / 길벗"
                 android:textSize="13sp" />

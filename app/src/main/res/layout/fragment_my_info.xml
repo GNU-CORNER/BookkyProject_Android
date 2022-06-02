@@ -118,32 +118,24 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:id="@+id/myInfo_textView_name2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="황랑귀"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myInfo_string2" />
+                        android:text="@string/myInfo_string2"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:textStyle="bold"
                     android:id="@+id/myInfo_textView_reset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textlines"
                     android:clickable="true"
                     android:text="@string/reset"
-                    android:background="@drawable/textlines"
-                    android:textSize="8sp"
+                    android:textColor="@color/day_subPrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -157,11 +149,6 @@
                 android:layout_marginBottom="20dp"
                 android:padding="2dp" />
 
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/line"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -177,32 +164,24 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:id="@+id/myInfo_textView_name3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="황랑귀"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="12sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myInfo_string3" />
+                        android:text="@string/myInfo_string3"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:textStyle="bold"
                     android:id="@+id/myInfo_textView_more1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:textSize="8sp"
-                    android:text="@string/view_more"
                     android:background="@drawable/textlines"
+                    android:clickable="true"
+                    android:text="@string/view_more"
+                    android:textColor="@color/day_subPrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -219,11 +198,6 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/recyclerview_item_interested_books" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/line"/>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -238,32 +212,24 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:id="@+id/myInfo_textView_name4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="황랑귀"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myInfo_string4" />
+                        android:text="@string/myInfo_string4"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:textSize="8sp"
-                    android:textStyle="bold"
                     android:id="@+id/myInfo_textView_more2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textlines"
                     android:clickable="true"
                     android:text="@string/view_more"
-                    android:background="@drawable/textlines"
+                    android:textColor="@color/day_subPrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -273,16 +239,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myInfo_recyclerView_my_writing"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
                 tools:itemCount="2"
                 tools:listitem="@layout/recyclerview_item_my_info_my_writing" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/line"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -298,32 +259,24 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:id="@+id/myInfo_textView_name5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="황랑귀"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/myInfo_string5" />
+                        android:text="@string/myInfo_string5"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:textSize="8sp"
-                    android:textStyle="bold"
                     android:id="@+id/myInfo_textView_more3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textlines"
                     android:clickable="true"
                     android:text="@string/view_more"
-                    android:background="@drawable/textlines"
+                    android:textColor="@color/day_subPrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -332,18 +285,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/myInfo_recyclerView_my_review"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
                 tools:itemCount="2"
                 tools:listitem="@layout/recyclerview_item_my_info_my_review" />
 
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/line"
-                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
 

@@ -60,6 +60,12 @@
         <action
             android:id="@+id/action_myInfoFragment_to_myReviewFragment"
             app:destination="@id/myReviewFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_myProfileCommunityFragment"
+            app:destination="@id/myProfileCommunityFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_modifyProfileFragment"
+            app:destination="@id/modifyProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/communityFragment"
@@ -222,5 +228,15 @@
         android:name="com.example.bookkyandroid.ui.fragment.search.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
+    <fragment
+        android:id="@+id/myProfileCommunityFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.myinfo.MyProfileCommunityFragment"
+        android:label="fragment_my_community"
+        tools:layout="@layout/fragment_my_community" />
+    <fragment
+        android:id="@+id/modifyProfileFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.myinfo.ModifyProfileFragment"
+        android:label="fragment_modify_profile"
+        tools:layout="@layout/fragment_modify_profile" />
 
 </navigation>

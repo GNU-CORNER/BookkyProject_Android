@@ -82,7 +82,7 @@ interface BookkyService {
         @Query("keyword") keyword : String,
         @Query("quantity") quantity : Int,
         @Query("page") page : Int
-    ) : Call<BaseResponse<ArrayList<SearchResultResponseDataModel>>>
+    ) : Call<BaseResponse<SearchResultResponseDataModel>>
 
     @POST("/v1/user/check")
     fun checkAuthenticationCode(
@@ -104,4 +104,21 @@ interface BookkyService {
         @Header("access-token")access_token: String,
         @Body tag : UpdateTagBodyDataModel
     ): Call<BaseResponse<UpdateTagResponseDataModel>>
+
+    @GET("/v1/user/mypost")
+    fun getMyPost(
+        @Header("access-token")access_token: String,
+    ): Call<BaseResponse<MyProfilePostResponseDataModel>>
+
+    @PUT("/v1/user/myprofile")
+    fun updateMyProfile(
+        @Header("access-token")access_token: String,
+        @Body profileData : UpdateProfileBodyDataModel
+    ): Call<BaseResponse<ModifyProfileResponseDataModel>>
+
+    @POST("/v1/user/favoritebook/{slug}")
+    fun favoriteBook(
+        @Header("access-token")access_token: String,
+        @Path("slug") pk:Int,
+    ) : Call<BaseResponse<PostFavoriteBookDataModel>>
 }

@@ -23,6 +23,7 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
         super.onViewCreated(view, savedInstanceState)
         val tagID = arguments?.getInt("TID")
         Log.d("home", tagID.toString())
+        showLoadingDialog(requireContext())
         val bookkyService = RetrofitManager.getInstance().bookkyService
         getHomeMoreTagDetailData(bookkyService, tagID!!)
     }
@@ -51,6 +52,8 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
                         response.body()?.let {
                             moreTagDetailAdapter(it.result.bookList)
                         }
+                        Thread.sleep(1000)
+                        dismissLoadingDialog()
                     }
                 }
 

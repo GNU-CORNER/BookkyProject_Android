@@ -6,10 +6,10 @@
     <string name="community_title">커뮤니티</string>
     <string name="home_title">홈</string>
     <string name="myInfo_string1">님, 반가워요!</string>
-    <string name="myInfo_string2">님의 관심 분야 💭 에요</string>
-    <string name="myInfo_string3">님의 관심 도서 📖 에요</string>
-    <string name="myInfo_string4">님이 쓴 글 ✏️ ️이에요</string>
-    <string name="myInfo_string5">님이 쓴 후기 ✏️ ️이에요</string>
+    <string name="myInfo_string2">관심분야</string>
+    <string name="myInfo_string3">관심 도서</string>
+    <string name="myInfo_string4">내가 작성한 게시글</string>
+    <string name="myInfo_string5">내가 작성한 후기</string>
     <string name="view_more">더 보기</string>
     <string name="reset">재설정하기</string>
     <string name="recommend_Button_string">당신의 책을 🔍찾아보세요!</string>
