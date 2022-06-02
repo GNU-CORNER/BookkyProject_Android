@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.ReviewDataModel
 
-class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : RecyclerView.Adapter<BookDetailReviewAdapter.PagerViewHolder>() {
+class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val VIEW_NO_OBJECT_TYPE = 0
+    private val VIEW_PAGE_TYPE = 1
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name : TextView = view.findViewById(R.id.textView_book_detail_review_item_title)
         val expand : TextView = view.findViewById(R.id.textView_book_detail_more)
@@ -20,43 +22,68 @@ class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : 
         val ratingBar : RatingBar = view.findViewById(R.id.ratingBar_book_detail_review_item)
         var isExpanded : Boolean = false
         val likeButton : TextView = view.findViewById(R.id.textView_book_detail_like)
-
-
-
         init {
             // Define click listener for the ViewHolder's View.
 
+        }
+    }
+    class NoObjectViewHolder(view:View) : RecyclerView.ViewHolder(view){
+        val objectTitle : TextView = view.findViewById(R.id.recyclerview_textView_no_object_title)
+    }
 
+    override fun getItemViewType(position: Int): Int {
+        return when(review[position].RID){
+            0 -> VIEW_NO_OBJECT_TYPE
+            else->VIEW_PAGE_TYPE
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recyclerview_item_book_detail_review,
-            parent,
-            false
-        )
-        return PagerViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            VIEW_PAGE_TYPE ->{
+                val view = LayoutInflater.from(parent.context).inflate(
+                    R.layout.recyclerview_item_book_detail_review,
+                    parent,
+                    false
+                )
+                PagerViewHolder(view)
+            }
+            else -> {
+                val view = LayoutInflater.from(parent.context).inflate(
+                    R.layout.recyclerview_item_no_object,
+                    parent,
+                    false
+                )
+                NoObjectViewHolder(view)
+            }
+        }
+
     }
 
-    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.name.text = review[position].nickname
-        holder.contents.text = review[position].contents
-        holder.like.text = review[position].likeCnt.toString()
-        holder.ratingBar.rating =  review[position].rating.toFloat()
-        holder.date.text = review[position].createAt
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(holder is PagerViewHolder){
+            holder.name.text = review[position].nickname
+            holder.contents.text = review[position].contents
+            holder.like.text = review[position].likeCnt.toString()
+            holder.ratingBar.rating =  review[position].rating.toFloat()
+            holder.date.text = review[position].createAt
 
-        holder.expand.setOnClickListener {
-            if (holder.isExpanded){
-                holder.contents.maxLines = 1000
-                holder.isExpanded = false
-            }
-            else {
-                holder.contents.maxLines = 2
-                holder.isExpanded = true
-            }
+            holder.expand.setOnClickListener {
+                if (holder.isExpanded){
+                    holder.contents.maxLines = 1000
+                    holder.isExpanded = false
+                }
+                else {
+                    holder.contents.maxLines = 2
+                    holder.isExpanded = true
+                }
 
+            }
         }
+        else if (holder is NoObjectViewHolder){
+            holder.objectTitle.text = "작성된 후기가 없습니다."
+        }
+
     }
 
     override fun getItemCount(): Int = review.size

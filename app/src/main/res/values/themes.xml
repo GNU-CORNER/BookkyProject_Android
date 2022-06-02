@@ -18,5 +18,13 @@
         <item name="colorControlActivated">@color/colorPrimary_night</item>
     </style>
 
-
+    <!--팝업창 테마 import from 창형-->
+    <style name="DialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">#00333333</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 </resources>

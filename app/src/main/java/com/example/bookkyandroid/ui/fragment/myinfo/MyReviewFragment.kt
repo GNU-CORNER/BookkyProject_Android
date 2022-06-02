@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
@@ -14,6 +15,7 @@ import com.example.bookkyandroid.databinding.FragmentMyReviewBinding
 import com.example.bookkyandroid.ui.adapter.MyInfoReviewAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +27,8 @@ class MyReviewFragment: BaseFragment<FragmentMyReviewBinding>(
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
             val bookkyService = RetrofitManager.getInstance().bookkyService
-            getReviewData(bookkyService)
+            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            getReviewData(bookkyService, access_token)
         }
 
     }
@@ -35,9 +38,8 @@ class MyReviewFragment: BaseFragment<FragmentMyReviewBinding>(
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recyclerViewMyReview.layoutManager = linearLayoutManager
     }
-    private fun getReviewData(bookkyService: BookkyService){
-        val accessToken = ""
-        bookkyService.getMyReview(accessToken)
+    private fun getReviewData(bookkyService: BookkyService, access_token:String){
+        bookkyService.getMyReview(access_token)
             .enqueue(object : Callback<BaseResponse<MyReviewResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<MyReviewResponseDataModel>>, t: Throwable) {
 

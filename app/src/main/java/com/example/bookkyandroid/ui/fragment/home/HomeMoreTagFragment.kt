@@ -26,6 +26,7 @@ import retrofit2.Response
 class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTagBinding::bind, R.layout.fragment_more_tag) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
             val bookkyService = RetrofitManager.getInstance().bookkyService
             val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
@@ -54,6 +55,8 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
                     response.body()?.let {
                         homeMoreTagBookListAdapterSet(it.result.bookList!!)
                         successToGetTagData(it.result.nickname!!)
+                        Thread.sleep(1000)
+                        dismissLoadingDialog()
                     }
                 }
             })

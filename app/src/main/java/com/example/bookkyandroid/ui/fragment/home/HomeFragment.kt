@@ -26,6 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
             //API 호출 BACK THREAD에서 호출 Coroutine
             val bookkyService = RetrofitManager.getInstance().bookkyService
@@ -119,6 +120,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                         homeBookListAdapterSet2(it.result.bookList!![1].tag,
                             it.result.bookList!![1]
                         )
+                        Thread.sleep(1000)
+//                        dismissLoadingDialog()
                     }
                 }
             })
