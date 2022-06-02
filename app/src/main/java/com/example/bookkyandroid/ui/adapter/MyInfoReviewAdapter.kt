@@ -71,6 +71,12 @@ class MyInfoReviewAdapter (private val reviewData : ArrayList<MyProfileReviewDat
                     .into(holder.image) // 이미지를 넣을 뷰
                 //이미지 뷰 처리는 Glide 라이브러리 사용 예정
             }
+            if (reviewData[position].bookTitle.toString().length >10){
+                holder.title.text = reviewData[position].bookTitle.toString().substring(0,10) + "..."
+            }
+            else{
+                holder.title.text = reviewData[position].bookTitle.toString()
+            }
             holder.title.text = reviewData[position].bookTitle.toString()
             holder.contents.text = reviewData[position].contents.toString()
             holder.like.text = reviewData[position].likeCnt.toString()

@@ -99,6 +99,7 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         binding.myInfoRecyclerViewInterestedBooks.layoutParams = layoutParams
         layoutParams.setMargins(dp,0,dp,dp)
         val linearLayoutManager = LinearLayoutManager(activity)
+
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.myInfoRecyclerViewInterestedBooks.layoutManager = linearLayoutManager
     }
@@ -119,7 +120,15 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
     }
 
     private fun myReviewAdapterSet(reviewData: ArrayList<MyProfileReviewDataModel>) {
-        binding.myInfoRecyclerViewMyReview.adapter = MyInfoReviewAdapter(reviewData)
+        var reviewProcessData : ArrayList<MyProfileReviewDataModel> = arrayListOf()
+        if (reviewData.size > 1){
+            reviewProcessData.add(reviewData[0])
+            reviewProcessData.add(reviewData[1])
+        }
+        else{
+            reviewProcessData = reviewData
+        }
+        binding.myInfoRecyclerViewMyReview.adapter = MyInfoReviewAdapter(reviewProcessData)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.myInfoRecyclerViewMyReview.layoutManager = linearLayoutManager

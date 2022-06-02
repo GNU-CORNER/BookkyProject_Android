@@ -155,7 +155,9 @@
         tools:layout="@layout/fragment_survey" >
         <action
             android:id="@+id/action_surveyFragment_to_surveySelectorFragment"
-            app:destination="@id/surveySelectorFragment" />
+            app:destination="@id/surveySelectorFragment"
+            app:popUpTo="@id/surveyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -209,7 +211,11 @@
         android:id="@+id/bookDetailFragment"
         android:name="com.example.bookkyandroid.ui.fragment.book.BookDetailFragment"
         android:label="fragment_book_detail"
-        tools:layout="@layout/fragment_book_detail" />
+        tools:layout="@layout/fragment_book_detail" >
+        <action
+            android:id="@+id/action_bookDetailFragment_to_reviewWriteFragment"
+            app:destination="@id/reviewWriteFragment" />
+    </fragment>
     <action
         android:id="@+id/action_global_bookDetailFragment"
         app:destination="@id/bookDetailFragment" />
@@ -238,5 +244,10 @@
         android:name="com.example.bookkyandroid.ui.fragment.myinfo.ModifyProfileFragment"
         android:label="fragment_modify_profile"
         tools:layout="@layout/fragment_modify_profile" />
+    <fragment
+        android:id="@+id/reviewWriteFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.review.ReviewWriteFragment"
+        android:label="fragment_review_write"
+        tools:layout="@layout/fragment_review_write" />
 
 </navigation>

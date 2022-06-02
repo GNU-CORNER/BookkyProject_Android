@@ -8,7 +8,21 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
+import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.data.model.BaseResponse
+import com.example.bookkyandroid.data.model.PostFavoriteBookDataModel
 import com.example.bookkyandroid.data.model.ReviewDataModel
+import com.example.bookkyandroid.data.model.ReviewLikeResponseDataModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.math.exp
 
 class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val VIEW_NO_OBJECT_TYPE = 0
@@ -21,9 +35,21 @@ class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : 
         val date: TextView = view.findViewById(R.id.textView_book_detail_createAt)
         val ratingBar : RatingBar = view.findViewById(R.id.ratingBar_book_detail_review_item)
         var isExpanded : Boolean = false
+        val ratingNum : TextView = view.findViewById(R.id.book_detail_review_item_textView_ratingNum)
         val likeButton : TextView = view.findViewById(R.id.textView_book_detail_like)
+        val likeCnt : TextView = view.findViewById(R.id.textView_book_detail_likeCnt)
         init {
-            // Define click listener for the ViewHolder's View.
+            expand.setOnClickListener {
+                if(!isExpanded){
+                    contents.maxLines = 9999
+                    isExpanded = true
+                }
+                else{
+                    contents.maxLines = 2
+                    isExpanded = false
+                }
+            }
+
 
         }
     }
@@ -67,17 +93,38 @@ class BookDetailReviewAdapter(private val review: ArrayList<ReviewDataModel>) : 
             holder.like.text = review[position].likeCnt.toString()
             holder.ratingBar.rating =  review[position].rating.toFloat()
             holder.date.text = review[position].createAt
+            holder.ratingNum.text = "("+review[position].rating.toString()+")"
+            holder.likeCnt.text = review[position].likeCnt.toString()
+            holder.likeButton.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val bookkyService = RetrofitManager.getInstance().bookkyService
+                    val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+                    bookkyService.likeReview(access_token, review[position].RID)
+                        .enqueue(object : Callback<BaseResponse<ReviewLikeResponseDataModel>> {
+                            override fun onFailure(call: Call<BaseResponse<ReviewLikeResponseDataModel>>, t: Throwable) {
+                            }
 
-            holder.expand.setOnClickListener {
-                if (holder.isExpanded){
-                    holder.contents.maxLines = 1000
-                    holder.isExpanded = false
-                }
-                else {
-                    holder.contents.maxLines = 2
-                    holder.isExpanded = true
-                }
+                            override fun onResponse(call: Call<BaseResponse<ReviewLikeResponseDataModel>>, response: Response<BaseResponse<ReviewLikeResponseDataModel>>){
+                                if (response.isSuccessful.not()) {
+                                    return
+                                }
+                                response.body()?.let {
+                                    if(it.result.isLiked){
+                                        runBlocking {
+                                            holder.likeCnt.text =
+                                                (Integer.parseInt(holder.likeCnt.text.toString()) + 1).toString()
+                                        }
+                                    }else{
+                                        runBlocking {
+                                            holder.likeCnt.text =
+                                                (Integer.parseInt(holder.likeCnt.text.toString()) - 1).toString()
+                                        }
+                                    }
+                                }
 
+                            }
+                        })
+                }
             }
         }
         else if (holder is NoObjectViewHolder){

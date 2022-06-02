@@ -127,4 +127,23 @@ interface BookkyService {
         @Path("slug") pk:Int,
     ) : Call<BaseResponse<PostFavoriteBookDataModel>>
 
+    @POST("/v1/review/{id}")
+    fun writeReview(
+        @Header("access-token")access_token: String,
+        @Path("id") id:Int,
+        @Body body : WriteReviewBodyDataModel
+    ) : Call<BaseResponse<WriteReviewResponseDataModel>>
+
+    @PUT("/v1/review/like/{id}")
+    fun likeReview(
+        @Header("access-token")access_token: String,
+        @Path("id") id:Int,
+    ) : Call<BaseResponse<ReviewLikeResponseDataModel>>
+
+    @POST("/v1/community/writepost/{slug}")
+    fun writePost(
+        @Header("access-token")access_token: String,
+        @Path("id") id:Int,
+        @Body postBody :WritePostBodyDataModel
+    ) : Call<BaseResponse<String>>
 }

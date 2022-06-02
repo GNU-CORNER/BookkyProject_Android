@@ -22,54 +22,33 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
+            <TextView
+                android:id="@+id/community_textView_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="글 쓰기"
+                android:textSize="17sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/community_textView_menu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="자유게시판"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="글 쓰기"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginVertical="10dp"
+            android:background="@color/reply_background" />
 
         <EditText
             android:id="@+id/community_edittext_post_title"
@@ -78,25 +57,27 @@
             android:layout_marginBottom="10dp"
             android:autofillHints="title"
             android:background="@color/reply_background"
+            android:hint="제목을 입력해 주세요."
+            android:includeFontPadding="true"
             android:inputType="textShortMessage"
-            android:text="  제목을 입력해 주세요."
+            android:paddingHorizontal="20dp"
             tools:ignore="HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/community_recyclerView_post_book"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/community_recyclerView_post_images"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="80dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -108,11 +89,14 @@
             android:id="@+id/community_edittext_post_contents"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:autofillHints="contents"
             android:background="@color/reply_background"
             android:gravity="top"
+            android:hint="내용을 입력해 주세요."
+            android:includeFontPadding="true"
             android:inputType="textLongMessage"
-            android:text="  내용을 입력해 주세요."
-            android:autofillHints="contents"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="10dp"
             tools:ignore="HardcodedText,LabelFor" />
 
 
@@ -151,13 +135,15 @@
                 android:contentDescription="images" />
 
             <Button
-                android:id="@+id/community_comments_submit"
+                android:id="@+id/community_button_write_submit"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:background="@drawable/community_blue_button"
-                android:text="댓글 달기"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/background_round_dark"
+                android:text="작성하기"
                 android:textColor="@color/white"
                 android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText,TouchTargetSizeCheck" />

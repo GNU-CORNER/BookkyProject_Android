@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -24,12 +26,14 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Thread.sleep
 
 
 class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDetailBinding::bind, R.layout.fragment_book_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bookID = arguments?.getInt("BID")
+        showLoadingDialog(requireContext())
         var expand1 = false
         var expand2 = false
         CoroutineScope(Dispatchers.IO).launch {
@@ -54,6 +58,15 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                 expand1 = false
             }
         }
+        binding.bookDetailTextViewIndex.setOnClickListener {
+
+            binding.bookDetailTextViewIndex.maxLines = 4
+            expand2 = false
+        }
+        binding.bookDetailTextViewIntro.setOnClickListener {
+            binding.bookDetailTextViewIntro.maxLines = 4
+            expand1 = false
+        }
         binding.bookDetailTextViewExpand2.setOnClickListener {
             if(!expand2){
                 binding.bookDetailTextViewIndex.maxLines = 9999
@@ -63,6 +76,19 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                 binding.bookDetailTextViewIndex.maxLines = 4
                 expand2 = false
             }
+        }
+
+    }
+    private fun successToCallGet(image : String, TITLE : String, AUTHOR : String, RATING : Float, BID:Int){
+        sleep(500)
+        dismissLoadingDialog()
+        binding.bookyDetailTextViewWriteReview.setOnClickListener {
+            val bundle = bundleOf("thumbnail" to image)
+            bundle.putString("TITLE", TITLE)
+            bundle.putString("AUTHOR", AUTHOR)
+            bundle.putFloat("RATING", RATING)
+            bundle.putInt("BID", BID)
+            findNavController().navigate(R.id.action_bookDetailFragment_to_reviewWriteFragment, bundle)
         }
     }
     private fun tagAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {
@@ -93,7 +119,9 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
         else{
             binding.bookDetailImageBtnLike.background.setTint(Color.DKGRAY)
         }
+
     }
+
     private fun postFavorite(bookkyService: BookkyService, pk:Int, access_token: String){
         bookkyService.favoriteBook(access_token,pk)
             .enqueue(object : Callback<BaseResponse<PostFavoriteBookDataModel>> {
@@ -170,6 +198,7 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                         reviewAdapterSet(it.result.reviewList!!)
                         Log.d("favorite?",it.result.isFavorite.toString())
                         successToCallFavorite(it.result.isFavorite!!)
+                        successToCallGet(it.result.bookList.thumbnailImage,it.result.bookList.TITLE, it.result.bookList.AUTHOR, it.result.bookList.rating, it.result.bookList.TBID)
                     }
 
                 }

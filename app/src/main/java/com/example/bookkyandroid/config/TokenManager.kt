@@ -6,6 +6,7 @@ import com.example.bookkyandroid.data.model.BaseResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,13 +26,6 @@ class TokenManager {
     }
     var accessToken : String = ""
     var refreshToken : String = ""
-    suspend fun getToken(){
-        val dataStoreInstance = ApplicationClass.getInstance().getDataStore()
-        this.accessToken = dataStoreInstance.accessToken.first()
-        this.refreshToken = dataStoreInstance.refreshToken.first()
-        Log.d("isit work?", this.accessToken +"    " +this.refreshToken)
-        Log.d("thread here", Thread.currentThread().threadGroup.name)
-    }
     fun refresh_token(bookkyService:BookkyService, accessToken:String, refreshToken:String){
         Log.d("asd", accessToken)
         Log.d("asd",refreshToken)
@@ -41,19 +35,18 @@ class TokenManager {
 
                 }
 
-                override fun onResponse(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, response: Response<BaseResponse<AuthRefreshResponseDataModel>>){
+                override fun onResponse(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, response: Response<BaseResponse<AuthRefreshResponseDataModel>>) {
                     if (response.isSuccessful.not()) {
                         Log.d("refresh", response.toString())
                         return
                     }
                     response.body()?.let {
-                        var accessToken = it.result.access_token
-
-                        runBlocking { ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken) }
-
+                        CoroutineScope(Dispatchers.IO).launch {
+                            ApplicationClass.getInstance().getDataStore()
+                                .setAccessToken(accessToken)
+                        }
                     }
                 }
             })
-
     }
 }

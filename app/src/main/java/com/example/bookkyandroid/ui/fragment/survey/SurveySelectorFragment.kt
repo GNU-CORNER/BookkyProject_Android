@@ -1,5 +1,6 @@
 package com.example.bookkyandroid.ui.fragment.survey
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,11 +49,15 @@ class SurveySelectorFragment:BaseFragment<FragmentSurveyselectorBinding>(Fragmen
     fun putTagData(i:Int){
         tagData.add(i)
         binding.surveySelectorButtonNext.setText("제출 ("+tagData.size+"개) 선택")
+        binding.surveySelectorButtonNext.setBackgroundResource(R.drawable.background_round_primary)
+        binding.surveySelectorButtonNext.setTextColor(Color.WHITE)
     }
     fun delTagData(i:Int){
         tagData.remove(i)
         if(tagData.size == 0){
             binding.surveySelectorButtonNext.setText("관심분야를 선택해주세요")
+            binding.surveySelectorButtonNext.setBackgroundResource(R.drawable.background_round_gray)
+            binding.surveySelectorButtonNext.setTextColor(Color.parseColor("#6C95FF"))
         }
         else{
             binding.surveySelectorButtonNext.setText("제출 ("+tagData.size+"개) 선택")

@@ -242,6 +242,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
+                android:overScrollMode="never"
                 tools:itemCount="2"
                 tools:listitem="@layout/recyclerview_item_my_info_my_writing" />
 
@@ -288,6 +289,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"
+                android:overScrollMode="never"
                 tools:itemCount="2"
                 tools:listitem="@layout/recyclerview_item_my_info_my_review" />
 

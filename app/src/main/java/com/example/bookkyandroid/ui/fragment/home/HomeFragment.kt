@@ -18,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -105,22 +106,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         bookkyService.getHomeData(access_token)
             .enqueue(object : Callback<HomeResponseDataModel> {
                 override fun onFailure(call: Call<HomeResponseDataModel>, t: Throwable) {
+
                 }
 
                 override fun onResponse(call: Call<HomeResponseDataModel>, response: Response<HomeResponseDataModel>){
-                    if (response.isSuccessful.not()) {
-                        return
+                    if (response.code() == 401) {
+//                        CoroutineScope(Dispatchers.IO).launch {
+//                            val refresh_token =
+//                                ApplicationClass.getInstance().getDataStore().refreshToken.first()
+//                            TokenManager.getInstance()
+//                                .refresh_token(bookkyService, access_token, refresh_token)
+//                            val access_token =
+//                                ApplicationClass.getInstance().getDataStore().accessToken.first()
+//                            runBlocking {
+//                                getHomeData(bookkyService, access_token)
+//                            }
+//                        }
+
                     }
                     response.body()?.let {
-                        successToGetHome(it.result.userData!!.nickname)
-                        homeCommunitySet(it.result.communityList!!)
-                        homeBookListAdapterSet1(it.result.bookList!![0].tag,
-                            it.result.bookList!![0]
-                        )
-                        homeBookListAdapterSet2(it.result.bookList!![1].tag,
-                            it.result.bookList!![1]
-                        )
-                        Thread.sleep(1000)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            successToGetHome(it.result.userData!!.nickname)
+                            homeCommunitySet(it.result.communityList!!)
+                            homeBookListAdapterSet1(it.result.bookList!![0].tag,
+                                it.result.bookList!![0]
+                            )
+                            homeBookListAdapterSet2(it.result.bookList!![1].tag,
+                                it.result.bookList!![1]
+                            )
+                        }
+//                        Thread.sleep(1000)
 //                        dismissLoadingDialog()
                     }
                 }
