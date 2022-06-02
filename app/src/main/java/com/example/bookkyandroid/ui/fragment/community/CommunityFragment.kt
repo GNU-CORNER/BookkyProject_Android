@@ -67,17 +67,13 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         communityService.getCommunitiyData(accessToken)
             .enqueue(object : Callback<CommunityResponseDataModel> {
                 override fun onFailure(call: Call<CommunityResponseDataModel>, t: Throwable) {
-                    Log.d("TEss", t.toString())
                 }
 
                 override fun onResponse(call: Call<CommunityResponseDataModel>, response: Response<CommunityResponseDataModel>){
-                    Log.d("TEss","Check2-3")
                     if (response.isSuccessful.not()) {
                         return
                     }
-                    Log.d("TEss","Check2-4")
                     response.body()?.let {
-                        Log.d("TEss","Check2-5")
                         var Temptitle=""
                         var Tempcontents=""
                         var Tempcomment = 0
@@ -85,24 +81,15 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
                         var TempPID = 0
                         var i = 0
                         val length = it.result?.postList?.size.toString().toInt() - 1
-                        Log.d("TEss","Check2-6")
                         var TempData = ArrayList<MyWriting>()
-                        Log.d("TEss","Check2-7")
-                        Log.d("TEss",length.toString())
                         for( i in 0..length)
                         {
-                            Log.d("TEss","Check2-8")
                             Temptitle=it.result?.postList?.get(i)?.title.toString()
-                            Log.d("TEss",Temptitle)
                             Tempcontents=it.result?.postList?.get(i)?.contents.toString()
-                            Log.d("TEss",Tempcontents)
-                            Tempcomment=it.result?.subData?.get(i)?.commentCnt.toString().toInt()
-                            Log.d("TEss",Tempcomment.toString())
-                            Templike=it.result?.subData?.get(i)?.likeCnt.toString().toInt()
-                            Log.d("TEss",Templike.toString())
-                            TempPID=it.result?.postList?.get(i)?.APID.toString().toInt()
-                            Log.d("TEss",TempPID.toString())
-                            TempData.add(MyWriting(Temptitle,Tempcontents,Tempcomment,Templike,TempPID))
+                            Tempcomment=it.result?.postList?.get(i)?.commentCnt.toString().toInt()
+                            Templike=it.result?.postList?.get(i)?.likeCnt.toString().toInt()
+                            TempPID=it.result?.postList?.get(i)?.PID.toString().toInt()
+                            TempData.add(MyWriting(Temptitle,Tempcontents,Templike,Tempcomment,TempPID))
                         }
 
                         Log.d("TEss",TempData.toString())

@@ -3,7 +3,7 @@ package com.example.bookkyandroid.data.model
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
 
-data class CommunityDetailCommentDataModel(
+data class CommunityDetailChildCommentDataModel(
 
     @SerializedName("parentID")
     val parentID : Int?,
@@ -21,7 +21,4 @@ data class CommunityDetailCommentDataModel(
     val isAccessible : Boolean?,
     @SerializedName("CID")
     val CID : Int?,
-    @SerializedName("childComment")
-    val childComment : ArrayList<CommunityDetailChildCommentDataModel>?,
-
     )

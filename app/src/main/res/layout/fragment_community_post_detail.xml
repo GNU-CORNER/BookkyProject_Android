@@ -50,6 +50,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
+
+                    <ImageButton
+                        android:id="@+id/community_imageButton_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_down"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -90,7 +100,7 @@
             <TextView
                 android:id="@+id/community_textView_nickname"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:text="이다혜"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toTopOf="@+id/community_textView_contents"
@@ -120,19 +130,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/community_textView_title"
                 tools:ignore="HardcodedText" />
 
+
             <TextView
                 android:id="@+id/community_textView_contents"
                 android:layout_width="match_parent"
-                android:layout_height="204dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:text="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/community_textView_createdAt"
+                app:layout_constraintTop_toBottomOf="@+id/community_recyclerView_images"
                 tools:ignore="HardcodedText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/community_recyclerView_book"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/community_textView_createdAt"
+                tools:layout_editor_absoluteX="68dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/community_recyclerView_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/community_recyclerView_book"
+                tools:layout_editor_absoluteX="231dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,47 +164,36 @@
             android:layout_width="match_parent"
             android:layout_height="48dp">
 
-            <Button
-                android:id="@+id/community_button_recommend"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/community_blue_button"
-                android:text="👍34"
-                android:textColor="@color/white"
-                android:textSize="11sp"
+
+            <TextView
+                android:id="@+id/community_textView_likeCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="좋아요(8)"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/community_imageView_like"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/community_textView_commentCnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="댓글(7)"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/community_textView_likeCnt"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/community_imageView_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_like"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/community_button_fix"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/community_blue_button"
-                android:text="수정"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/community_button_del"
-                app:layout_constraintTop_toTopOf="parent"
-
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/community_button_del"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/community_red_button"
-                android:text="삭제"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -197,37 +210,34 @@
             android:layout_marginTop="10dp"
             android:background="@color/line" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="63dp">
 
             <EditText
                 android:id="@+id/community_comments_edittext"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
                 android:autofillHints="comments"
                 android:inputType="textShortMessage"
-                android:text="댓글을 입력해 주세요."
-                tools:ignore="HardcodedText,LabelFor" />
+                android:hint="댓글을 입력해 주세요."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText,LabelFor,TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/community_comments_submit"
                 android:layout_width="80dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
                 android:background="@drawable/community_blue_button"
                 android:text="댓글 달기"
                 android:textColor="@color/white"
                 android:textSize="11sp"
-                tools:ignore="HardcodedText" />
-
-
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/community_comments_edittext"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
