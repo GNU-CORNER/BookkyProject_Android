@@ -104,4 +104,8 @@ interface BookkyService {
         @Header("access-token")access_token: String,
         @Body tag : UpdateTagBodyDataModel
     ): Call<BaseResponse<UpdateTagResponseDataModel>>
+    @GET("/v1/community/postdetail/{slug1}/{slug2}")
+    fun getCommunityDetailData(
+        @Header("access-token") access_token: String?, @Path("slug1")slug1: String?, @Path("slug2")slug2: String?
+    ): Call<CommunityDetailResponseDataModel>
 }

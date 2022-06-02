@@ -6,9 +6,16 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
+import com.example.bookkyandroid.config.BookkyService
+import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.CommunityDetailResponseDataModel
 import com.example.bookkyandroid.databinding.FragmentCommunityPostDetailBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,37 +35,19 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
         Log.d("TEss",args.pid.toString())
 
         var isExpanded : Boolean = false
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://203.255.3.144:8002")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        getCommunityDetailData(retrofit, isExpanded,this.activity?.intent?.getStringExtra("access-token").toString())
-
+        CoroutineScope(Dispatchers.IO).launch {
+            //API 호출 BACK THREAD에서 호출 Coroutine
+            val bookkyService = RetrofitManager.getInstance().bookkyService
+            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            getCommunityDetailData(bookkyService, isExpanded,access_token)
+        }
 
     }
 
-//    private fun postAdapterSet(myWriting: ArrayList<MyWriting>, NavControl : NavController) {
-//        binding.communityRecyclerViewPost.adapter = CommunityPostAdapter(myWriting, NavControl)
-//        val linearLayoutManager = LinearLayoutManager(activity)
-//        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-//        binding.communityRecyclerViewPost.layoutManager = linearLayoutManager
-//    }
 
-
-    public interface CommunityDetailGetCaller {
-        @GET("/v1/community/postdetail/{slug1}/{slug2}")
-        fun getCommunityDetailData(
-            @Header("access-token") access_token: String?, @Path("slug1")slug1: String?, @Path("slug2")slug2: String?
-        ): Call<CommunityDetailResponseDataModel>
-    }
-
-    private fun getCommunityDetailData(retrofit: Retrofit, isExpanded: Boolean, access_token : String){
+    private fun getCommunityDetailData(bookkyService:BookkyService, isExpanded: Boolean, access_token : String){
         Log.d("TEss","Check2-1")
-
-        val communityService = retrofit.create(CommunityDetailGetCaller::class.java)
-        Log.d("TEss","Check2-2")
-        communityService.getCommunityDetailData(access_token,"0",args.pid.toString())
+        bookkyService.getCommunityDetailData(access_token,"0",args.pid.toString())
             .enqueue(object : Callback<CommunityDetailResponseDataModel> {
                 override fun onFailure(call: Call<CommunityDetailResponseDataModel>, t: Throwable) {
                     Log.d("TEss", "실패!!")
@@ -74,12 +63,13 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
                     Log.d("TEss","Check2-4")
                     response.body()?.let {
                         Log.d("TEss",it.result?.postdata.toString())
-                        binding.communityTextViewTitle.text = it.result?.postdata?.get(0)?.title.toString()
-                        binding.communityTextViewCreatedAt.text = it.result?.postdata?.get(0)?.createAt.toString()
-                        binding.communityTextViewNickname.text = it.result?.postuserdata?.get(0)?.nickname.toString()
-                        binding.communityTextViewViews.text = it.result?.postdata?.get(0)?.views.toString()
-                        binding.communityTextViewContents.text = it.result?.postdata?.get(0)?.contents.toString()
-                        binding.communityButtonRecommend.text = it.result?.postdata?.get(0)?.like?.size.toString()
+                        binding.communityTextViewTitle.text = it.result?.postdata?.title.toString()
+                        binding.communityTextViewCreatedAt.text = it.result?.postdata?.updateAt.toString()
+                        binding.communityTextViewNickname.text = it.result?.postdata?.nickname.toString()
+                        binding.communityTextViewViews.text = "\uD83D\uDC41" + it.result?.postdata?.views.toString()
+                        binding.communityTextViewContents.text = it.result?.postdata?.contents.toString()
+                        binding.communityTextViewLikeCnt.text = "좋아요("+it.result?.postdata?.like?.size.toString()+")"
+                        binding.communityTextViewCommentCnt.text = "댓글("+it.result?.commentCnt?.toString()+")"
 
 //                        var Temptitle=""
 //                        var Tempcontents=""

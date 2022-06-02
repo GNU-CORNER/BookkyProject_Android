@@ -14,9 +14,19 @@ data class CommunityDetailPostDataModel(
     val createAt : String?,
     @SerializedName("updateAt")
     val updateAt : String?,
+    @SerializedName("postImage")
+    val postImage : ArrayList<String>?,
     @SerializedName("like")
     val like : ArrayList<Int>?,
-    @SerializedName("UID")
-    val UID : Int?,
+    @SerializedName("nickname")
+    val nickname : String?,
+    @SerializedName("thumbnail")
+    val thumbnail : String?,
+    @SerializedName("isAccessible")
+    val isAccessible : Boolean?,
+    @SerializedName("isLiked")
+    val isLiked : Boolean?,
+    @SerializedName("TBID")
+    val TBID : Int?,
 
     )

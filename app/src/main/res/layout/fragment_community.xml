@@ -25,43 +25,32 @@
             android:layout_marginTop="20dp">
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="195dp"
-                android:layout_height="27dp"
+            <ImageButton
+                android:id="@+id/community_imageButton_menu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal"
+                android:background="@null"
+                android:contentDescription="menu"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_menu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-
-                <ImageButton
-                    android:id="@+id/community_imageButton_menu"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@null"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_menu"
-                    tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-                    android:contentDescription="menu" />
-
-
-                <TextView
-                    android:id="@+id/community_textView_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="자유게시판"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="HardcodedText" />
-
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/community_textView_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="자유게시판"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/community_imageButton_menu"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
 
             <ImageButton

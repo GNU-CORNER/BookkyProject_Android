@@ -4,33 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/community_constraintlayout_commtents"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     >
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/community_LinearLayout_comments"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@drawable/ic_reply" />
+
     <LinearLayout
         android:id = "@+id/community_LinearLayout_comments"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="130dp"
         android:orientation="vertical"
+        android:background="@drawable/reply_comment_box"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="361dp"
             android:layout_height="match_parent">
 
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/line"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -39,7 +43,8 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view">
+                app:layout_constraintTop_toTopOf="parent">
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -79,8 +84,8 @@
                 android:id="@+id/community_textView_comments_contents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="오 잘쓰셨네 \n두줄"
                 android:layout_marginStart="10dp"
+                android:text="오 잘쓰셨네 \n두줄"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +99,7 @@
                 android:orientation="horizontal"
 
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
@@ -113,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="공감(34)"
+                    android:text="공감(30)"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
