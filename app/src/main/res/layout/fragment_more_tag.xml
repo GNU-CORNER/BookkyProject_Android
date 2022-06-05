@@ -77,7 +77,6 @@
                         android:id="@+id/more_tag_textView_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="황랑귀"
                         android:textSize="36sp"
                         android:textStyle="bold" />
 

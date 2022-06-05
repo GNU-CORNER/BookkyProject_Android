@@ -21,11 +21,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
+import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.databinding.FragmentModifyProfileBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,12 +55,11 @@ class ModifyProfileFragment : BaseFragment<FragmentModifyProfileBinding>(
         binding.editTextTextPersonName3.setText(nickname.toString())
         binding.button2.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
                 if (flag) {
                     runBlocking {
                         updateProfile(
-                            bookkyService, access_token, UpdateProfileBodyDataModel(
+                            bookkyService, UpdateProfileBodyDataModel(
                                 binding.editTextTextPersonName3.text.toString(),
                                 "data:image/jpeg;base64," + imageUri
                             )
@@ -169,8 +166,8 @@ class ModifyProfileFragment : BaseFragment<FragmentModifyProfileBinding>(
             }
         }
     }
-    private fun updateProfile(bookkyService: BookkyService, access_token:String, body : UpdateProfileBodyDataModel){
-        bookkyService.updateMyProfile(access_token, body)
+    private fun updateProfile(bookkyService: BookkyService, body : UpdateProfileBodyDataModel){
+        bookkyService.updateMyProfile(body)
             .enqueue(object : Callback<BaseResponse<ModifyProfileResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<ModifyProfileResponseDataModel>>, t: Throwable) {
                     Log.d("api", "test")

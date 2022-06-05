@@ -6,7 +6,7 @@
     android:windowIsFloating="false"
 
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.signin.FindPwFragment">
+    tools:context=".ui.fragment.findpw.FindPwFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

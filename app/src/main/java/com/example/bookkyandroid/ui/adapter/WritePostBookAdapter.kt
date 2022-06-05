@@ -11,8 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.data.model.SearchResultDataModel
+import com.example.bookkyandroid.data.model.WriteBookSearchDataModel
+import com.example.bookkyandroid.databinding.FragmentCommunityPostWriteBinding
 
-class WritePostBookAdapter (private val itemData: SearchResultDataModel) : RecyclerView.Adapter<WritePostBookAdapter.PagerViewHolder>() {
+class WritePostBookAdapter (private val itemData: WriteBookSearchDataModel,private val binding: FragmentCommunityPostWriteBinding) : RecyclerView.Adapter<WritePostBookAdapter.PagerViewHolder>() {
     class PagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView : ImageView = view.findViewById(R.id.write_post_imageView_book_iamge)
         val cancelButton : ImageButton = view.findViewById(R.id.write_post_book_imageButton_cancel)
@@ -25,7 +27,7 @@ class WritePostBookAdapter (private val itemData: SearchResultDataModel) : Recyc
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.recyclerview_item_post_images,
+            R.layout.recyclerview_item_write_post_book,
             parent,
             false
         )
@@ -44,12 +46,12 @@ class WritePostBookAdapter (private val itemData: SearchResultDataModel) : Recyc
         }
         holder.title.text = itemData.TITLE
         holder.author.text = itemData.AUTHOR + " / " + itemData.PUBLISHER
-
         for(i in itemData.tagData){
             text += "#"+i.tag +" "
         }
         holder.tagString.text = text
         holder.cancelButton.setOnClickListener {
+            binding.communityRecyclerViewPostBook.visibility = View.GONE
         }
     }
 

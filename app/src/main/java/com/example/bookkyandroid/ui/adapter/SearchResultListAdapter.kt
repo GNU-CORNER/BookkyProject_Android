@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -81,12 +83,24 @@ class SearchResultListAdapter (private val searchData : ArrayList<SearchResultDa
             val linearLayoutManager = LinearLayoutManager(holder.itemView.context)
             linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
             holder.tagRecyclerView.layoutManager = linearLayoutManager
+            holder.itemView.setOnClickListener {
+                val bundle = bundleOf("BID" to searchData[position]!!.TBID)
+                it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
+            }
         }else{
 
         }
     }
 
-    override fun getItemCount(): Int = searchData.size
+    override fun getItemCount(): Int {
+        if (searchData.size != 26){
+            return searchData.size - 1
+        }
+        else{
+            return searchData.size
+        }
+
+    }
 
 
 }

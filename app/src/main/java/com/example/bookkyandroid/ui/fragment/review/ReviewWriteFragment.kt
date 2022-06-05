@@ -6,11 +6,9 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
+import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.databinding.FragmentReviewWriteBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,10 +27,17 @@ class ReviewWriteFragment : BaseFragment<FragmentReviewWriteBinding>(
         val BookAuthor = arguments?.getString("AUTHOR")
         val Rating = arguments?.getFloat("RATING")
         val BookImage = arguments?.getString("thumbnail")
+        val RID = arguments?.getInt("RID")
+        val type = arguments?.getInt("type")
+        Log.d("RID", RID!!.toString())
+
         binding.reviewWriteTextViewBookTitle.text = BookTitle.toString()
         binding.reviewWriteTextViewBookAuthor.text = BookAuthor.toString()
         binding.reviewWriteRatingBar.rating = Rating!!
-
+        if (type == 0){
+            val contents = arguments?.getString("contents")
+            binding.reviewWriteEditTextTextMultiLine2.setText(contents)
+        }
         Glide.with(this).load(BookImage)
             .placeholder(R.drawable.test_book) // 이미지 로딩 시작하기 전 표시할 이미지
             .error(R.drawable.test_book) // 로딩 에러 발생 시 표시할 이미지
@@ -45,18 +50,23 @@ class ReviewWriteFragment : BaseFragment<FragmentReviewWriteBinding>(
             binding.reviewWriteRatingBar.rating = rating
         }
         CoroutineScope(Dispatchers.IO).launch {
-            val bookkyService = RetrofitManager.getInstance().bookkyService
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
             binding.reviewWriteButtonWrite.setOnClickListener {
-                reviewWrite(bookkyService, access_token, BID!!, WriteReviewBodyDataModel(binding.reviewWriteEditTextTextMultiLine2.text.toString(),binding.reviewWriteRatingBar.rating))
+                if(RID!! > 0){
+                    Log.d("RID", RID!!.toString())
+                    reviewUpdate(bookkyService, RID!!, WriteReviewBodyDataModel(binding.reviewWriteEditTextTextMultiLine2.text.toString(),binding.reviewWriteRatingBar.rating))
+                }
+                else{
+                    reviewWrite(bookkyService, BID!!, WriteReviewBodyDataModel(binding.reviewWriteEditTextTextMultiLine2.text.toString(),binding.reviewWriteRatingBar.rating))
+                }
             }
         }
     }
     private fun successToCall(){
         findNavController().popBackStack()
     }
-    private fun reviewWrite(bookkyService: BookkyService, access_token : String, BID : Int, body : WriteReviewBodyDataModel){
-        bookkyService.writeReview(access_token,BID,body)
+    private fun reviewWrite(bookkyService: BookkyService, BID : Int, body : WriteReviewBodyDataModel){
+        bookkyService.writeReview(BID,body)
             .enqueue(object : Callback<BaseResponse<WriteReviewResponseDataModel>> {
                 override fun onFailure(
                     call: Call<BaseResponse<WriteReviewResponseDataModel>>,
@@ -80,6 +90,29 @@ class ReviewWriteFragment : BaseFragment<FragmentReviewWriteBinding>(
             })
 
     }
+    private fun reviewUpdate(bookkyService: BookkyService, RID :Int, body:WriteReviewBodyDataModel){
+        bookkyService.reviewUpdate(RID,body)
+            .enqueue(object : Callback<BaseResponse<WriteReviewResponseDataModel>> {
+                override fun onFailure(
+                    call: Call<BaseResponse<WriteReviewResponseDataModel>>,
+                    t: Throwable
+                ) {
+                    Log.d("???ad?", t.toString())
+                }
 
+                override fun onResponse(
+                    call: Call<BaseResponse<WriteReviewResponseDataModel>>,
+                    response: Response<BaseResponse<WriteReviewResponseDataModel>>
+                ) {
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+                    response.body()?.let {
+                        successToCall()
+                        Log.d("api", "asd?")
+                    }
+                }
+            })
+    }
 
 }

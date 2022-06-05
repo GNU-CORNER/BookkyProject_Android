@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_myInfoFragment_to_modifyProfileFragment"
             app:destination="@id/modifyProfileFragment" />
+        <action
+            android:id="@+id/action_myInfoFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/communityFragment"
@@ -146,7 +149,8 @@
         tools:layout="@layout/fragment_surveyselector" >
         <action
             android:id="@+id/action_surveySelectorFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/surveyFragment"
@@ -172,7 +176,8 @@
             app:destination="@id/additionalFragment" />
         <action
             android:id="@+id/action_signInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_signInFragment_to_findPwFragment"
             app:destination="@id/findPwFragment" />
@@ -187,6 +192,11 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/signInFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signupFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment"
+            app:popUpTo="@id/signupFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/additionalFragment"
@@ -195,7 +205,7 @@
         tools:layout="@layout/fragment_additional_info" />
     <fragment
         android:id="@+id/findPwFragment"
-        android:name="com.example.bookkyandroid.ui.fragment.signin.FindPwFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.findpw.FindPwFragment"
         android:label="fragment_findpw"
         tools:layout="@layout/fragment_findpw" >
         <action
@@ -204,7 +214,7 @@
     </fragment>
     <fragment
         android:id="@+id/findPwNewPwFragment"
-        android:name="com.example.bookkyandroid.ui.fragment.signin.FindPwNewPwFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.findpw.FindPwNewPwFragment"
         android:label="fragment_findpw_newpw"
         tools:layout="@layout/fragment_findpw_newpw" />
     <fragment
@@ -249,5 +259,14 @@
         android:name="com.example.bookkyandroid.ui.fragment.review.ReviewWriteFragment"
         android:label="fragment_review_write"
         tools:layout="@layout/fragment_review_write" />
+    <action
+        android:id="@+id/action_global_homeFragment"
+        app:destination="@id/homeFragment"
+        app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.bookkyandroid.ui.fragment.setting.SettingsFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 
 </navigation>

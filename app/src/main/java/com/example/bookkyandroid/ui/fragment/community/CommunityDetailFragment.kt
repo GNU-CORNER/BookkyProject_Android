@@ -37,7 +37,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
         var isExpanded : Boolean = false
         CoroutineScope(Dispatchers.IO).launch {
             //API 호출 BACK THREAD에서 호출 Coroutine
-            val bookkyService = RetrofitManager.getInstance().bookkyService
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
             val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
             getCommunityDetailData(bookkyService, isExpanded,access_token)
         }
@@ -47,7 +47,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
 
     private fun getCommunityDetailData(bookkyService:BookkyService, isExpanded: Boolean, access_token : String){
         Log.d("TEss","Check2-1")
-        bookkyService.getCommunityDetailData(access_token,"0",args.pid.toString())
+        bookkyService.getCommunityDetailData("0",args.pid.toString())
             .enqueue(object : Callback<CommunityDetailResponseDataModel> {
                 override fun onFailure(call: Call<CommunityDetailResponseDataModel>, t: Throwable) {
                     Log.d("TEss", "실패!!")

@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.data.model.HomeBookDataModel
 import com.example.bookkyandroid.data.model.HomeBookListDataModel
@@ -24,17 +21,27 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTagBinding::bind, R.layout.fragment_more_tag) {
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private var data : HomeMoreTagResponseDataModel? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
-            val bookkyService = RetrofitManager.getInstance().bookkyService
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-            getHomeData(bookkyService, access_token)
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
+            getHomeData(bookkyService)
+        }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if(data != null){
+            homeMoreTagBookListAdapterSet(data!!.bookList!!)
+            successToGetTagData(data!!.nickname!!)
         }
     }
     private fun successToGetTagData(nickname: String){
         binding.moreTagTextViewNickname.setText(nickname)
+        Thread.sleep(700)
+        dismissLoadingDialog()
     }
     private fun homeMoreTagBookListAdapterSet(DataModels: ArrayList<HomeBookListDataModel?>){
         binding.recyclerViewMoreTagBookList.adapter = HomeMoreTagBookListAdpater(DataModels)
@@ -42,8 +49,8 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.recyclerViewMoreTagBookList.layoutManager = linearLayoutManager
     }
-    private fun getHomeData(bookkyService: BookkyService, access_token : String){
-        bookkyService.getHomeMoreTagData(access_token)
+    private fun getHomeData(bookkyService: BookkyService){
+        bookkyService.getHomeMoreTagData()
             .enqueue(object : Callback<BaseResponse<HomeMoreTagResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<HomeMoreTagResponseDataModel>>, t: Throwable) {
                 }
@@ -55,10 +62,10 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
                     response.body()?.let {
                         homeMoreTagBookListAdapterSet(it.result.bookList!!)
                         successToGetTagData(it.result.nickname!!)
-                        Thread.sleep(1000)
-                        dismissLoadingDialog()
+                        data = it.result
                     }
                 }
             })
+
     }
 }

@@ -11,11 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
+import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.databinding.FragmentBookDetailBinding
 import com.example.bookkyandroid.ui.adapter.BookDetailReviewAdapter
 import com.example.bookkyandroid.ui.adapter.MyInfoInterestedAreaAdapter
@@ -29,67 +27,97 @@ import retrofit2.Response
 import java.lang.Thread.sleep
 
 
-class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDetailBinding::bind, R.layout.fragment_book_detail) {
+class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDetailBinding::bind, R.layout.fragment_book_detail), callbackMoreAPI {
+    var bookID : Int? = 0
+    var flag = true
+    var data:BookDetailResponseDataModel? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showLoadingDialog(requireContext())
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookID = arguments?.getInt("BID")
-        showLoadingDialog(requireContext())
+        bookID = arguments?.getInt("BID")
+
         var expand1 = false
         var expand2 = false
         CoroutineScope(Dispatchers.IO).launch {
-            val bookkyService = RetrofitManager.getInstance().bookkyService
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-            getBookDetail(bookkyService,bookID!!, access_token)
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
+            getBookDetail(bookkyService,bookID!!)
         }
         binding.bookDetailImageBtnLike.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                postFavorite(bookkyService, bookID!!,access_token)
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                postFavorite(bookkyService, bookID!!)
             }
         }
         binding.bookDetailTextViewExpand1.setOnClickListener {
             if(!expand1){
                 binding.bookDetailTextViewIntro.maxLines = 9999
+                binding.bookDetailTextViewExpand1.text = "접기 <"
                 expand1 = true
             }
             else{
                 binding.bookDetailTextViewIntro.maxLines = 4
+                binding.bookDetailTextViewExpand1.text = "펼처보기 >"
                 expand1 = false
             }
         }
-        binding.bookDetailTextViewIndex.setOnClickListener {
-
-            binding.bookDetailTextViewIndex.maxLines = 4
-            expand2 = false
-        }
         binding.bookDetailTextViewIntro.setOnClickListener {
             binding.bookDetailTextViewIntro.maxLines = 4
+            binding.bookDetailTextViewExpand1.text = "펼처보기 >"
             expand1 = false
         }
         binding.bookDetailTextViewExpand2.setOnClickListener {
             if(!expand2){
                 binding.bookDetailTextViewIndex.maxLines = 9999
+                binding.bookDetailTextViewExpand2.text = "접기 <"
                 expand2 = true
             }
             else{
                 binding.bookDetailTextViewIndex.maxLines = 4
+                binding.bookDetailTextViewExpand2.text = "펼처보기 >"
                 expand2 = false
             }
         }
+        binding.bookDetailTextViewIndex.setOnClickListener {
+
+            binding.bookDetailTextViewIndex.maxLines = 4
+            binding.bookDetailTextViewExpand2.text = "펼처보기 >"
+            expand2 = false
+        }
+
 
     }
-    private fun successToCallGet(image : String, TITLE : String, AUTHOR : String, RATING : Float, BID:Int){
+
+    override fun callAPI() {
+        showLoadingDialog(requireContext())
+        CoroutineScope(Dispatchers.Main).launch {
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
+            getBookDetail(bookkyService, bookID!!)
+        }
+
+    }
+    private fun successToCallGet(image : String, TITLE : String, AUTHOR : String, RATING : Float, BID:Int) {
+
+        binding.bookyDetailTextViewWriteReview.setOnClickListener {
+            if (flag) {
+                val bundle = bundleOf("thumbnail" to image)
+                bundle.putString("TITLE", TITLE)
+                bundle.putString("AUTHOR", AUTHOR)
+                bundle.putFloat("RATING", RATING)
+                bundle.putInt("BID", BID)
+                bundle.putInt("type", 1)
+                findNavController().navigate(
+                    R.id.action_bookDetailFragment_to_reviewWriteFragment,
+                    bundle
+                )
+            } else {
+                showCustomToast("이미 작성한 리뷰가 있습니다.")
+            }
+        }
         sleep(500)
         dismissLoadingDialog()
-        binding.bookyDetailTextViewWriteReview.setOnClickListener {
-            val bundle = bundleOf("thumbnail" to image)
-            bundle.putString("TITLE", TITLE)
-            bundle.putString("AUTHOR", AUTHOR)
-            bundle.putFloat("RATING", RATING)
-            bundle.putInt("BID", BID)
-            findNavController().navigate(R.id.action_bookDetailFragment_to_reviewWriteFragment, bundle)
-        }
     }
     private fun tagAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {
         binding.bookDetailRecyclerViewTags.adapter = MyInfoInterestedAreaAdapter(tags)
@@ -105,9 +133,10 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
             reviewData.add(ReviewDataModel(0,0,0,"",0,"",0.0F,false,0,false,"","","",""))
         }
         else{
+            flag = false
             reviewData = review
         }
-        binding.bookDetailRecyclerViewReviews.adapter = BookDetailReviewAdapter(reviewData)
+        binding.bookDetailRecyclerViewReviews.adapter = BookDetailReviewAdapter(reviewData, requireContext(), this)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.bookDetailRecyclerViewReviews.layoutManager = linearLayoutManager
@@ -122,8 +151,8 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
 
     }
 
-    private fun postFavorite(bookkyService: BookkyService, pk:Int, access_token: String){
-        bookkyService.favoriteBook(access_token,pk)
+    private fun postFavorite(bookkyService: BookkyService, pk:Int){
+        bookkyService.favoriteBook(pk)
             .enqueue(object : Callback<BaseResponse<PostFavoriteBookDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<PostFavoriteBookDataModel>>, t: Throwable) {
                 }
@@ -145,9 +174,9 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
 
         return text
     }
-    private fun getBookDetail(bookkyService: BookkyService, pk:Int, access_token :String){
+    private fun getBookDetail(bookkyService: BookkyService, pk:Int){
 
-        bookkyService.getBookDetail(pk, access_token)
+        bookkyService.getBookDetail(pk)
             .enqueue(object : Callback<BaseResponse<BookDetailResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<BookDetailResponseDataModel>>, t: Throwable) {
                     Log.d("asasdsad", t.toString())
@@ -160,6 +189,7 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                     }
                     Log.d("out response", response.toString())
                     response.body()?.let {
+
                         Log.d("log", it.result.toString())
                         binding.bookDetailTextViewTitle.text = it.result.bookList!!.TITLE
                         binding.bookDetailTextViewWriter.text = it.result.bookList!!.AUTHOR + " / "+ it.result.bookList!!.PUBLISHER
@@ -196,12 +226,15 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                         }
 
                         reviewAdapterSet(it.result.reviewList!!)
-                        Log.d("favorite?",it.result.isFavorite.toString())
                         successToCallFavorite(it.result.isFavorite!!)
                         successToCallGet(it.result.bookList.thumbnailImage,it.result.bookList.TITLE, it.result.bookList.AUTHOR, it.result.bookList.rating, it.result.bookList.TBID)
                     }
 
                 }
             })
+
     }
+}
+interface callbackMoreAPI{
+    fun callAPI()
 }

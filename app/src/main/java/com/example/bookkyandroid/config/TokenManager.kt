@@ -13,7 +13,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TokenManager {
+    lateinit var access_token : String
+    lateinit var refresh_token : String
+
     companion object{
+
         @Volatile private var instance: TokenManager? = null
 
         @JvmStatic fun getInstance(): TokenManager =
@@ -22,31 +26,13 @@ class TokenManager {
                     instance = it
                 }
             }
-
     }
-    var accessToken : String = ""
-    var refreshToken : String = ""
-    fun refresh_token(bookkyService:BookkyService, accessToken:String, refreshToken:String){
-        Log.d("asd", accessToken)
-        Log.d("asd",refreshToken)
-        bookkyService.refreshToken(accessToken,refreshToken)
-            .enqueue(object : Callback<BaseResponse<AuthRefreshResponseDataModel>> {
-                override fun onFailure(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<BaseResponse<AuthRefreshResponseDataModel>>, response: Response<BaseResponse<AuthRefreshResponseDataModel>>) {
-                    if (response.isSuccessful.not()) {
-                        Log.d("refresh", response.toString())
-                        return
-                    }
-                    response.body()?.let {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            ApplicationClass.getInstance().getDataStore()
-                                .setAccessToken(accessToken)
-                        }
-                    }
-                }
-            })
+    fun getToken(){
+        CoroutineScope(Dispatchers.IO).launch {
+            access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
+            refresh_token = ApplicationClass.getInstance().getDataStore().refreshToken.first()
+            Log.d("getToken", access_token)
+            Log.d("getToken", refresh_token)
+        }
     }
 }

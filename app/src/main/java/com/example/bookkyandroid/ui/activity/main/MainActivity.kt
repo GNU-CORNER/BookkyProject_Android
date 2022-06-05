@@ -2,18 +2,16 @@ package com.example.bookkyandroid.ui.activity.main
 
 
 
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseActivity
 import com.example.bookkyandroid.config.DBController
 import com.example.bookkyandroid.config.FeedReaderContract
 import com.example.bookkyandroid.databinding.ActivityMainBinding
-import java.security.Permission
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -36,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 binding.bottomNav.visibility = View.GONE
             }
         }
-
+        ApplicationClass.getInstance().showSplashDiaglog(this)
         fun getHelper(): FeedReaderContract.FeedReaderDbHelper {
             return dbHelper
         }

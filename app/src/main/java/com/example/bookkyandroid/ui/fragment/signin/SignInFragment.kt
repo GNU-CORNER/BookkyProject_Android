@@ -26,7 +26,7 @@ import java.util.regex.Pattern
 class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding::bind, R.layout.fragment_signin) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
         binding.loginButtonSignIn!!.setOnClickListener {
             val pattern: Pattern = Patterns.EMAIL_ADDRESS
             if (pattern.matcher(binding.loginEditTextEmailInput.text.toString()).matches()){
@@ -69,6 +69,7 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
             ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
         }
+        ApplicationClass.getInstance().recreateRetrofit()
         findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
     }
 

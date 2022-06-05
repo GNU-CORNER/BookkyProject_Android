@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookkyandroid.R
@@ -84,7 +86,8 @@ class MyInfoReviewAdapter (private val reviewData : ArrayList<MyProfileReviewDat
             holder.ratingBar.rating =  reviewData[position].rating!!.toFloat()
             holder.writer.text = reviewData[position].AUTHOR.toString()
             holder.itemView.setOnClickListener {
-
+                val bundle = bundleOf("BID" to reviewData[position]!!.TBID)
+                it.findNavController().navigate(R.id.action_global_bookDetailFragment, bundle)
             }
         }
         else if (holder is NoObjectViewHolder){

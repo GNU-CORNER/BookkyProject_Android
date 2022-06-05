@@ -17,7 +17,12 @@
         <item name="colorControlNormal">@color/gray</item>
         <item name="colorControlActivated">@color/colorPrimary_night</item>
     </style>
-
+    <style name="CustomBottomSheetDialg" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+    </style>
+    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceRoundBottomSheetDialog</item>
+    </style>
     <!--팝업창 테마 import from 창형-->
     <style name="DialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowBackground">#00333333</item>
@@ -26,5 +31,14 @@
         <item name="android:windowAnimationStyle">@null</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="CustomShapeAppearanceRoundBottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 </resources>

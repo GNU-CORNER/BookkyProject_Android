@@ -8,11 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
+import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.databinding.FragmentSurveyselectorBinding
 import com.example.bookkyandroid.ui.adapter.HomeMoreTagDetailAdapter
 import com.example.bookkyandroid.ui.adapter.SurveySelectorAdapter
@@ -30,15 +28,14 @@ class SurveySelectorFragment:BaseFragment<FragmentSurveyselectorBinding>(Fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val level = arguments?.getInt("level")
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
         getSurveyItem(bookkyService)
         binding.surveySelectorButtonNext.setOnClickListener {
             if (tagData.size != 0){
                 CoroutineScope(Dispatchers.IO).launch {
-                    val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
                     tagData.add(level!!)
                     Log.d("tagData", tagData.toString())
-                    updateTag(tagData, bookkyService, access_token)
+                    updateTag(tagData, bookkyService)
                 }
             }
             else{
@@ -86,11 +83,12 @@ class SurveySelectorFragment:BaseFragment<FragmentSurveyselectorBinding>(Fragmen
             })
     }
     private fun successTagPut(){
-        findNavController().popBackStack()
+        findNavController().navigate(R.id.action_surveySelectorFragment_to_homeFragment)
+
     }
-    private fun updateTag(tagArray:ArrayList<Int>, bookkyService: BookkyService, access_token:String){
+    private fun updateTag(tagArray:ArrayList<Int>, bookkyService: BookkyService){
         val body = UpdateTagBodyDataModel(tagArray)
-        bookkyService.updateTag(access_token, body)
+        bookkyService.updateTag(body)
             .enqueue(object : Callback<BaseResponse<UpdateTagResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<UpdateTagResponseDataModel>>, t: Throwable) {
                 }

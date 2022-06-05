@@ -70,7 +70,6 @@
             android:id="@+id/textView_result_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최근 검색"
             android:textColor="@color/colorPrimary_day"
             android:textSize="15sp"
             android:textStyle="bold" />

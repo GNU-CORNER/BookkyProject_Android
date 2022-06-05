@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
+import com.example.bookkyandroid.config.ApplicationClass
 import com.example.bookkyandroid.config.BaseFragment
 import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
@@ -14,18 +15,33 @@ import com.example.bookkyandroid.data.model.HomeBookListDataModel
 import com.example.bookkyandroid.data.model.HomeMoreTagDetailResponseDataModel
 import com.example.bookkyandroid.databinding.FragmentMoreTagDetailBinding
 import com.example.bookkyandroid.ui.adapter.HomeMoreTagDetailAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(FragmentMoreTagDetailBinding::bind, R.layout.fragment_more_tag_detail) {
+    var data : HomeMoreTagDetailResponseDataModel? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val tagID = arguments?.getInt("TID")
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
+        showLoadingDialog(requireContext())
+        CoroutineScope(Dispatchers.IO).launch {
+            getHomeMoreTagDetailData(bookkyService, tagID!!)
+        }
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tagID = arguments?.getInt("TID")
-        Log.d("home", tagID.toString())
-        showLoadingDialog(requireContext())
-        val bookkyService = RetrofitManager.getInstance().bookkyService
-        getHomeMoreTagDetailData(bookkyService, tagID!!)
+
+
+        if(data != null){
+            moreTagDetailAdapter(data!!.bookList)
+        }
+
     }
     private fun moreTagDetailAdapter(DataModels: HomeBookListDataModel){
         binding.textViewHomeMoreTagDetailHeadLine.setText(DataModels.tag)
@@ -51,13 +67,15 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
                     if(response.isSuccessful()){
                         response.body()?.let {
                             moreTagDetailAdapter(it.result.bookList)
+                            data = it.result
                         }
-                        Thread.sleep(1000)
-                        dismissLoadingDialog()
+
                     }
                 }
 
 
             })
+        Thread.sleep(500)
+        dismissLoadingDialog()
     }
 }

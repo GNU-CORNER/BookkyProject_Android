@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,15 +21,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.*
+import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.databinding.FragmentCommunityPostWriteBinding
-import com.example.bookkyandroid.ui.adapter.MyInfoInterestedBooksAdapter
 import com.example.bookkyandroid.ui.adapter.WritePostBookAdapter
 import com.example.bookkyandroid.ui.adapter.WritePostImageAdapter
+import com.example.bookkyandroid.ui.dialog.PostBookListBottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -42,37 +39,47 @@ import java.io.IOException
 
 
 class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
-    FragmentCommunityPostWriteBinding::bind, R.layout.fragment_community_post_write) {
+    FragmentCommunityPostWriteBinding::bind, R.layout.fragment_community_post_write),getDatafromBottomSheet {
     val PERMISSION_Album = 101 // 앨범 권한 처리
     val REQUEST_GET_IMAGE = 105
     private var imageArray : ArrayList<Uri> = arrayListOf()
     private var imageEncodeArray : ArrayList<String> = arrayListOf()
+    var TBID: Int? = 0
     val spinnerList = listOf("자유게시판", "장터게시판", "QnA게시판")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val communityType = arguments?.getInt("communityType")
-        var TBID: Int? = null
+        var communityType = arguments?.getInt("communityType")
         var QPID = arguments?.getInt("QPID")
+        if (QPID == null){
+            QPID = 0
+        }
+        if(communityType == null){
+            communityType = 0
+        }
         binding.communityRecyclerViewPostImages.visibility = GONE
         binding.communityRecyclerViewPostBook.visibility = GONE
         binding.communityEdittextPostContents.addTextChangedListener {
             binding.communityButtonWriteSubmit.setBackgroundColor(R.drawable.background_round_round_primary)
         }
+        /*--------------------------------------------작성하기 버튼 호출부--------------------------------------------*/
         binding.communityButtonWriteSubmit.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                postWrite(
-                    bookkyService, access_token, communityType!!, WritePostBodyDataModel(
-                        binding.communityEdittextPostTitle.text.toString(),
-                        binding.communityEdittextPostContents.text.toString(),
-                        TBID!!,
-                        QPID!!,
-                        arrayListOf()
+            if(binding.communityEdittextPostTitle.text.length >0 && binding.communityEdittextPostContents.text.length > 0) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                    Log.d("imageisright?", imageEncodeArray[0])
+                    postWrite(
+                        bookkyService, communityType!!, WritePostBodyDataModel(
+                            binding.communityEdittextPostTitle.text.toString(),
+                            binding.communityEdittextPostContents.text.toString(),
+                            TBID!!,
+                            QPID!!,
+                            imageEncodeArray
+                        )
                     )
-                )
+                }
             }
         }
+        /*--------------------------------------------Gallery 호출부--------------------------------------------*/
         binding.communityEdittextAddImages.setOnClickListener {
             requirePermissions(
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -80,6 +87,7 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
             )
             binding.communityRecyclerViewPostImages.visibility = VISIBLE
         }
+        /*--------------------------------------------Spinner 호출부--------------------------------------------*/
         val adapter = ArrayAdapter(requireContext(),R.layout.spinner_item,spinnerList )
         binding.spinner.adapter = adapter
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -89,8 +97,8 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
                 position: Int,
                 id: Long
             ) {
-                if (position != 0) QPID = position
-                Log.d("QPID", QPID.toString())
+                if (position != 0) communityType = position
+                Log.d("communityType", communityType.toString())
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -98,9 +106,22 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
             }
         }
 
+        /*--------------------------------------------BottomSheet 호출부--------------------------------------------*/
+        binding.communityEdittextAddBook.setOnClickListener {
+            bottomSheet = PostBookListBottomSheetDialog(requireContext(),this)
+            bottomSheet.show()
+            //BottomSheet 띄우는 부분
+        }
     }
-    private fun writeBookAdapter(Book: SearchResultDataModel) {
-        binding.communityRecyclerViewPostBook.adapter = WritePostBookAdapter(Book)
+
+    override fun getData(data: WriteBookSearchDataModel) {
+        binding.communityRecyclerViewPostBook.visibility = VISIBLE
+        TBID = data.TBID
+        writeBookAdapter(data)
+    }
+    /*--------------------------------------------RecyclerView Adapter--------------------------------------------*/
+    private fun writeBookAdapter(Book: WriteBookSearchDataModel) {
+        binding.communityRecyclerViewPostBook.adapter = WritePostBookAdapter(Book, binding)
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.communityRecyclerViewPostBook.layoutManager = linearLayoutManager
@@ -111,9 +132,9 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         binding.communityRecyclerViewPostImages.layoutManager = linearLayoutManager
     }
-
-    private fun postWrite(bookkyService: BookkyService, access_token: String,communityType:Int, postData : WritePostBodyDataModel ){
-        bookkyService.writePost(access_token, communityType, postData)
+    /*--------------------------------------------API호출 함수부--------------------------------------------*/
+    private fun postWrite(bookkyService: BookkyService,communityType:Int, postData : WritePostBodyDataModel){
+        bookkyService.writePost(communityType, postData)
             .enqueue(object : Callback<BaseResponse<String>> {
                 override fun onFailure(
                     call: Call<BaseResponse<String>>,
@@ -130,14 +151,14 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
                         return
                     }
                     response.body()?.let {
-
+                        findNavController().popBackStack()
                     }
                 }
             })
     }
 
 
-
+    /*--------------------------------------------갤러리 관련 함수부--------------------------------------------*/
     private fun getBase64ForUriAndPossiblyCrash(uri: Uri): String {
         var imageBase64 : String = ""
         try {
@@ -168,11 +189,6 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
             }
         }
     }
-    /** 사용자가 권한을 승인하거나 거부한 다음에 호출되는 메서드
-     * @param requestCode 요청한 주체를 확인하는 코드
-     * @param permissions 요청한 권한 목록
-     * @param grantResults 권한 목록에 대한 승인/미승인 값, 권한 목록의 개수와 같은 수의 결괏값이 전달된다.
-     * */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -220,14 +236,14 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
                             for (i in 0 until size) {
                                 val imageUri = data.clipData!!.getItemAt(i).uri
                                 imageArray.add(imageUri)
-                                imageEncodeArray.add(getBase64ForUriAndPossiblyCrash(imageUri))
+                                imageEncodeArray.add("data:image/jpeg;base64,"+getBase64ForUriAndPossiblyCrash(imageUri))
                             }
                         }
                     } else {
                         data?.data?.let { uri ->
                             if(uri != null){
                                 imageArray.add(uri)
-                                val imageUri = getBase64ForUriAndPossiblyCrash(uri)
+                                val imageUri = "data:image/jpeg;base64,"+ getBase64ForUriAndPossiblyCrash(uri)
                                 imageEncodeArray.add(imageUri)
                             }
                         }
@@ -238,4 +254,7 @@ class CommunityWriteFragment : BaseFragment<FragmentCommunityPostWriteBinding>(
         }
     }
 
+}
+interface getDatafromBottomSheet{
+    fun getData(data : WriteBookSearchDataModel)
 }

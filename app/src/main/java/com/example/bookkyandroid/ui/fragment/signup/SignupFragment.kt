@@ -27,7 +27,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private var flag2=false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
 
         binding.signupButtonCodeCheckButton.setBackgroundResource(R.drawable.background_round_dark)
         binding.signupButtonSignUpButton!!.setOnClickListener{
@@ -98,7 +98,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
             ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
         }
-        view.findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+        ApplicationClass.getInstance().recreateRetrofit()
+        view.findNavController().navigate(R.id.action_signupFragment_to_surveyFragment)
     }
     private fun successToSend(){
         showCustomToast("인증코드를 전송했습니다.")

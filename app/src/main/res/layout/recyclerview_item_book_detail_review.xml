@@ -37,7 +37,6 @@
                     android:id="@+id/textView_book_detail_review_item_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="REACT 리액트"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -68,7 +67,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
                         android:layout_marginRight="5dp"
-                        android:text="5"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -97,7 +95,6 @@
             android:layout_marginBottom="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="여러분 이거보세요 ㄹㅇ 개쩜ㅋㅋㅋㅋㅋ짱이죠 ㄹㅇ ㅋㅋㅋ 신기하지않나요 이정도면 ㄹㅇ ㅋㅋㅋ 이게 ㄹㅇ 말이되.."
             android:textColor="@color/gray"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -120,7 +117,6 @@
                     android:id="@+id/textView_book_detail_createAt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2022-02-14 11:34"
                     android:textColor="@color/gray5"
                     android:textSize="12sp" />
 
@@ -137,7 +133,6 @@
                     android:id="@+id/textView_book_detail_likeCnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(34)"
                     android:textSize="12sp" />
 
             </LinearLayout>

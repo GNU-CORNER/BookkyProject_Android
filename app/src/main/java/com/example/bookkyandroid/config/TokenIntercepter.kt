@@ -28,8 +28,8 @@ class TokenIntercepter(
 
     private fun Request.putTokenHeader(tokenManager: TokenManager): Request {
         return this.newBuilder()
-            .addHeader(AUTHORIZATION, tokenManager.accessToken)
-            .addHeader(AUTHORIZATION, tokenManager.refreshToken)
+//            .addHeader(AUTHORIZATION, tokenManager.accessToken)
+//            .addHeader(AUTHORIZATION, tokenManager.refreshToken)
             .build()
     }
 

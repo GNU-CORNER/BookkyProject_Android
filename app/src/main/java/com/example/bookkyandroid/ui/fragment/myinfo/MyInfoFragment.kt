@@ -32,16 +32,18 @@ import java.lang.Thread.sleep
 
 class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
     FragmentMyInfoBinding::bind, R.layout.fragment_my_info) {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showLoadingDialog(requireContext())
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        showLoadingDialog(requireContext())
-        CoroutineScope(Dispatchers.IO).launch{
-            val bookkyService = RetrofitManager.getInstance().bookkyService
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
 
-            getMyProfileData(bookkyService,access_token)
+        CoroutineScope(Dispatchers.IO).launch{
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
+
+            getMyProfileData(bookkyService)
         }
         binding.myInfoTextViewReset.setOnClickListener {
             findNavController().navigate(R.id.action_myInfoFragment_to_surveyFragment)
@@ -55,7 +57,9 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         binding.myInfoTextViewMore3.setOnClickListener {
             findNavController().navigate(R.id.action_myInfoFragment_to_myReviewFragment)
         }
-
+        binding.myInfoImageBtnSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_myInfoFragment_to_settingsFragment)
+        }
 
     }
     private fun successToCall(image : String, nickname:String) {
@@ -135,15 +139,18 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
         binding.myInfoRecyclerViewMyReview.stopScroll()
     }
 
-    private fun getMyProfileData(bookkyService:BookkyService, access_token:String){
-        bookkyService.getMyprofile(access_token)
+    private fun getMyProfileData(bookkyService:BookkyService){
+        bookkyService.getMyprofile()
             .enqueue(object : Callback<BaseResponse<MyProfileResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<MyProfileResponseDataModel>>, t: Throwable) {
 
                 }
 
                 override fun onResponse(call: Call<BaseResponse<MyProfileResponseDataModel>>, response: Response<BaseResponse<MyProfileResponseDataModel>>){
-                    if (response.isSuccessful.not()) {
+                    if (response.code() == 403) {
+                        findNavController().navigate(R.id.action_global_signInFragment)
+                        sleep(1000)
+                        dismissLoadingDialog()
                         return
                     }
                     response.body()?.let {
@@ -172,10 +179,11 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
                         }
                         myInterestedAraAdapterSet(it.result.userData.userTagList!!)
 
-                        sleep(1000)
-                        dismissLoadingDialog()
+
                     }
                 }
             })
+        sleep(500)
+        dismissLoadingDialog()
     }
 }

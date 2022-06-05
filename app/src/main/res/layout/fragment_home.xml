@@ -100,7 +100,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="15dp"
-                                    android:text="황랑귀"
                                     android:textColor="@color/black"
                                     android:textSize="36sp"
                                     android:textStyle="bold" />
@@ -166,7 +165,6 @@
                                         android:layout_marginLeft="15dp"
                                         android:layout_marginTop="10dp"
                                         android:layout_marginBottom="15dp"
-                                        android:text="TextView"
                                         android:textColor="@color/white"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
@@ -195,7 +193,6 @@
                                         android:layout_marginLeft="15dp"
                                         android:layout_marginTop="10dp"
                                         android:layout_marginBottom="15dp"
-                                        android:text="TextView"
                                         android:textColor="@color/white"
                                         android:textSize="18sp"
                                         android:textStyle="bold" />
