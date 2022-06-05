@@ -32,11 +32,10 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         super.onViewCreated(view, savedInstanceState)
         var isExpanded : Boolean = false
 
-        CoroutineScope(Dispatchers.IO).launch { //access_token
+        CoroutineScope(Dispatchers.IO).launch {
             //API 호출 BACK THREAD에서 호출 Coroutine
-            val bookkyService = RetrofitManager.getInstance().bookkyService
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-            getCommunitiyData(bookkyService,access_token,communityType)
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
+            getCommunitiyData(bookkyService,communityType)
         }
         binding.communityImageButtonMenu.setOnClickListener{
             binding.planetsSpinner.performClick()
@@ -68,10 +67,10 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         binding.communityRecyclerViewPost.layoutManager = linearLayoutManager
     }
 
-    private fun getCommunitiyData(bookkyService: BookkyService, access_token : String,communityType : String){
+    private fun getCommunitiyData(bookkyService: BookkyService, communityType : String){
 
         if (communityType != "4") {
-            bookkyService.getCommunitiyData(access_token, communityType, 25, 1)
+            bookkyService.getCommunitiyData( communityType, 25, 1)
                 .enqueue(object : Callback<CommunityResponseDataModel> {
                     override fun onFailure(call: Call<CommunityResponseDataModel>, t: Throwable) {
                     }
@@ -106,10 +105,8 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
                                 for (i in 0..length) {
                                     Temptitle = it.result?.postList?.get(i)?.title.toString()
                                     Tempcontents = it.result?.postList?.get(i)?.contents.toString()
-                                    Tempcomment =
-                                        it.result?.postList?.get(i)?.commentCnt.toString().toInt()
-                                    Templike =
-                                        it.result?.postList?.get(i)?.likeCnt.toString().toInt()
+                                    Tempcomment = it.result?.postList?.get(i)?.commentCnt.toString().toInt()
+                                    Templike = it.result?.postList?.get(i)?.likeCnt.toString().toInt()
                                     TempPID = it.result?.postList?.get(i)?.PID.toString().toInt()
                                     TempData.add(
                                         CommunityAllTypePostDataModel(
@@ -126,17 +123,16 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
 
 
                                 postAdapterSet(TempData, communityType)
-                            } else if (communityType == "2") {
+                            } 
+                            else if (communityType == "2") {
                                 // QNA 스타일
                                 var TempData = ArrayList<CommunityAllTypePostDataModel>()
                                 var TempreplyCnt = 0
                                 for (i in 0..length) {
                                     Temptitle = it.result?.postList?.get(i)?.title.toString()
                                     Tempcontents = it.result?.postList?.get(i)?.contents.toString()
-                                    Tempcomment =
-                                        it.result?.postList?.get(i)?.commentCnt.toString().toInt()
-                                    Templike =
-                                        it.result?.postList?.get(i)?.likeCnt.toString().toInt()
+                                    Tempcomment = it.result?.postList?.get(i)?.commentCnt.toString().toInt()
+                                    Templike = it.result?.postList?.get(i)?.likeCnt.toString().toInt()
                                     TempPID = it.result?.postList?.get(i)?.PID.toString().toInt()
                                     TempreplyCnt = it.result?.postList?.get(i)?.replyCnt!!
                                     TempData.add(
@@ -154,22 +150,20 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
 
 
                                 postAdapterSet(TempData, communityType)
-                            } else {
-                                // 내글 => communityAlltype
+                            } 
+                            else {
+                                // 내글 + 핫게
                                 var TempData = ArrayList<CommunityAllTypePostDataModel>()
                                 var TempreplyCnt = 0
                                 var TempCommunityType = 0
                                 for (i in 0..length) {
                                     Temptitle = it.result?.postList?.get(i)?.title.toString()
                                     Tempcontents = it.result?.postList?.get(i)?.contents.toString()
-                                    Tempcomment =
-                                        it.result?.postList?.get(i)?.commentCnt.toString().toInt()
-                                    Templike =
-                                        it.result?.postList?.get(i)?.likeCnt.toString().toInt()
+                                    Tempcomment = it.result?.postList?.get(i)?.commentCnt.toString().toInt()
+                                    Templike = it.result?.postList?.get(i)?.likeCnt.toString().toInt()
                                     TempPID = it.result?.postList?.get(i)?.PID.toString().toInt()
                                     TempreplyCnt = it.result?.postList?.get(i)?.replyCnt!!
-                                    TempCommunityType =
-                                        it.result?.postList?.get(i)?.communityType!!.toInt()
+                                    TempCommunityType = it.result?.postList?.get(i)?.communityType!!
 
                                     TempData.add(
                                         CommunityAllTypePostDataModel(
@@ -193,7 +187,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         }
         else
         {
-            bookkyService.getHotCommunitiyData(access_token,25, 1)
+            bookkyService.getHotCommunitiyData(25, 1)
                 .enqueue(object : Callback<CommunityResponseDataModel> {
                     override fun onFailure(call: Call<CommunityResponseDataModel>, t: Throwable) {
                     }
@@ -264,52 +258,47 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(
         if (position == 0) {
                 //Hot 게시판 정보 받아오는거
 
-            CoroutineScope(Dispatchers.IO).launch { //access_token
+            CoroutineScope(Dispatchers.IO).launch {
                 //API 호출 BACK THREAD에서 호출 Coroutine
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                getCommunitiyData(bookkyService, access_token,"0")
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                getCommunitiyData(bookkyService, "0")
             }
 
         }
         else if (position == 1) {
               //Hot 게시판 정보 받아오는거
 
-            CoroutineScope(Dispatchers.IO).launch { //access_token
+            CoroutineScope(Dispatchers.IO).launch {
                 //API 호출 BACK THREAD에서 호출 Coroutine
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                getCommunitiyData(bookkyService, access_token,"4")
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                getCommunitiyData(bookkyService, "4")
             }
           }
         else if (position == 2) {
             //Hot 게시판 정보 받아오는거
 
-            CoroutineScope(Dispatchers.IO).launch { //access_token
+            CoroutineScope(Dispatchers.IO).launch {
                 //API 호출 BACK THREAD에서 호출 Coroutine
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                getCommunitiyData(bookkyService, access_token,"2")
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                getCommunitiyData(bookkyService, "2")
             }
         }
         else if (position == 3) {
             //Hot 게시판 정보 받아오는거
 
-            CoroutineScope(Dispatchers.IO).launch { //access_token
+            CoroutineScope(Dispatchers.IO).launch {
                 //API 호출 BACK THREAD에서 호출 Coroutine
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                getCommunitiyData(bookkyService, access_token,"1")
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                getCommunitiyData(bookkyService, "1")
             }
         }
         else if (position == 4) {
             //Hot 게시판 정보 받아오는거
 
-            CoroutineScope(Dispatchers.IO).launch { //access_token
+            CoroutineScope(Dispatchers.IO).launch {
                 //API 호출 BACK THREAD에서 호출 Coroutine
-                val bookkyService = RetrofitManager.getInstance().bookkyService
-                val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
-                getCommunitiyData(bookkyService, access_token,"3")
+                val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                getCommunitiyData(bookkyService, "3")
             }
         }
 

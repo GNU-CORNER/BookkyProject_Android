@@ -31,13 +31,12 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
         super.onViewCreated(view, savedInstanceState)
         var isExpanded : Boolean = false
 
-        CoroutineScope(Dispatchers.IO).launch { //access_token
+        CoroutineScope(Dispatchers.IO).launch {
             //API 호출 BACK THREAD에서 호출 Coroutine
             val bookkyService = ApplicationClass.getInstance().getRetrofit()
-            val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
             val communityType = arguments?.getString("communityType").toString()
             val pid = arguments?.getString("PID").toString()
-            getCommunityDetailData(bookkyService, isExpanded,access_token,communityType,pid)
+            getCommunityDetailData(bookkyService, isExpanded,communityType,pid)
         }
 
     }
@@ -57,11 +56,11 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
 
 
 
-    private fun getCommunityDetailData(bookkyService:BookkyService, isExpanded: Boolean, access_token : String,communityType : String, pid : String){
+    private fun getCommunityDetailData(bookkyService:BookkyService, isExpanded: Boolean,communityType : String, pid : String){
 
         if( communityType != "2") {
 
-            bookkyService.getCommunityDetailData(access_token, communityType, pid, 1)
+            bookkyService.getCommunityDetailData( communityType, pid, 1)
                 .enqueue(object : Callback<CommunityDetailResponseDataModel> {
                     override fun onFailure(
                         call: Call<CommunityDetailResponseDataModel>,
@@ -139,7 +138,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
         else // QNA 파트
         {
 
-            bookkyService.getQnACommunityDetailData(access_token, communityType, pid, 1)
+            bookkyService.getQnACommunityDetailData( communityType, pid, 1)
                 .enqueue(object : Callback<CommunityQnADetailResponseDataModel> {
                     override fun onFailure(
                         call: Call<CommunityQnADetailResponseDataModel>,

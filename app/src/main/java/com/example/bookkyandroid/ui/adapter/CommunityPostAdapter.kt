@@ -83,30 +83,18 @@ class CommunityPostAdapter(private val myWriting: ArrayList<CommunityAllTypePost
         holder.contents.text = myWriting[position].contents
         holder.like.text = myWriting[position].likeCnt.toString()
         holder.comment.text = myWriting[position].commentCnt.toString()
-        if( myWriting[position].communityType.toString() == "2") {
+        if(communityType == "2" ||  myWriting[position].communityType.toString() == "2") {
             holder.reply?.text = myWriting[position].replyCnt.toString()+"\n답글"
         }
         holder.layout.setOnClickListener{
 
-            if( myWriting[position].communityType.toString() == "2") {
-
-                val bundle = bundleOf(
+            val bundle = bundleOf(
                     "PID" to myWriting[position].PID.toString(),
                     "communityType" to myWriting[position].communityType.toString()
                 )
                 it.findNavController()
                     .navigate(R.id.action_communityFragment_to_communityDetailFragment, bundle)
-            }
-            else
-            {
-                val bundle = bundleOf(
-                    "PID" to myWriting[position].PID.toString(),
-                    "communityType" to communityType
-                )
-                it.findNavController()
-                    .navigate(R.id.action_communityFragment_to_communityDetailFragment, bundle)
 
-            }
 
         }
     }
