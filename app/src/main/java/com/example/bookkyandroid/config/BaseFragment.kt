@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.example.bookkyandroid.ui.dialog.MoreConfigurationBottomSheetDialog
+import com.example.bookkyandroid.ui.dialog.PostBookListBottomSheetDialog
+import com.example.bookkyandroid.util.LoadingDialog
+import com.example.bookkyandroid.util.SplashDiaglog
 
 
 // Fragment의 기본을 작성, 뷰 바인딩 활용
@@ -17,9 +22,9 @@ abstract class BaseFragment<B : ViewBinding>(
     @LayoutRes layoutResId: Int
 ) : Fragment(layoutResId) {
     private var _binding: B? = null
-
     protected val binding get() = _binding!!
-
+    lateinit var bottomSheet : PostBookListBottomSheetDialog
+    lateinit var bottomSheetMoreConfiguration : MoreConfigurationBottomSheetDialog
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,5 +42,4 @@ abstract class BaseFragment<B : ViewBinding>(
     fun showCustomToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
-
 }

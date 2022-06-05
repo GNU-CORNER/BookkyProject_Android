@@ -7,6 +7,6 @@ data class MyProfileUserDataModel (
     val userTagList : ArrayList<TagDataResponseDataModel>?,
     @SerializedName("nickname")
     val nickname : String?,
-    @SerializedName("thumbnail")
-    val thumbnail : String?
+    @SerializedName("userThumbnail")
+    val userThumbnail : String?
     )

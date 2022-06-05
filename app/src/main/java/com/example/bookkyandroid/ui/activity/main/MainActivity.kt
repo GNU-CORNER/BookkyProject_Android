@@ -7,11 +7,8 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.BaseActivity
-import com.example.bookkyandroid.config.DBController
-import com.example.bookkyandroid.config.FeedReaderContract
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.databinding.ActivityMainBinding
-
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -26,16 +23,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val dbInstance = DBController.getInstance()
         dbInstance.setter(dbHelper)
         binding.bottomNav.setupWithNavController(navController)
-
+        overridePendingTransition(0, 0);
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.homeFragment || destination.id == R.id.searchFragment || destination.id == R.id.myInfoFragment || destination.id == R.id.suggestionFragment || destination.id == R.id.communityFragment) {
                 binding.bottomNav.visibility = View.VISIBLE
-
             } else {
                 binding.bottomNav.visibility = View.GONE
             }
         }
-
+        ApplicationClass.getInstance().showSplashDiaglog(this)
         fun getHelper(): FeedReaderContract.FeedReaderDbHelper {
             return dbHelper
         }

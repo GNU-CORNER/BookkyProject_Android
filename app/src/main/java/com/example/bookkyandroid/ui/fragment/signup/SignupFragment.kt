@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
@@ -27,7 +28,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private var flag2=false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
 
         binding.signupButtonCodeCheckButton.setBackgroundResource(R.drawable.background_round_dark)
         binding.signupButtonSignUpButton!!.setOnClickListener{
@@ -97,8 +98,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             val refreshToken = data.singUpResult.refresh_token
             ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
             ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+            ApplicationClass.getInstance().recreateRetrofit()
         }
-        view.findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
+        view.findNavController().navigate(R.id.action_signupFragment_to_surveyFragment)
     }
     private fun successToSend(){
         showCustomToast("인증코드를 전송했습니다.")

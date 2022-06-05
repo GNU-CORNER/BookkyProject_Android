@@ -6,10 +6,10 @@
     <string name="community_title">커뮤니티</string>
     <string name="home_title">홈</string>
     <string name="myInfo_string1">님, 반가워요!</string>
-    <string name="myInfo_string2">님의 관심 분야 💭 에요</string>
-    <string name="myInfo_string3">님의 관심 도서 📖 에요</string>
-    <string name="myInfo_string4">님이 쓴 글 ✏️ ️이에요</string>
-    <string name="myInfo_string5">님이 쓴 후기 ✏️ ️이에요</string>
+    <string name="myInfo_string2">관심분야</string>
+    <string name="myInfo_string3">관심 도서</string>
+    <string name="myInfo_string4">내가 작성한 게시글</string>
+    <string name="myInfo_string5">내가 작성한 후기</string>
     <string name="view_more">더 보기</string>
     <string name="reset">재설정하기</string>
     <string name="recommend_Button_string">당신의 책을 🔍찾아보세요!</string>
@@ -63,6 +63,7 @@
     <string name="book_detail_bookReviewText_string">리뷰</string>
     <string name="book_detail_bookReviewWrite_string">리뷰 쓰기</string>
     <string name="book_detail_bookLikeText_string">공감</string>
+
     <string-array name="community_post_list">
         <item>자유게시판</item>
         <item>H🔥T</item>
@@ -70,6 +71,21 @@
         <item>책 장터</item>
         <item>내 글 보기</item>
     </string-array>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
 </resources>

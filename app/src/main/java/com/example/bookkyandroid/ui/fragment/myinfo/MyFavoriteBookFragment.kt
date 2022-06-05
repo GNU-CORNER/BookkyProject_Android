@@ -5,9 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.BaseFragment
-import com.example.bookkyandroid.config.BookkyService
-import com.example.bookkyandroid.config.RetrofitManager
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.data.model.BaseResponse
 import com.example.bookkyandroid.data.model.FavoriteBookDataModel
 import com.example.bookkyandroid.data.model.FavoriteBookListResponseDataModel
@@ -15,6 +13,7 @@ import com.example.bookkyandroid.databinding.FragmentMyFavoriteBookBinding
 import com.example.bookkyandroid.ui.adapter.MyFavoriteBookAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +24,7 @@ class MyFavoriteBookFragment: BaseFragment<FragmentMyFavoriteBookBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            val bookkySerivce = RetrofitManager.getInstance().bookkyService
+            val bookkySerivce = ApplicationClass.getInstance().getRetrofit()
             getFavoriteData(bookkySerivce)
         }
 
@@ -37,8 +36,7 @@ class MyFavoriteBookFragment: BaseFragment<FragmentMyFavoriteBookBinding>(
         binding.recyclerViewMyFavoriteBook.layoutManager = linearLayoutManager
     }
     private fun getFavoriteData(bookkyService: BookkyService){
-        val accessToken = ""
-        bookkyService.getFavoriteBook(accessToken)
+        bookkyService.getFavoriteBook()
             .enqueue(object : Callback<BaseResponse<FavoriteBookListResponseDataModel>> {
                 override fun onFailure(call: Call<BaseResponse<FavoriteBookListResponseDataModel>>, t: Throwable) {
 

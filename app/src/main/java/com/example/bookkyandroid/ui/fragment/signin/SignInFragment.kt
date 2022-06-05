@@ -5,6 +5,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
@@ -13,10 +14,12 @@ import com.example.bookkyandroid.config.BookkyService
 import com.example.bookkyandroid.config.RetrofitManager
 import com.example.bookkyandroid.data.model.UserSignInBody
 import com.example.bookkyandroid.data.model.UserSignInResponse
+import com.example.bookkyandroid.data.model.UserSingInResult
 import com.example.bookkyandroid.databinding.FragmentSigninBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +28,7 @@ import java.util.regex.Pattern
 class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding::bind, R.layout.fragment_signin) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val context = this
-        val bookkyService = RetrofitManager.getInstance().bookkyService
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
         binding.loginButtonSignIn!!.setOnClickListener {
             val pattern: Pattern = Patterns.EMAIL_ADDRESS
             if (pattern.matcher(binding.loginEditTextEmailInput.text.toString()).matches()){
@@ -35,7 +37,6 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
                         binding.loginEditTextEmailInput!!.text.toString(),
                         binding.loginEditTextPasswordInput!!.text.toString(),
                         bookkyService,
-                        context!!
                     )
 //                }
 //                else{
@@ -58,43 +59,50 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             findNavController().navigate(R.id.action_signInFragment_to_findPwFragment)
         }
     }
-
-}
-private fun successLogin(view : SignInFragment, data : UserSignInResponse){
-//로그인 성공했을때, datastore에 토큰을 저장하는 부분에서 BACK THREAD에서 저장 함수 호출 Coroutine
-    CoroutineScope(Dispatchers.IO).launch {
-        val accessToken = data.singInResult.access_token
-        val refreshToken = data.singInResult.refresh_token
-        ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
-        ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+    fun failLogin(){
+        showCustomToast("이메일 혹은 비밀번호가 틀렸습니다")
     }
-    view.findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-}
 
-private fun signIn(email: String, password: String, bookkyService: BookkyService, activity: SignInFragment){
-    val bodyParameter = UserSignInBody(email, password)
-    bookkyService.signIn(bodyParameter)
-        .enqueue(object : Callback<UserSignInResponse> {
-            override fun onFailure(call: Call<UserSignInResponse>, t: Throwable) {
-                Log.d("LoginAPI", t.toString())
-            }
+    private fun successLogin(data : UserSingInResult){
+        //로그인 성공했을때, datastore에 토큰을 저장하는 부분에서 BACK THREAD에서 저장 함수 호출 Coroutine
+        CoroutineScope(Dispatchers.IO).launch {
+            val accessToken = data.access_token
+            val refreshToken = data.refresh_token
+            ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
+            ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+            ApplicationClass.getInstance().recreateRetrofit()
+        }
+        val bundle = bundleOf("type" to "key")
+        findNavController().navigate(R.id.action_signInFragment_to_homeFragment, bundle)
 
-            override fun onResponse(call: Call<UserSignInResponse>, signInResponse: Response<UserSignInResponse>) {
-                if (signInResponse.isSuccessful.not()) {
-                    return
+    }
+
+    private fun signIn(email: String, password: String, bookkyService: BookkyService){
+        val bodyParameter = UserSignInBody(email, password)
+        bookkyService.signIn(bodyParameter)
+            .enqueue(object : Callback<UserSignInResponse> {
+                override fun onFailure(call: Call<UserSignInResponse>, t: Throwable) {
+                    failLogin()
                 }
-                signInResponse.body()?.let {
-                    successLogin(activity, it)
+
+                override fun onResponse(call: Call<UserSignInResponse>, signInResponse: Response<UserSignInResponse>) {
+                    if (signInResponse.isSuccessful.not()) {
+                        return
+                    }
+                    signInResponse.body()?.let {
+                        successLogin(it.singInResult)
+                    }
                 }
-            }
-        })
-}
-private fun socialKaKaoSignIn(){
+            })
+    }
+    private fun socialKaKaoSignIn(){
 
-}
-private fun socialNaverSignIn(){
+    }
+    private fun socialNaverSignIn(){
 
-}
-private fun socialGoogleSignIn(){
+    }
+    private fun socialGoogleSignIn(){
 
+    }
 }
+

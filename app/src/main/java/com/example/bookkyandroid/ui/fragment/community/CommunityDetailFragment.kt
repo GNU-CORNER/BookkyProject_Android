@@ -33,7 +33,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
 
         CoroutineScope(Dispatchers.IO).launch { //access_token
             //API 호출 BACK THREAD에서 호출 Coroutine
-            val bookkyService = RetrofitManager.getInstance().bookkyService
+            val bookkyService = ApplicationClass.getInstance().getRetrofit()
             val access_token = ApplicationClass.getInstance().getDataStore().accessToken.first()
             val communityType = arguments?.getString("communityType").toString()
             val pid = arguments?.getString("PID").toString()
@@ -133,7 +133,6 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
                             postAdapterSet(TempData, communityType)
 
                         }
-
                     }
                 })
         }

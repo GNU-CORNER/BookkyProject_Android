@@ -70,7 +70,6 @@
                         android:id="@+id/textView_home_more_tag_detail_headLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DeepLearning"
                         android:textSize="36sp"
                         android:textStyle="bold" />
 
