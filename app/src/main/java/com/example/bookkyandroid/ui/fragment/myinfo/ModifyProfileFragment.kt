@@ -43,15 +43,20 @@ class ModifyProfileFragment : BaseFragment<FragmentModifyProfileBinding>(
     private var imageUri : String? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val image = arguments?.getString("image22")
-        Log.d("image", image.toString())
+        var image = arguments?.getString("image22")
+        Log.d("imageStringasd", image.toString())
         val nickname = arguments?.getString("nickname")
-        Glide.with(this)
-            .load(image.toString())
-            .override(150, 150)
-            .diskCacheStrategy(DiskCacheStrategy.NONE )
-            .skipMemoryCache(true)
-            .into(binding.imageView3)
+        if(image!!.length != 4) {
+            Glide.with(this)
+                .load(image.toString())
+                .override(150, 150)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(binding.imageView3)
+        }
+        else{
+            binding.imageView3.setImageDrawable(resources.getDrawable(R.drawable.default_profileimage))
+        }
         binding.editTextTextPersonName3.setText(nickname.toString())
         binding.button2.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {

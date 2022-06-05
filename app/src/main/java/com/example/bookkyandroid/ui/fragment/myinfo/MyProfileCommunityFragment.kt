@@ -23,7 +23,7 @@ class MyProfileCommunityFragment :BaseFragment<FragmentMyCommunityBinding>(
     FragmentMyCommunityBinding::bind, R.layout.fragment_my_community) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,6 +57,6 @@ class MyProfileCommunityFragment :BaseFragment<FragmentMyCommunityBinding>(
                 }
             })
         Thread.sleep(500)
-        dismissLoadingDialog()
+        ApplicationClass.getInstance().dismissLoadingDialog()
     }
 }

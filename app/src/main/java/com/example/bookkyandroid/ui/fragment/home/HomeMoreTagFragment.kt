@@ -24,7 +24,7 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
     private var data : HomeMoreTagResponseDataModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
             val bookkyService = ApplicationClass.getInstance().getRetrofit()
             getHomeData(bookkyService)
@@ -39,9 +39,16 @@ class HomeMoreTagFragment : BaseFragment<FragmentMoreTagBinding>(FragmentMoreTag
         }
     }
     private fun successToGetTagData(nickname: String){
-        binding.moreTagTextViewNickname.setText(nickname)
+        if(nickname.equals("비회원")){
+            binding.moreTagTextViewNickname.text = "처음 온 당신"
+            binding.textView5.text ="에게"
+        }
+        else{
+            binding.moreTagTextViewNickname.setText(nickname)
+        }
+
         Thread.sleep(700)
-        dismissLoadingDialog()
+        ApplicationClass.getInstance().dismissLoadingDialog()
     }
     private fun homeMoreTagBookListAdapterSet(DataModels: ArrayList<HomeBookListDataModel?>){
         binding.recyclerViewMoreTagBookList.adapter = HomeMoreTagBookListAdpater(DataModels)

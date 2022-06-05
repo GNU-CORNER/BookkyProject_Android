@@ -28,7 +28,7 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
         super.onCreate(savedInstanceState)
         val tagID = arguments?.getInt("TID")
         val bookkyService = ApplicationClass.getInstance().getRetrofit()
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
             getHomeMoreTagDetailData(bookkyService, tagID!!)
         }
@@ -76,6 +76,6 @@ class HomeMoreTagDetailFragment : BaseFragment<FragmentMoreTagDetailBinding>(Fra
 
             })
         Thread.sleep(500)
-        dismissLoadingDialog()
+        ApplicationClass.getInstance().dismissLoadingDialog()
     }
 }

@@ -22,10 +22,7 @@ abstract class BaseFragment<B : ViewBinding>(
     @LayoutRes layoutResId: Int
 ) : Fragment(layoutResId) {
     private var _binding: B? = null
-    lateinit var splashDiaglog: SplashDiaglog
-
     protected val binding get() = _binding!!
-    lateinit var mLoadingDialog: LoadingDialog
     lateinit var bottomSheet : PostBookListBottomSheetDialog
     lateinit var bottomSheetMoreConfiguration : MoreConfigurationBottomSheetDialog
     override fun onCreateView(
@@ -44,24 +41,5 @@ abstract class BaseFragment<B : ViewBinding>(
 
     fun showCustomToast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-    fun showLoadingDialog(context: Context) {
-        mLoadingDialog = LoadingDialog(context)
-        mLoadingDialog.show()
-    }
-    fun showSplashDiaglog(context:Context){
-        splashDiaglog = SplashDiaglog(context)
-        splashDiaglog.show()
-    }
-    fun dismissSplashDialog(){
-        if(splashDiaglog.isShowing){
-            splashDiaglog.dismiss()
-        }
-    }
-    // 띄워 놓은 로딩 다이얼로그를 없앰.
-    fun dismissLoadingDialog() {
-        if (mLoadingDialog.isShowing) {
-            mLoadingDialog.dismiss()
-        }
     }
 }

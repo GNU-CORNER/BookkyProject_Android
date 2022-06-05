@@ -33,7 +33,7 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
     var data:BookDetailResponseDataModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,10 +45,18 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
             val bookkyService = ApplicationClass.getInstance().getRetrofit()
             getBookDetail(bookkyService,bookID!!)
         }
+        if(TokenManager.getInstance().access_token.length == 0) {
+            binding.bookyDetailTextViewWriteReview.setTextColor(Color.GRAY)
+        }
         binding.bookDetailImageBtnLike.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                val bookkyService = ApplicationClass.getInstance().getRetrofit()
-                postFavorite(bookkyService, bookID!!)
+            if(TokenManager.getInstance().access_token.length != 0) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                    postFavorite(bookkyService, bookID!!)
+                }
+            }
+            else{
+                findNavController().navigate(R.id.action_global_signInFragment)
             }
         }
         binding.bookDetailTextViewExpand1.setOnClickListener {
@@ -91,7 +99,7 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
     }
 
     override fun callAPI() {
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
         CoroutineScope(Dispatchers.Main).launch {
             val bookkyService = ApplicationClass.getInstance().getRetrofit()
             getBookDetail(bookkyService, bookID!!)
@@ -101,23 +109,28 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
     private fun successToCallGet(image : String, TITLE : String, AUTHOR : String, RATING : Float, BID:Int) {
 
         binding.bookyDetailTextViewWriteReview.setOnClickListener {
-            if (flag) {
-                val bundle = bundleOf("thumbnail" to image)
-                bundle.putString("TITLE", TITLE)
-                bundle.putString("AUTHOR", AUTHOR)
-                bundle.putFloat("RATING", RATING)
-                bundle.putInt("BID", BID)
-                bundle.putInt("type", 1)
-                findNavController().navigate(
-                    R.id.action_bookDetailFragment_to_reviewWriteFragment,
-                    bundle
-                )
-            } else {
-                showCustomToast("이미 작성한 리뷰가 있습니다.")
+            if(TokenManager.getInstance().access_token.length != 0) {
+                if (flag) {
+                    val bundle = bundleOf("thumbnail" to image)
+                    bundle.putString("TITLE", TITLE)
+                    bundle.putString("AUTHOR", AUTHOR)
+                    bundle.putFloat("RATING", RATING)
+                    bundle.putInt("BID", BID)
+                    bundle.putInt("type", 1)
+                    findNavController().navigate(
+                        R.id.action_bookDetailFragment_to_reviewWriteFragment,
+                        bundle
+                    )
+                } else {
+                    showCustomToast("이미 작성한 리뷰가 있습니다.")
+                }
+            }
+            else{
+                findNavController().navigate(R.id.action_global_signInFragment)
             }
         }
         sleep(500)
-        dismissLoadingDialog()
+        ApplicationClass.getInstance().dismissLoadingDialog()
     }
     private fun tagAdapterSet(tags: ArrayList<TagDataResponseDataModel>) {
         binding.bookDetailRecyclerViewTags.adapter = MyInfoInterestedAreaAdapter(tags)
@@ -224,8 +237,9 @@ class BookDetailFragment: BaseFragment<FragmentBookDetailBinding>(FragmentBookDe
                                 .into(binding.bookDetailImageViewBook) // 이미지를 넣을 뷰
                             //이미지 뷰 처리는 Glide 라이브러리 사용 예정
                         }
-
-                        reviewAdapterSet(it.result.reviewList!!)
+                        if(it.result.reviewList != null) {
+                            reviewAdapterSet(it.result.reviewList!!)
+                        }
                         successToCallFavorite(it.result.isFavorite!!)
                         successToCallGet(it.result.bookList.thumbnailImage,it.result.bookList.TITLE, it.result.bookList.AUTHOR, it.result.bookList.rating, it.result.bookList.TBID)
                     }

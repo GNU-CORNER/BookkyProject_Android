@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
@@ -97,8 +98,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             val refreshToken = data.singUpResult.refresh_token
             ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
             ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+            ApplicationClass.getInstance().recreateRetrofit()
         }
-        ApplicationClass.getInstance().recreateRetrofit()
         view.findNavController().navigate(R.id.action_signupFragment_to_surveyFragment)
     }
     private fun successToSend(){

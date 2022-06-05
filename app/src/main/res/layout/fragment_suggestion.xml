@@ -31,7 +31,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="170dp"
                 android:layout_weight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,72 +54,89 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:layout_width="200dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="right"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/suggestion_item_background_img" />
-
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="35dp"
-                                android:text="멍탐정 북키"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="5dp"
-                                android:text="내가 책을 추천해주지"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
+                            android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:id="@+id/suggestion_linearlayout_start_bookky1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:layout_marginVertical="10dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:id="@+id/linearLayout16"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="10dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="멍탐정 북키"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="내가 책을 추천해주지"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="북키와 대화하기"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold" />
+                                    android:layout_height="wrap_content" />
 
-                                <ImageButton
-                                    android:layout_width="8dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginStart="2dp"
-                                    android:background="@null"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/ic_arrow" />
+
+                                <LinearLayout
+                                    android:id="@+id/suggestion_linearlayout_start_bookky1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_marginVertical="10dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="북키와 대화하기"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:layout_width="8dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginStart="2dp"
+                                        android:background="@null"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/ic_arrow" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
-                        </LinearLayout>
+                            <ImageView
+                                android:layout_width="164dp"
+                                android:layout_height="255dp"
+                                android:layout_gravity="right"
+                                android:layout_marginVertical="10dp"
+                                android:layout_marginEnd="104dp"
+                                android:src="@drawable/bookkinator_image"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:srcCompat="@drawable/bookkinator_image"
+                                tools:srcCompat="@drawable/bookkinator_image" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     </FrameLayout>
 
@@ -137,7 +154,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="170dp"
                 android:layout_weight="1">
 
 
@@ -161,68 +178,87 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:layout_width="200dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="right"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/suggestion_item_background_img2" />
-
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="10dp"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="35dp"
-                                android:text="안내견 북키 - FrontEnd -"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="5dp"
-                                android:text="요즘 유행하는 웹 개발, 나도 해볼까?\n북키가 안내해줄게 !"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-
-                            <LinearLayout
-                                android:id="@+id/suggestion_linearlayout_start_bookky2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <ImageView
+                                android:layout_width="136dp"
+                                android:layout_height="177dp"
                                 android:layout_gravity="right"
                                 android:layout_marginVertical="10dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:src="@drawable/bookkinavigator_image"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.931"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:srcCompat="@drawable/bookkinavigator_image"
+                                tools:srcCompat="@drawable/bookkinavigator_image" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="10dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="북키에게 안내받기"
-                                    android:textSize="15sp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="안내견 북키 - FrontEnd -"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"
                                     android:textStyle="bold" />
 
-                                <ImageButton
-                                    android:layout_width="8dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginStart="2dp"
-                                    android:background="@null"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/ic_arrow" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="요즘 유행하는 웹 개발, 나도 해볼까?\n북키가 안내해줄게 !"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+
+
+                                <LinearLayout
+                                    android:id="@+id/suggestion_linearlayout_start_bookky2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_marginVertical="10dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="북키에게 안내받기"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:layout_width="8dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginStart="2dp"
+                                        android:background="@null"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/ic_arrow" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                     </FrameLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -240,7 +276,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="170dp"
                 android:layout_weight="1">
 
 
@@ -264,68 +300,87 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:layout_width="200dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="right"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/suggestion_item_background_img2" />
-
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="10dp"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="35dp"
-                                android:text="안내견 북키 - BackEnd -"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="5dp"
-                                android:text="진짜 프로그래머는 백엔드를 한다 ! 나도 해볼까?\n북키가 안내해줄게 !"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-
-                            <LinearLayout
-                                android:id="@+id/suggestion_linearlayout_start_bookky3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <ImageView
+                                android:layout_width="136dp"
+                                android:layout_height="177dp"
                                 android:layout_gravity="right"
                                 android:layout_marginVertical="10dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:src="@drawable/bookkinavigator_image"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.931"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:srcCompat="@drawable/bookkinavigator_image"
+                                tools:srcCompat="@drawable/bookkinavigator_image" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="10dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="북키에게 안내받기"
-                                    android:textSize="15sp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="안내견 북키 - BackEnd -"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="18sp"
                                     android:textStyle="bold" />
 
-                                <ImageButton
-                                    android:layout_width="8dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginStart="2dp"
-                                    android:background="@null"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/ic_arrow" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="진짜 프로그래머는 백엔드를 한다 ! 나도 해볼까?\n북키가 안내해줄게 !"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+
+
+                                <LinearLayout
+                                    android:id="@+id/suggestion_linearlayout_start_bookky3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_marginVertical="10dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="북키에게 안내받기"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:layout_width="8dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginStart="2dp"
+                                        android:background="@null"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/ic_arrow" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                     </FrameLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -342,7 +397,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="170dp"
                 android:layout_weight="1">
 
 
@@ -367,77 +422,83 @@
                         app:layout_constraintTop_toTopOf="parent">
 
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="10dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="35dp"
-                                android:text="북키가 새로운 아이디어를\n생각중이에요."
-                                android:textColor="@color/gray3"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="5dp"
-                                android:text="추후 추가될 기능을 기대해주세요"
-                                android:textColor="@color/gray3"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
+                            android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:layout_marginVertical="10dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:visibility="invisible">
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="10dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="북키에게 안내받기"
-                                    android:textSize="15sp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="북키가 새로운 아이디어를\n생각중이에요."
+                                    android:textColor="@color/gray3"
+                                    android:textSize="18sp"
                                     android:textStyle="bold" />
 
-                                <ImageButton
-                                    android:layout_width="8dp"
-                                    android:layout_height="16dp"
-                                    android:layout_marginStart="2dp"
-                                    android:background="@null"
-                                    android:scaleType="centerInside"
-                                    android:src="@drawable/ic_arrow" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="추후 추가될 기능을 기대해주세요"
+                                    android:textColor="@color/gray3"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_marginVertical="10dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:visibility="invisible">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="북키에게 안내받기"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageButton
+                                        android:layout_width="8dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginStart="2dp"
+                                        android:background="@null"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/ic_arrow" />
+                                </LinearLayout>
+
+
                             </LinearLayout>
 
-
-                        </LinearLayout>
-
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="right"
-                            android:layout_marginVertical="10dp"
-                            android:src="@drawable/suggestion_item_background_img3" />
-
-                        <ImageView
-                            android:id="@+id/suggestion_item_imageView_light"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="right|top"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/light_bulb" />
+                            <ImageView
+                                android:layout_width="95dp"
+                                android:layout_height="140dp"
+                                android:layout_gravity="right"
+                                android:layout_marginVertical="10dp"
+                                android:src="@drawable/thinkingbookky_image"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.859"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/thinkingbookky_image"
+                                tools:srcCompat="@drawable/thinkingbookky_image" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     </FrameLayout>

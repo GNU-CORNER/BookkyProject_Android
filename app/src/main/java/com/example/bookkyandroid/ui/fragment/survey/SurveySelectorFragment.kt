@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,7 +84,8 @@ class SurveySelectorFragment:BaseFragment<FragmentSurveyselectorBinding>(Fragmen
             })
     }
     private fun successTagPut(){
-        findNavController().navigate(R.id.action_surveySelectorFragment_to_homeFragment)
+        val bundle = bundleOf("type" to "key")
+        findNavController().navigate(R.id.action_surveySelectorFragment_to_homeFragment, bundle)
 
     }
     private fun updateTag(tagArray:ArrayList<Int>, bookkyService: BookkyService){

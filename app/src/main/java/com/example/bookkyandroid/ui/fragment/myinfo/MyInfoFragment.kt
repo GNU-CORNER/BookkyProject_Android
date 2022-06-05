@@ -34,7 +34,11 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
     FragmentMyInfoBinding::bind, R.layout.fragment_my_info) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showLoadingDialog(requireContext())
+        ApplicationClass.getInstance().showLoadingDialog(requireContext())
+        if(TokenManager.getInstance().access_token.length == 0){
+            ApplicationClass.getInstance().dismissLoadingDialog()
+            findNavController().navigate(R.id.action_myInfoFragment_to_signInFragment)
+        }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -63,13 +67,18 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
 
     }
     private fun successToCall(image : String, nickname:String) {
-        Log.d("image", image)
-        Glide.with(this)
-            .load(image)
-            .override(80, 80)
-            .diskCacheStrategy(DiskCacheStrategy.NONE )
-            .skipMemoryCache(true)
-            .into(binding.myInfoCircleImageProfile);
+        if(image.length==4){
+            binding.myInfoCircleImageProfile.setImageDrawable(resources.getDrawable(R.drawable.default_profileimage))
+        }
+        else{
+            Glide.with(this)
+                .load(image)
+                .override(80, 80)
+                .diskCacheStrategy(DiskCacheStrategy.NONE )
+                .skipMemoryCache(true)
+                .into(binding.myInfoCircleImageProfile);
+        }
+
         binding.myInfoImgBtnArrow.setOnClickListener {
             val bundle = bundleOf("image22" to image)
             bundle.putString("nickname", nickname)
@@ -148,9 +157,6 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
 
                 override fun onResponse(call: Call<BaseResponse<MyProfileResponseDataModel>>, response: Response<BaseResponse<MyProfileResponseDataModel>>){
                     if (response.code() == 403) {
-                        findNavController().navigate(R.id.action_global_signInFragment)
-                        sleep(1000)
-                        dismissLoadingDialog()
                         return
                     }
                     response.body()?.let {
@@ -184,6 +190,6 @@ class MyInfoFragment : BaseFragment<FragmentMyInfoBinding>(
                 }
             })
         sleep(500)
-        dismissLoadingDialog()
+        ApplicationClass.getInstance().dismissLoadingDialog()
     }
 }

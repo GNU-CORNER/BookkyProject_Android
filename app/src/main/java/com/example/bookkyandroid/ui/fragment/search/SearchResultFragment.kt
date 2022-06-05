@@ -30,11 +30,12 @@ class SearchResultFragment: BaseFragment<FragmentSearchResultBinding>(FragmentSe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         keyword = arguments?.getString("keyword")
         val bookkyService = ApplicationClass.getInstance().getRetrofit()
-
+        binding.textViewResultTitle.setText(keyword)
         if (data != null){
-            successToGetSearchData(keyword!!)
+            binding.textViewResultTitle.setText(keyword)
             recyclerviewBinder(data!!.searchData)
             binding.searchEditTextSearchInput.setText(keyword)
             page = 1
@@ -65,9 +66,6 @@ class SearchResultFragment: BaseFragment<FragmentSearchResultBinding>(FragmentSe
                 }
             }
         })
-    }
-    private fun successToGetSearchData(keyword : String){
-        binding.textViewResultTitle.setText(keyword)
     }
     private fun recyclerviewBinder(searchData : ArrayList<SearchResultDataModel>) {
         if (searchData.size > 0){
@@ -109,7 +107,6 @@ class SearchResultFragment: BaseFragment<FragmentSearchResultBinding>(FragmentSe
                     t: Throwable
                 ) {
                     flag = true
-                    successToGetSearchData(keyword)
                     recyclerviewBinder(arrayListOf())
 
                     Log.d("searchSuccess", t.toString())
@@ -126,7 +123,7 @@ class SearchResultFragment: BaseFragment<FragmentSearchResultBinding>(FragmentSe
                         return
                     }
                     response.body()?.let {
-                        successToGetSearchData(keyword)
+                        binding.progressBar2.visibility = View.GONE
                         recyclerviewBinder(it.result.searchData)
                         totalPage = it.result.total
                         page++

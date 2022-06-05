@@ -7,10 +7,7 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bookkyandroid.R
-import com.example.bookkyandroid.config.ApplicationClass
-import com.example.bookkyandroid.config.BaseActivity
-import com.example.bookkyandroid.config.DBController
-import com.example.bookkyandroid.config.FeedReaderContract
+import com.example.bookkyandroid.config.*
 import com.example.bookkyandroid.databinding.ActivityMainBinding
 
 

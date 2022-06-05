@@ -5,6 +5,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
@@ -18,6 +19,7 @@ import com.example.bookkyandroid.databinding.FragmentSigninBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -68,9 +70,11 @@ class SignInFragment : BaseFragment<FragmentSigninBinding>(FragmentSigninBinding
             val refreshToken = data.refresh_token
             ApplicationClass.getInstance().getDataStore().setAccessToken(accessToken)
             ApplicationClass.getInstance().getDataStore().setRefreshToken(refreshToken)
+            ApplicationClass.getInstance().recreateRetrofit()
         }
-        ApplicationClass.getInstance().recreateRetrofit()
-        findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+        val bundle = bundleOf("type" to "key")
+        findNavController().navigate(R.id.action_signInFragment_to_homeFragment, bundle)
+
     }
 
     private fun signIn(email: String, password: String, bookkyService: BookkyService){

@@ -26,6 +26,9 @@ import java.lang.Thread.sleep
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home) {
     private var data : HomeResponseDataModel? = null
+    private var type : String? = null
+    private var flag = false
+    private var flag2 = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
@@ -36,7 +39,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("token123123?", TokenManager.getInstance().access_token.length.toString())
+        type = arguments?.getString("type")
+
         if (data != null){
             successToGetHome(data!!.result.userData!!.nickname)
             homeCommunitySet(data!!.result.communityList!!)
@@ -49,7 +53,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                 data!!.result.bookList!![1]
             )
         }
-
+        if (type != null && flag == false){
+                ApplicationClass.getInstance().showLoadingDialog(requireContext())
+                flag = true
+                flag2 = false
+                CoroutineScope(Dispatchers.IO).launch {
+                    val bookkyService = ApplicationClass.getInstance().getRetrofit()
+                    getHomeData(bookkyService)
+                }
+        }
         binding.textViewHomeCommunityHeadLineText.setOnClickListener {
             var flag = false
             CoroutineScope(Dispatchers.IO).launch {
@@ -87,7 +99,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 
 
     private fun successToGetHome(nickname : String?){
-        binding.textViewHomeNickName.setText(nickname)
+        if (nickname == null){
+            binding.textViewHomeNickName.text = "처음 온 당신"
+            binding.textViewHomeHeadLine2.text ="에게"
+        }
+        else{
+            binding.textViewHomeNickName.setText(nickname)
+        }
+
     }
     private fun homeBookListAdapterSet1(headline : String, DataModels: HomeBookListDataModel){
         binding.homeTextViewRecyclerviewHeadline1.text = headline
@@ -162,8 +181,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                 }
             })
         sleep(2000)
-        ApplicationClass.getInstance().dismissSplashDialog()
+        if(flag2){
+            ApplicationClass.getInstance().dismissSplashDialog()
+        }
 
+        if(flag == true) {
+            flag2 = true
+            ApplicationClass.getInstance().dismissLoadingDialog()
+            type = null
+        }
     }
 }
 
