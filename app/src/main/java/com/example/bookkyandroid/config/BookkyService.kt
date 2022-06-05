@@ -104,8 +104,26 @@ interface BookkyService {
         @Header("access-token")access_token: String,
         @Body tag : UpdateTagBodyDataModel
     ): Call<BaseResponse<UpdateTagResponseDataModel>>
+
     @GET("/v1/community/postdetail/{slug1}/{slug2}")
     fun getCommunityDetailData(
-        @Header("access-token") access_token: String?, @Path("slug1")slug1: String?, @Path("slug2")slug2: String?
+        @Header("access-token") access_token: String?, @Path("slug1")slug1: String?, @Path("slug2")slug2: String?, @Query("mode") mode: Int
     ): Call<CommunityDetailResponseDataModel>
+
+    @GET("/v1/community/postdetail/{slug1}/{slug2}")
+    fun getQnACommunityDetailData(
+        @Header("access-token") access_token: String?, @Path("slug1")slug1: String?, @Path("slug2")slug2: String?, @Query("mode") mode: Int
+    ): Call<CommunityQnADetailResponseDataModel>
+
+    @GET("/v1/community/hotcommunity")
+    fun getHotCommunitiyData(
+        @Header("access-token") access_token: String?,  @Query("quantity") quantity : Int,     @Query("page") page : Int
+    ): Call<CommunityResponseDataModel>
+
+    @GET("/v1/community/postlist/{slug}")
+    fun getCommunitiyData(
+        @Header("access-token") access_token: String?, @Path("slug")slug: String?,  @Query("quantity") quantity : Int,     @Query("page") page : Int
+    ): Call<CommunityResponseDataModel>
+
+
 }

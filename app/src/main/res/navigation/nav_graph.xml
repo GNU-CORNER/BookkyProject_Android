@@ -80,13 +80,6 @@
         android:id="@+id/communityDetailFragment"
         android:name="com.example.bookkyandroid.ui.fragment.community.CommunityDetailFragment"
         android:label="CommunityDetailFragment" >
-        <action
-            android:id="@+id/action_communityDetailFragment_to_communityFragment"
-            app:destination="@id/communityFragment" />
-        <argument
-            android:name="PID"
-            app:argType="integer" />
-
     </fragment>
     <fragment
         android:id="@+id/communityWriteFragment"
