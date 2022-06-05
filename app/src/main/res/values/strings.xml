@@ -63,6 +63,15 @@
     <string name="book_detail_bookReviewText_string">리뷰</string>
     <string name="book_detail_bookReviewWrite_string">리뷰 쓰기</string>
     <string name="book_detail_bookLikeText_string">공감</string>
+
+    <string-array name="community_post_list">
+        <item>자유게시판</item>
+        <item>H🔥T</item>
+        <item>Q &amp; A</item>
+        <item>책 장터</item>
+        <item>내 글 보기</item>
+    </string-array>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

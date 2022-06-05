@@ -21,7 +21,7 @@ data class CommunityDetailCommentDataModel(
     val isAccessible : Boolean?,
     @SerializedName("CID")
     val CID : Int?,
-    @SerializedName("childComment")
-    val childComment : ArrayList<CommunityDetailChildCommentDataModel>?,
+    @SerializedName("reply")
+    val reply : Int?,
 
     )
