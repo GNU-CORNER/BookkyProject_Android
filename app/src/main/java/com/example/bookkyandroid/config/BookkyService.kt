@@ -163,6 +163,13 @@ interface BookkyService {
         @Body postBody :WritePostBodyDataModel
     ) : Call<BaseResponse<String>>
 
+    @POST("/v1/community/writecomment/{slug}")
+    fun writeComment(
+        @Path("slug") id:Int,
+        @Body postBody :WriteCommentBodyDataModel
+    ) : Call<BaseResponse<String>>
+
+
     @GET("/v1/community/post/book")
     fun searchWriteBook(
         @Query("keyword") keyword : String,
