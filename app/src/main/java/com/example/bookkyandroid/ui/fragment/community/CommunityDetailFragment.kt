@@ -3,6 +3,7 @@ package com.example.bookkyandroid.ui.fragment.community
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookkyandroid.R
 import com.example.bookkyandroid.config.ApplicationClass
@@ -14,6 +15,7 @@ import com.example.bookkyandroid.databinding.FragmentCommunityPostDetailBinding
 import com.example.bookkyandroid.ui.adapter.CommunityDetailCommentAdapter
 import com.example.bookkyandroid.ui.adapter.CommunityPostAdapter
 import com.example.bookkyandroid.ui.adapter.CommunityQnADetailReplyAdapter
+import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -26,18 +28,40 @@ import retrofit2.http.*
 class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>(
     FragmentCommunityPostDetailBinding::bind, R.layout.fragment_community_post_detail) {
 
+    val parentID = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var isExpanded : Boolean = false
+        var communityType = arguments?.getString("communityType").toString()
+        val pid = arguments?.getString("PID").toString()
+        val bookkyService = ApplicationClass.getInstance().getRetrofit()
+        if(communityType == null){
+            communityType = "0"
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
             //API 호출 BACK THREAD에서 호출 Coroutine
-            val bookkyService = ApplicationClass.getInstance().getRetrofit()
-            val communityType = arguments?.getString("communityType").toString()
-            val pid = arguments?.getString("PID").toString()
             getCommunityDetailData(bookkyService, isExpanded,communityType,pid)
         }
+
+
+        binding.communityCommentsSubmit.setOnClickListener {
+            if(binding.communityCommentsEdittext.text.length >0) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    commentWrite(
+                        bookkyService, communityType.toInt(), WriteCommentBodyDataModel(
+                            binding.communityCommentsEdittext.text.toString(),
+                            parentID,
+                            pid.toInt()
+                        )
+                    )
+                    binding.communityCommentsSubmit.text=""
+                }
+            }
+        }
+
+
 
     }
 
@@ -53,6 +77,34 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.communityRecyclerViewComments.layoutManager = linearLayoutManager
     }
+
+
+    private fun commentWrite(bookkyService: BookkyService,communityType:Int, commentData : WriteCommentBodyDataModel){
+        bookkyService.writeComment(communityType, commentData)
+            .enqueue(object : Callback<BaseResponse<String>> {
+                override fun onFailure(
+                    call: Call<BaseResponse<String>>,
+                    t: Throwable
+                ) {
+
+                }
+
+                override fun onResponse(
+                    call: Call<BaseResponse<String>>,
+                    response: Response<BaseResponse<String>>
+                ) {
+                    if (response.isSuccessful.not()) {
+                        return
+                    }
+                    // 콜 백스택은 아닐텐데 리로드를 어캐해주지?
+                    response.body()?.let {
+                        getCommunityDetailData(bookkyService, false,communityType.toString(),commentData.PID.toString())
+                        //findNavController().popBackStack()
+                    }
+                }
+            })
+    }
+
 
 
 
@@ -92,6 +144,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
                             binding.communityTextViewCommentCnt.text =
                                 "댓글(" + it.result?.commentCnt?.toString() + ")"
 
+                            Log.d("Test", it.result?.commentCnt.toString())
                             val length = it.result?.commentCnt?.minus(1)
                             var TempData = ArrayList<CommunityDetailCommentDataModel>()
                             var TempparentID = 0
@@ -129,6 +182,7 @@ class CommunityDetailFragment : BaseFragment<FragmentCommunityPostDetailBinding>
                                     )
                                 )
                             }
+                            Log.d("Test", TempData.size.toString())
                             postAdapterSet(TempData, communityType)
 
                         }

@@ -69,6 +69,8 @@ class CommunityDetailCommentAdapter(private val comment: ArrayList<CommunityDeta
 
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
+        Log.d("Test","뷰홀더")
+        Log.d("Test",comment.size.toString())
         holder.nickname.text = comment[position].nickname
         holder.contents.text = comment[position].comment
         holder.like.text = "공감("+ comment[position].like?.size.toString()+")"
